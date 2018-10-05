@@ -13,3 +13,4 @@ build
 *.iml
 .benchmarks/
 .pytest_cache/
+.DS_Store
