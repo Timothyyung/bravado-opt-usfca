@@ -170,7 +170,7 @@ class Spec(object):
         :param http_client: http client used to download remote $refs
         :param config: Configuration dict. See CONFIG_DEFAULTS.
         """
-        print('Version2')
+        print('Using bravado-core at branch Version2')
         spec = cls(spec_dict, origin_url, http_client, config)
         spec.build()
         return spec
