@@ -24,9 +24,9 @@ from bravado_core.exception import SwaggerValidationError
 from bravado_core.formatter import return_true_wrapper
 from bravado_core.model import model_discovery
 from bravado_core.resource import build_resources
-from Cython_test.schema import is_dict_like
-from Cython_test.schema import is_list_like
-from Cython_test.schema import is_ref
+from bravado_core.schema import is_dict_like
+from bravado_core.schema import is_list_like
+from bravado_core.schema import is_ref
 from bravado_core.security_definition import SecurityDefinition
 from bravado_core.spec_flattening import flattened_spec
 from bravado_core.util import cached_property
