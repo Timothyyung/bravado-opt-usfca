@@ -89,7 +89,7 @@ def is_list_like(spec):
     :param spec: swagger object specification in dict form
     :rtype: boolean
     """
-    return isinstance(spec, tuple)
+    return isinstance(spec, (list, tuple))
 
 
 def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, properties=None):
