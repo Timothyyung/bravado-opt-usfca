@@ -170,6 +170,7 @@ class Spec(object):
         :param http_client: http client used to download remote $refs
         :param config: Configuration dict. See CONFIG_DEFAULTS.
         """
+        print('Optimize with multithreading...')
         spec = cls(spec_dict, origin_url, http_client, config)
         spec.build()
         return spec
