@@ -114,10 +114,11 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
             type(array_value), array_value))
 
     item_spec = swagger_spec.deref(array_spec).get('items')
+    func = partial(unmarshal_schema_object, swagger_spec, item_spec)
     pool = Pool(5)
     jobs = []
     for item in array_value:
-        job = apply_async(pool, unmarshal_schema_object, swagger_spec, item_spec, item)
+        job = apply_async(pool, func, item)
         jobs.append(job)
 
     return [job.get() for job in jobs]
