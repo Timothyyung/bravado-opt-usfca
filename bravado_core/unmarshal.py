@@ -12,7 +12,7 @@ from bravado_core.schema import handle_null_value
 from bravado_core.schema import is_dict_like
 from bravado_core.schema import is_list_like
 from bravado_core.schema import SWAGGER_PRIMITIVES
-from pathos.multiprocessing import ProcessingPool as Pool
+from pathos.pools import ParallelPool as Pool
 from functools import partial
 
 
@@ -109,7 +109,7 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
     pool = Pool()
     func = partial(unmarshal_schema_object, swagger_spec, item_spec)
     result = pool.map(func, array_value)
-    
+
     return result
         #unmarshal_schema_object(swagger_spec, item_spec, item)
 
