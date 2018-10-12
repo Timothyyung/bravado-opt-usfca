@@ -32,6 +32,7 @@ from bravado_core.spec_flattening import flattened_spec
 from bravado_core.util import cached_property
 from bravado_core.util import memoize_by_id
 from bravado_core.util import strip_xscope
+from fastcache import clru_cache
 
 
 log = logging.getLogger(__name__)
@@ -199,6 +200,7 @@ class Spec(object):
 
         self.api_url = build_api_serving_url(self.spec_dict, self.origin_url)
 
+    @clru_cache(maximize=325, typed=false)
     def _force_deref(self, ref_dict):
         """Dereference ref_dict (if it is indeed a ref) and return what the
         ref points to.

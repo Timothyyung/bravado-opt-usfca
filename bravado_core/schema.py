@@ -5,6 +5,7 @@ from collections import Mapping
 from six import iteritems
 
 from bravado_core.exception import SwaggerMappingError
+from frozendict import frozendict
 
 
 # 'object' and 'array' are omitted since this should really be read as
@@ -57,7 +58,7 @@ def is_ref(spec):
     :rtype: boolean
     """
     try:
-        return '$ref' in spec and is_dict_like(spec)
+        return '$ref' in spec and is_frozendict_like(spec)
     except TypeError:
         return False
 
@@ -72,6 +73,15 @@ def is_dict_like(spec):
     # by executing a much cheaper isinstance(spec, dict) check before the more
     # expensive isinstance(spec, Mapping) check.
     return isinstance(spec, (dict, Mapping))
+
+def is_frozendict_like(spec):
+    return isinstance(spec, frozendict)
+
+def transform_dict_to_frozendict(spec):
+    if is_frozendict_like(spec):
+        return spec
+    else:
+        return frozendict(spec)
 
 
 def is_list_like(spec):

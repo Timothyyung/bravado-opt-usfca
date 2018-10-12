@@ -8,6 +8,7 @@ from bravado_core.exception import SwaggerMappingError
 from bravado_core.operation import Operation
 from bravado_core.util import AliasKeyDict
 from bravado_core.util import sanitize_name
+from bravado_core.schema import transform_dict_to_frozendict
 
 log = logging.getLogger(__name__)
 
@@ -50,12 +51,12 @@ def build_resources(swagger_spec):
     # key = tag_name   value = { operation_id : Operation }
     tag_to_ops = defaultdict(dict)
     deref = swagger_spec.deref
-    spec_dict = deref(swagger_spec._internal_spec_dict)
-    paths_spec = deref(spec_dict.get('paths', {}))
+    spec_dict = deref(transform_dict_to_frozendict(swagger_spec._internal_spec_dict))
+    paths_spec = deref(transform_dict_to_frozendict(spec_dict.get('paths', {})))
     for path_name, path_spec in iteritems(paths_spec):
-        path_spec = deref(path_spec)
+        path_spec = deref(transform_dict_to_frozendict(path_spec))
         for http_method, op_spec in iteritems(path_spec):
-            op_spec = deref(op_spec)
+            op_spec = deref(transform_dict_to_frozendict(op_spec))
             # vendor extensions and parameters that are shared across all
             # operations for a given path are also defined at this level - we
             # just need to skip over them.
@@ -64,7 +65,7 @@ def build_resources(swagger_spec):
 
             op = Operation.from_spec(swagger_spec, path_name, http_method,
                                      op_spec)
-            tags = deref(op_spec.get('tags', []))
+            tags = deref(tuple(op_spec.get('tags', [])))
 
             if not tags:
                 tags.append(convert_path_to_resource(path_name))
