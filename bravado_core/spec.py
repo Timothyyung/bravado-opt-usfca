@@ -200,7 +200,7 @@ class Spec(object):
 
         self.api_url = build_api_serving_url(self.spec_dict, self.origin_url)
 
-    @clru_cache(maximize=325, typed=False)
+    @clru_cache(maxize=325, typed=False)
     def _force_deref(self, ref_dict):
         """Dereference ref_dict (if it is indeed a ref) and return what the
         ref points to.
