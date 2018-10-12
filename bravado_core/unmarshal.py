@@ -105,12 +105,10 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
 
     item_spec = swagger_spec.deref(array_spec).get('items')
     pool = multiprocessing.Pool(2)
-    return
+    res = pool.map(unmarshal_schema_object, swagger_spec, item_spec, array_value)
         #unmarshal_schema_object(swagger_spec, item_spec, item)
-        for item in array_value:
-            pool.map(unmarshal_schema_object, swagger_spec, item_spec, item)
-
     pool.close()
+    return res
 
 
 def unmarshal_object(swagger_spec, object_spec, object_value):
