@@ -100,7 +100,7 @@ def _tag_models(container, json_reference, visited_models, swagger_spec):
 
     key = json_reference.split('/')[-1]
     deref = swagger_spec.deref
-    model_spec = deref(transform_dict_to_frozendict(container.get(key)))
+    model_spec = deref(tuple(container.get(key)))
 
     if not is_object(swagger_spec, model_spec):
         return
