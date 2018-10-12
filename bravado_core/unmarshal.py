@@ -12,7 +12,7 @@ from bravado_core.schema import handle_null_value
 from bravado_core.schema import is_dict_like
 from bravado_core.schema import is_list_like
 from bravado_core.schema import SWAGGER_PRIMITIVES
-from multiprocessing import Pool, Manager
+from multiprocessing.dummy import Pool
 from functools import partial
 
 
