@@ -12,7 +12,7 @@ from bravado_core.schema import handle_null_value
 from bravado_core.schema import is_dict_like
 from bravado_core.schema import is_list_like
 from bravado_core.schema import SWAGGER_PRIMITIVES
-from multiprocessing.dummy import Pool as ThreadPool
+from multiprocessing import Pool
 from functools import partial
 
 
@@ -106,7 +106,7 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
 
     item_spec = swagger_spec.deref(array_spec).get('items')
 
-    pool = ThreadPool()
+    pool = Pool()
     func = partial(unmarshal_schema_object, swagger_spec, item_spec)
     result = pool.map(func, array_value)
     pool.close()
