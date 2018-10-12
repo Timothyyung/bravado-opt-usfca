@@ -109,6 +109,7 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
         #unmarshal_schema_object(swagger_spec, item_spec, item)
         for item in array_value:
             pool.map(unmarshal_schema_object, swagger_spec, item_spec, item)
+
     pool.close()
 
 
