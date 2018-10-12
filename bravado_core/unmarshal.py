@@ -12,9 +12,8 @@ from bravado_core.schema import handle_null_value
 from bravado_core.schema import is_dict_like
 from bravado_core.schema import is_list_like
 from bravado_core.schema import SWAGGER_PRIMITIVES
-from multiprocessing import Pool
+from multiprocessing.dummy import Pool
 from functools import partial
-import dill
 
 
 def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
@@ -88,14 +87,6 @@ def unmarshal_primitive(swagger_spec, primitive_spec, value):
     value = formatter.to_python(swagger_spec, primitive_spec, value)
     return value
 
-def run_dill_encoded(payload):
-    fun, args = dill.loads(payload)
-    return fun(*args)
-
-
-def apply_async(pool, fun, args):
-    payload = dill.dumps((fun, args))
-    return pool.apply_async(run_dill_encoded, (payload,))
 
 def unmarshal_array(swagger_spec, array_spec, array_value):
     """Unmarshal a jsonschema type of 'array' into a python list.
@@ -116,12 +107,10 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
     item_spec = swagger_spec.deref(array_spec).get('items')
     func = partial(unmarshal_schema_object, swagger_spec, item_spec)
     pool = Pool(5)
-    jobs = []
-    for item in array_value:
-        job = apply_async(pool, func, item)
-        jobs.append(job)
-
-    return [job.get() for job in jobs]
+    result = pool.map(func, array_value)
+    pool.close()
+    pool.join()
+    return result
         #unmarshal_schema_object(swagger_spec, item_spec, item)
 
 
