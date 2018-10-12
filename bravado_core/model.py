@@ -144,7 +144,7 @@ def _bless_models(container, json_reference, visited_models, swagger_spec):
 
     key = json_reference.split('/')[-1]
     deref = swagger_spec.deref
-    model_spec = deref(container.get(key))
+    model_spec = deref(tuple(container.get(key)))
 
     if (
         not is_dict_like(model_spec) or
