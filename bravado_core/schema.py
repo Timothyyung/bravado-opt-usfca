@@ -87,7 +87,7 @@ def transform_dict_to_frozendict(spec):
 
 
 def transfer_list_to_tuple(spec):
-    from irem in spec:
+    for irem in spec:
         if is_list_like(item):
             transfer_list_to_tuple(item)
         elif is_dict_like(item):
