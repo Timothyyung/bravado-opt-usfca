@@ -94,11 +94,11 @@ def _tag_models(container, json_reference, visited_models, swagger_spec):
     :type visited_models: dict (k,v) == (model_name, path)
     :type swagger_spec: :class:`bravado_core.spec.Spec`
     """
-    print('tag')
     if not re.match('^[^#]*#/definitions/[^/]+$', json_reference):
         return
 
     key = json_reference.split('/')[-1]
+    print(key)
     deref = swagger_spec.deref
     model_spec = deref(container.get(key))
 
@@ -140,11 +140,11 @@ def _bless_models(container, json_reference, visited_models, swagger_spec):
     :type visited_models: dict (k,v) == (model_name, path)
     :type swagger_spec: :class:`bravado_core.spec.Spec`
     """
-    print('bless')
     if not is_dict_like(container):
         return
 
     key = json_reference.split('/')[-1]
+    print(key)
     deref = swagger_spec.deref
     model_spec = deref(container.get(key))
 
@@ -189,8 +189,8 @@ def _collect_models(container, json_reference, models, swagger_spec):
     :param models: created model types are placed here
     :type swagger_spec: :class:`bravado_core.spec.Spec`
     """
-    print('collect')
     key = json_reference.split('/')[-1]
+    print(key)
     if key == MODEL_MARKER and is_object(swagger_spec, container):
         model_spec = swagger_spec.deref(container)
         model_name = _get_model_name(container)
