@@ -116,6 +116,7 @@ def _tag_models(container, json_reference, visited_models, swagger_spec):
         is_blessed=False,
         swagger_spec=swagger_spec,
     )
+    print(visited_models)
 
 
 def _bless_models(container, json_reference, visited_models, swagger_spec):
@@ -188,7 +189,6 @@ def _collect_models(container, json_reference, models, swagger_spec):
     :type swagger_spec: :class:`bravado_core.spec.Spec`
     """
     key = json_reference.split('/')[-1]
-    print(key)
     if key == MODEL_MARKER and is_object(swagger_spec, container):
         model_spec = swagger_spec.deref(container)
         model_name = _get_model_name(container)
