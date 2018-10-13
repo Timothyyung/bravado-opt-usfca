@@ -834,6 +834,7 @@ def _get_unprocessed_uri(swagger_spec, processed_uris):
 
 
 def model_discovery(swagger_spec):
+    print('model_discovert')
     # This run is needed in order to get all the available models discovered
     # deref_flattened_spec depends on flattened_spec which assumes that model
     # discovery is performed
