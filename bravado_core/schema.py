@@ -58,7 +58,7 @@ def is_ref(spec):
     :rtype: boolean
     """
     try:
-        return '$ref' in spec and is_frozendict_like(spec)
+        return '$ref' in spec and is_dict_like(spec)
     except TypeError:
         return False
 
@@ -78,10 +78,23 @@ def is_frozendict_like(spec):
     return isinstance(spec, frozendict)
 
 def transform_dict_to_frozendict(spec):
-    if is_frozendict_like(spec):
-        return spec
-    else:
-        return frozendict(spec)
+
+    for key, value in iteritems(spec):
+        if is_list_like(value):
+            transfer_list_to_tuple(value)
+        elif is_dict_like(value):
+            transform_dict_to_frozendict(value)
+
+
+def transfer_list_to_tuple(spec):
+    from item in spec:
+        if is_list_like(value):
+            transfer_list_to_tuple(value)
+        elif is_dict_like(value):
+            transform_dict_to_frozendict(value)
+
+def transfer_to_hashable(spec):
+
 
 
 def is_list_like(spec):

@@ -200,7 +200,7 @@ class Spec(object):
 
         self.api_url = build_api_serving_url(self.spec_dict, self.origin_url)
 
-    @clru_cache(maxsize=325, typed=False)
+
     def _force_deref(self, ref_dict):
         """Dereference ref_dict (if it is indeed a ref) and return what the
         ref points to.
@@ -218,6 +218,11 @@ class Spec(object):
         with in_scope(self.resolver, ref_dict):
             _, target = self.resolver.resolve(ref_dict['$ref'])
             return target
+
+
+    @clru_cache(maxsize=325, typed=False)
+    def deref(ref_dict):
+
 
     # NOTE: deref gets overridden, if internally_dereference_refs is enabled, after calling build
     deref = _force_deref

@@ -14,7 +14,6 @@ from bravado_core.schema import is_dict_like
 from bravado_core.schema import is_list_like
 from bravado_core.schema import is_ref
 from bravado_core.schema import SWAGGER_PRIMITIVES
-from bravado_core.schema import transform_dict_to_frozendict
 from bravado_core.util import determine_object_type
 from bravado_core.util import ObjectType
 from bravado_core.util import strip_xscope
@@ -100,7 +99,7 @@ def _tag_models(container, json_reference, visited_models, swagger_spec):
 
     key = json_reference.split('/')[-1]
     deref = swagger_spec.deref
-    model_spec = deref(tuple(container.get(key)))
+    model_spec = deref(container.get(key))
 
     if not is_object(swagger_spec, model_spec):
         return
@@ -145,7 +144,7 @@ def _bless_models(container, json_reference, visited_models, swagger_spec):
 
     key = json_reference.split('/')[-1]
     deref = swagger_spec.deref
-    model_spec = deref(tuple(container.get(key)))
+    model_spec = deref(zcontainer.get(key))
 
     if (
         not is_dict_like(model_spec) or
