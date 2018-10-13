@@ -98,7 +98,6 @@ def _tag_models(container, json_reference, visited_models, swagger_spec):
         return
 
     key = json_reference.split('/')[-1]
-    print(key)
     deref = swagger_spec.deref
     model_spec = deref(container.get(key))
 
@@ -144,7 +143,6 @@ def _bless_models(container, json_reference, visited_models, swagger_spec):
         return
 
     key = json_reference.split('/')[-1]
-    print(key)
     deref = swagger_spec.deref
     model_spec = deref(container.get(key))
 
