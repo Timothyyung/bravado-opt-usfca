@@ -100,6 +100,7 @@ def _tag_models(container, json_reference, visited_models, swagger_spec):
     key = json_reference.split('/')[-1]
     deref = swagger_spec.deref
     model_spec = deref(container.get(key))
+    print(model_spec)
 
     if not is_object(swagger_spec, model_spec):
         return
@@ -116,7 +117,6 @@ def _tag_models(container, json_reference, visited_models, swagger_spec):
         is_blessed=False,
         swagger_spec=swagger_spec,
     )
-    print(visited_models)
 
 
 def _bless_models(container, json_reference, visited_models, swagger_spec):
