@@ -94,6 +94,7 @@ def _tag_models(container, json_reference, visited_models, swagger_spec):
     :type visited_models: dict (k,v) == (model_name, path)
     :type swagger_spec: :class:`bravado_core.spec.Spec`
     """
+    print('tag')
     if not re.match('^[^#]*#/definitions/[^/]+$', json_reference):
         return
 
@@ -139,6 +140,7 @@ def _bless_models(container, json_reference, visited_models, swagger_spec):
     :type visited_models: dict (k,v) == (model_name, path)
     :type swagger_spec: :class:`bravado_core.spec.Spec`
     """
+    print('bless')
     if not is_dict_like(container):
         return
 
@@ -187,6 +189,7 @@ def _collect_models(container, json_reference, models, swagger_spec):
     :param models: created model types are placed here
     :type swagger_spec: :class:`bravado_core.spec.Spec`
     """
+    print('collect')
     key = json_reference.split('/')[-1]
     if key == MODEL_MARKER and is_object(swagger_spec, container):
         model_spec = swagger_spec.deref(container)
@@ -834,7 +837,6 @@ def _get_unprocessed_uri(swagger_spec, processed_uris):
 
 
 def model_discovery(swagger_spec):
-    print('model_discovert')
     # This run is needed in order to get all the available models discovered
     # deref_flattened_spec depends on flattened_spec which assumes that model
     # discovery is performed
