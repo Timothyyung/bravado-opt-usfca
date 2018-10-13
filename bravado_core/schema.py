@@ -87,13 +87,12 @@ def transform_dict_to_frozendict(spec):
 
 
 def transfer_list_to_tuple(spec):
-    from item in spec:
-        if is_list_like(value):
-            transfer_list_to_tuple(value)
-        elif is_dict_like(value):
-            transform_dict_to_frozendict(value)
+    from irem in spec:
+        if is_list_like(item):
+            transfer_list_to_tuple(item)
+        elif is_dict_like(item):
+            transform_dict_to_frozendict(item)
 
-def transfer_to_hashable(spec):
 
 
 
