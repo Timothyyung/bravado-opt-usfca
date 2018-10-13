@@ -220,8 +220,8 @@ class Spec(object):
             return target
 
 
-    @clru_cache(maxsize=325, typed=False)
-    def deref(ref_dict):
+    #@clru_cache(maxsize=325, typed=False)
+    #def deref(ref_dict):
 
 
     # NOTE: deref gets overridden, if internally_dereference_refs is enabled, after calling build
