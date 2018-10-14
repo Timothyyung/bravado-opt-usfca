@@ -58,10 +58,15 @@ def is_ref(spec):
     :rtype: boolean
     """
     try:
-        return '$ref' in spec and is_dict_like(spec)
+        return '$ref' in spec and is_frozendict_like(spec)
     except TypeError:
         return False
 
+def is_ref_buld:
+    try:
+        return '$ref' in spec and is_dict_like(spec)
+    except TypeError:
+        return False
 
 def is_dict_like(spec):
     """

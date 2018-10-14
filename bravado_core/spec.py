@@ -200,7 +200,7 @@ class Spec(object):
 
         self.api_url = build_api_serving_url(self.spec_dict, self.origin_url)
 
-
+    @clru_cache(maxsize=325, typed=False)
     def _force_deref(self, ref_dict):
         """Dereference ref_dict (if it is indeed a ref) and return what the
         ref points to.
@@ -220,12 +220,20 @@ class Spec(object):
             return target
 
 
-    #@clru_cache(maxsize=325, typed=False)
-    #def deref(ref_dict):
+    def _deref_build(self, ref_dict):
+        if ref_dict is None or not is_ref_buld(ref_dict):
+            return ref_dict
 
+        # Restore attached resolution scope before resolving since the
+        # resolver doesn't have a traversal history (accumulated scope_stack)
+        # when asked to resolve.
+        with in_scope(self.resolver, ref_dict):
+            _, target = self.resolver.resolve(ref_dict['$ref'])
+            return target
 
     # NOTE: deref gets overridden, if internally_dereference_refs is enabled, after calling build
     deref = _force_deref
+    deref_build = _deref_build
 
     def get_op_for_request(self, http_method, path_pattern):
         """Return the Swagger operation for the passed in request http method
