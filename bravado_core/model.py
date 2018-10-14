@@ -193,6 +193,7 @@ def _collect_models(container, json_reference, models, swagger_spec):
         model_spec = swagger_spec.deref(container)
         model_name = _get_model_name(container)
         model_type = models.get(model_name)
+        print(model_type)
         if not model_type:
             models[model_name] = create_model_type(
                 swagger_spec=swagger_spec,
@@ -200,7 +201,6 @@ def _collect_models(container, json_reference, models, swagger_spec):
                 model_spec=model_spec,
                 json_reference=re.sub('/{MODEL_MARKER}$'.format(MODEL_MARKER=MODEL_MARKER), '', json_reference),
             )
-            print(type(models[model_name]))
         elif (
             # the condition with strip_xscope is the most selective check
             # but it implies memory allocation, so additional lightweight checks
@@ -330,7 +330,6 @@ class Model(object):
         for attr_name in self._properties:
             if include_missing_properties or attr_name in dct:
                 self.__dict[attr_name] = dct.get(attr_name)
-                print(self.__dict[attr_name])
 
         # we've got additionalProperties to set on the model
         for attr_name in additional:
