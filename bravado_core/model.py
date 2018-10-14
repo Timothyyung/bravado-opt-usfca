@@ -100,7 +100,7 @@ def _tag_models(container, json_reference, visited_models, swagger_spec):
         return
 
     key = json_reference.split('/')[-1]
-    deref = swagger_spec.deref_build
+    deref = swagger_spec.deref
     model_spec = deref(container.get(key))
 
     if not is_object(swagger_spec, model_spec):
@@ -145,7 +145,7 @@ def _bless_models(container, json_reference, visited_models, swagger_spec):
         return
 
     key = json_reference.split('/')[-1]
-    deref = swagger_spec.deref_build
+    deref = swagger_spec.deref
     model_spec = deref(container.get(key))
 
     if (
@@ -191,11 +191,10 @@ def _collect_models(container, json_reference, models, swagger_spec):
     """
     key = json_reference.split('/')[-1]
     if key == MODEL_MARKER and is_object(swagger_spec, container):
-        model_spec = swagger_spec.deref_build(container)
+        model_spec = swagger_spec.deref(container)
         model_name = _get_model_name(container)
         model_type = models.get(model_name)
         if not model_type:
-            model_spec = transform_dict_to_frozendict(model_spec)
             models[model_name] = create_model_type(
                 swagger_spec=swagger_spec,
                 model_name=model_name,
@@ -587,7 +586,7 @@ def create_model_type(swagger_spec, model_name, model_spec, bases=(Model,), json
     inherits_from = []
     if 'allOf' in model_spec:
         for schema in model_spec['allOf']:
-            inherited_name = swagger_spec.deref_build(schema).get(MODEL_MARKER, None)
+            inherited_name = swagger_spec.deref(schema).get(MODEL_MARKER, None)
             if inherited_name:
                 inherits_from.append(inherited_name)
 
@@ -609,7 +608,7 @@ def is_model(swagger_spec, schema_object_spec):
     :return: True if the spec has been "marked" as a model type, false
         otherwise.
     """
-    deref = swagger_spec.deref_build
+    deref = swagger_spec.deref
     schema_object_spec = deref(schema_object_spec)
     return deref(schema_object_spec.get(MODEL_MARKER)) is not None
 
@@ -625,7 +624,7 @@ def is_object(swagger_spec, object_spec, no_default_type=False):
     :type no_default_type: bool
     :return: True if the spec describes an object, False otherwise.
     """
-    deref = swagger_spec.deref_build
+    deref = swagger_spec.deref
     default_type = 'object' if not no_default_type and swagger_spec.config['default_type_to_object'] else None
     return deref(object_spec.get('type', default_type)) == 'object' or 'allOf' in object_spec
 
@@ -636,7 +635,7 @@ def create_model_docstring(swagger_spec, model_spec):
     :param model_spec: specification for a model in dict form
     :rtype: string or unicode
     """
-    deref = swagger_spec.deref_build
+    deref = swagger_spec.deref
     model_spec = deref(model_spec)
 
     s = 'Attributes:\n\n\t'

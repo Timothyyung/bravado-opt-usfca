@@ -27,7 +27,7 @@ from bravado_core.resource import build_resources
 from bravado_core.schema import is_dict_like
 from bravado_core.schema import is_list_like
 from bravado_core.schema import is_ref
-from bravado_core.schema import is_ref_buld
+from bravado_core.schema import is_ref_fast
 from bravado_core.security_definition import SecurityDefinition
 from bravado_core.spec_flattening import flattened_spec
 from bravado_core.util import cached_property
@@ -201,7 +201,6 @@ class Spec(object):
 
         self.api_url = build_api_serving_url(self.spec_dict, self.origin_url)
 
-    @clru_cache(maxsize=325, typed=False)
     def _force_deref(self, ref_dict):
         """Dereference ref_dict (if it is indeed a ref) and return what the
         ref points to.
@@ -220,9 +219,9 @@ class Spec(object):
             _, target = self.resolver.resolve(ref_dict['$ref'])
             return target
 
-
-    def _deref_build(self, ref_dict):
-        if ref_dict is None or not is_ref_buld(ref_dict):
+    @clru_cache(maxsize=325, typed=False)
+    def _fast_deref(self, ref_dict):
+        if ref_dict is None or not is_ref_fast(ref_dict):
             return ref_dict
 
         # Restore attached resolution scope before resolving since the
@@ -234,7 +233,7 @@ class Spec(object):
 
     # NOTE: deref gets overridden, if internally_dereference_refs is enabled, after calling build
     deref = _force_deref
-    deref_build = _deref_build
+    fast_deref = _fast_deref
 
     def get_op_for_request(self, http_method, path_pattern):
         """Return the Swagger operation for the passed in request http method

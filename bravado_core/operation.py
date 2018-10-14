@@ -53,7 +53,7 @@ class Operation(object):
         self.swagger_spec = swagger_spec
         self.path_name = path_name
         self.http_method = http_method
-        self.op_spec = swagger_spec.deref_build(op_spec)
+        self.op_spec = swagger_spec.deref(op_spec)
 
         # (key, value) = (param name, Param)
         self.params = {}
@@ -75,7 +75,7 @@ class Operation(object):
 
     @cached_property
     def security_specs(self):
-        deref = self.swagger_spec.deref_build
+        deref = self.swagger_spec.deref
         op_spec = deref(self.op_spec)
         spec_dict = deref(self.swagger_spec._internal_spec_dict)
         if 'security' in op_spec:
@@ -159,7 +159,7 @@ def build_params(op):
     :returns: dict where (k,v) is (param_name, Param)
     """
     swagger_spec = op.swagger_spec
-    deref = swagger_spec.deref_build
+    deref = swagger_spec.deref
     op_spec = deref(op.op_spec)
     op_params_spec = deref(op_spec.get('parameters', []))
     spec_dict = deref(swagger_spec._internal_spec_dict)
