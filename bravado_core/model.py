@@ -201,6 +201,7 @@ def _collect_models(container, json_reference, models, swagger_spec):
                 model_spec=model_spec,
                 json_reference=re.sub('/{MODEL_MARKER}$'.format(MODEL_MARKER=MODEL_MARKER), '', json_reference),
             )
+            print(type(models[model_name]))
         elif (
             # the condition with strip_xscope is the most selective check
             # but it implies memory allocation, so additional lightweight checks
@@ -590,7 +591,7 @@ def create_model_type(swagger_spec, model_name, model_spec, bases=(Model,), json
             if inherited_name:
                 inherits_from.append(inherited_name)
 
-    return type(str(model_name), bases, frozendict(
+    return type(str(model_name), bases, dict(
         __doc__=ModelDocstring(),
         _swagger_spec=swagger_spec,
         _model_spec=model_spec,
