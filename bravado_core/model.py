@@ -17,6 +17,7 @@ from bravado_core.schema import SWAGGER_PRIMITIVES
 from bravado_core.util import determine_object_type
 from bravado_core.util import ObjectType
 from bravado_core.util import strip_xscope
+from frozendict import frozendict
 
 log = logging.getLogger(__name__)
 
@@ -589,7 +590,7 @@ def create_model_type(swagger_spec, model_name, model_spec, bases=(Model,), json
             if inherited_name:
                 inherits_from.append(inherited_name)
 
-    return type(str(model_name), bases, dict(
+    return type(str(model_name), bases, frozendict(
         __doc__=ModelDocstring(),
         _swagger_spec=swagger_spec,
         _model_spec=model_spec,
