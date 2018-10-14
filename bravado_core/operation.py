@@ -159,7 +159,7 @@ def build_params(op):
     :returns: dict where (k,v) is (param_name, Param)
     """
     swagger_spec = op.swagger_spec
-    deref = swagger_spec.deref
+    deref = swagger_spec.deref_build
     op_spec = deref(op.op_spec)
     op_params_spec = deref(op_spec.get('parameters', []))
     spec_dict = deref(swagger_spec._internal_spec_dict)
