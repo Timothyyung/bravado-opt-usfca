@@ -92,7 +92,7 @@ def transform_dict_to_frozendict(spec):
 
     if is_frozendict_like(spec):
         return spec
-    return spec
+    return frozendict(spec)
 
 
 def transfer_list_to_tuple(spec):
