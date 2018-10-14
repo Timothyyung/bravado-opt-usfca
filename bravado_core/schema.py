@@ -87,7 +87,6 @@ def transform_dict_to_frozendict(spec):
         if is_list_like(value):
             spec[key] = transfer_list_to_tuple(value)
         elif is_dict_like(value) and not is_frozendict_like(value):
-            print(type(value))
             spec[key] = transform_dict_to_frozendict(value)
 
     if is_frozendict_like(spec):
