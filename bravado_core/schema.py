@@ -95,16 +95,16 @@ def transform_dict_to_frozendict(spec):
 
 
 def transfer_list_to_tuple(spec):
+    array = []
     for item in spec:
         if is_list_like(item):
-            item = transfer_list_to_tuple(item)
+            array.append(transfer_list_to_tuple(item))
         elif is_dict_like(item):
-            item = transform_dict_to_frozendict(item)
+            array.append(transform_dict_to_frozendict(item))
+        else:
+            array.append(item)
 
-    if isinstance(spec, tuple):
-        return spec
-    else:
-        return tuple(spec)
+    return tuple(array)
 
 
 
