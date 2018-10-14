@@ -189,11 +189,11 @@ def _collect_models(container, json_reference, models, swagger_spec):
     :type swagger_spec: :class:`bravado_core.spec.Spec`
     """
     key = json_reference.split('/')[-1]
+    print(key)
     if key == MODEL_MARKER and is_object(swagger_spec, container):
         model_spec = swagger_spec.deref(container)
         model_name = _get_model_name(container)
         model_type = models.get(model_name)
-        print(model_spec)
         if not model_type:
             models[model_name] = create_model_type(
                 swagger_spec=swagger_spec,
