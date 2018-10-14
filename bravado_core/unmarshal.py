@@ -9,7 +9,8 @@ from bravado_core.model import MODEL_MARKER
 from bravado_core.schema import collapsed_properties
 from bravado_core.schema import get_spec_for_prop
 from bravado_core.schema import handle_null_value
-from bravado_core.schema import is_dict_like
+from bravado_core.schema import is_frozendict_like
+from bravado_core.schema import transform_dict_to_frozendict
 from bravado_core.schema import is_list_like
 from bravado_core.schema import SWAGGER_PRIMITIVES
 
@@ -30,7 +31,9 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
     :rtype: int, float, long, string, unicode, boolean, list, dict, object (in
         the case of a 'format' conversion', or Model type
     """
-    deref = swagger_spec.deref
+    if is_frozendict_like(schema_object_spec):
+        schema_object_spec = transform_dict_to_frozendict(schema_object_spec)
+    deref = swagger_spec.fast_deref
     schema_object_spec = deref(schema_object_spec)
 
     obj_type = schema_object_spec.get('type')
@@ -123,7 +126,7 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
     if object_value is None:
         return handle_null_value(swagger_spec, object_spec)
 
-    if not is_dict_like(object_value):
+    if not is_frozendict_like(object_value):
         raise SwaggerMappingError('Expected dict like type for {0}:{1}'.format(
             type(object_value), object_value))
 
@@ -176,7 +179,7 @@ def unmarshal_model(swagger_spec, model_spec, model_value):
     if model_value is None:
         return handle_null_value(swagger_spec, model_spec)
 
-    if not is_dict_like(model_value):
+    if not is_frozendict_like(model_value):
         raise SwaggerMappingError(
             "Expected type to be dict for value {0} to unmarshal to a {1}."
             "Was {2} instead."
