@@ -53,7 +53,7 @@ class Operation(object):
         self.swagger_spec = swagger_spec
         self.path_name = path_name
         self.http_method = http_method
-        self.op_spec = swagger_spec.deref(op_spec)
+        self.op_spec = swagger_spec.deref_build(op_spec)
 
         # (key, value) = (param name, Param)
         self.params = {}
