@@ -36,7 +36,6 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
         schema_object_spec = transform_dict_to_frozendict(schema_object_spec)
 
     deref = swagger_spec.fast_deref
-    print(type(schema_object_spec))
     schema_object_spec = deref(schema_object_spec)
 
     obj_type = schema_object_spec.get('type')
@@ -157,7 +156,7 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
             result[prop_name] = None
             if schema.has_default(swagger_spec, prop_spec):
                 result[prop_name] = schema.get_default(swagger_spec, prop_spec)
-
+    print(result)
     return result
 
 
