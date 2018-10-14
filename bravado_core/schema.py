@@ -86,9 +86,9 @@ def transform_dict_to_frozendict(spec):
     print(type(spec))
     for key, value in iteritems(spec):
         if is_list_like(value):
-            value = transfer_list_to_tuple(value)
+            spec[key] = transfer_list_to_tuple(value)
         elif is_dict_like(value):
-            value = transform_dict_to_frozendict(value)
+            spec[key] = transform_dict_to_frozendict(value)
 
     if is_frozendict_like(spec):
         return spec
