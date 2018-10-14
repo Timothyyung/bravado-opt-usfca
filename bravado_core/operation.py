@@ -75,7 +75,7 @@ class Operation(object):
 
     @cached_property
     def security_specs(self):
-        deref = self.swagger_spec.deref
+        deref = self.swagger_spec.deref_build
         op_spec = deref(self.op_spec)
         spec_dict = deref(self.swagger_spec._internal_spec_dict)
         if 'security' in op_spec:
