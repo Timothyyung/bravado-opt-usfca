@@ -68,6 +68,7 @@ def _register_visited_model(json_reference, model_spec, model_name, visited_mode
         )
 
     model_spec[MODEL_MARKER] = model_name
+    print(model_name)
     visited_models[model_name] = json_reference
 
 
@@ -189,7 +190,6 @@ def _collect_models(container, json_reference, models, swagger_spec):
     :type swagger_spec: :class:`bravado_core.spec.Spec`
     """
     key = json_reference.split('/')[-1]
-    print(key)
     if key == MODEL_MARKER and is_object(swagger_spec, container):
         model_spec = swagger_spec.deref(container)
         model_name = _get_model_name(container)
