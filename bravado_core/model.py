@@ -14,6 +14,7 @@ from bravado_core.schema import is_dict_like
 from bravado_core.schema import is_list_like
 from bravado_core.schema import is_ref
 from bravado_core.schema import SWAGGER_PRIMITIVES
+form bravado_core.schema import transform_dict_to_frozendict
 from bravado_core.util import determine_object_type
 from bravado_core.util import ObjectType
 from bravado_core.util import strip_xscope
@@ -68,7 +69,6 @@ def _register_visited_model(json_reference, model_spec, model_name, visited_mode
         )
 
     model_spec[MODEL_MARKER] = model_name
-    print(model_name)
     visited_models[model_name] = json_reference
 
 
@@ -205,6 +205,7 @@ def _collect_models(container, json_reference, models, swagger_spec):
             # the condition with strip_xscope is the most selective check
             # but it implies memory allocation, so additional lightweight checks
             # are added to avoid strip_xscope check
+            print(model_type)
             id(model_type._model_spec) != id(model_spec) and
             model_type._model_spec != model_spec and
             strip_xscope(model_type._model_spec) != strip_xscope(model_spec)

@@ -85,6 +85,10 @@ def transform_dict_to_frozendict(spec):
         elif is_dict_like(value):
             transform_dict_to_frozendict(value)
 
+    if is_frozendict_like(spec):
+        return spec
+    return spec
+
 
 def transfer_list_to_tuple(spec):
     for item in spec:
@@ -92,6 +96,11 @@ def transfer_list_to_tuple(spec):
             transfer_list_to_tuple(item)
         elif is_dict_like(item):
             transform_dict_to_frozendict(item)
+
+    if isinstance(spec, tuple):
+        return spec
+    else:
+        return tuple(spec)
 
 
 
