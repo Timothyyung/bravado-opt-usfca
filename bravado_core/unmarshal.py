@@ -32,7 +32,7 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
         the case of a 'format' conversion', or Model type
     """
     schema_hashable_spec = schema_object_spec
-    if is_frozendict_like(schema_hashable_spec):
+    if not is_frozendict_like(schema_hashable_spec):
         schema_hashable_spec = transform_dict_to_frozendict(schema_hashable_spec)
 
     print(type(schema_hashable_spec))
