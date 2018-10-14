@@ -100,6 +100,7 @@ def transfer_list_to_tuple(spec):
         if is_list_like(item):
             array.append(transfer_list_to_tuple(item))
         elif is_dict_like(item):
+            print(type(item))
             array.append(transform_dict_to_frozendict(item))
         else:
             array.append(item)
