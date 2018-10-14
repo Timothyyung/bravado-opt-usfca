@@ -181,7 +181,7 @@ def unmarshal_model(swagger_spec, model_spec, model_value):
     if model_value is None:
         return handle_null_value(swagger_spec, model_spec)
 
-    if not is_frozendict_like(model_value):
+    if not is_dict_like(model_value):
         raise SwaggerMappingError(
             "Expected type to be dict for value {0} to unmarshal to a {1}."
             "Was {2} instead."
