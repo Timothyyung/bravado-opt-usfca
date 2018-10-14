@@ -205,11 +205,11 @@ def _collect_models(container, json_reference, models, swagger_spec):
             # the condition with strip_xscope is the most selective check
             # but it implies memory allocation, so additional lightweight checks
             # are added to avoid strip_xscope check
-            print(model_type)
             id(model_type._model_spec) != id(model_spec) and
             model_type._model_spec != model_spec and
             strip_xscope(model_type._model_spec) != strip_xscope(model_spec)
         ):
+            print(model_type)
             return _raise_or_warn_duplicated_model(
                 swagger_spec=swagger_spec,
                 message='Identified duplicated model: model_name "{model_name}", uri: {json_reference}.\n'
