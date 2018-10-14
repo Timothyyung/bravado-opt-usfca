@@ -10,6 +10,7 @@ from bravado_core.schema import collapsed_properties
 from bravado_core.schema import get_spec_for_prop
 from bravado_core.schema import handle_null_value
 from bravado_core.schema import is_frozendict_like
+from bravado_core.schema import is_dict_like
 from bravado_core.schema import transform_dict_to_frozendict
 from bravado_core.schema import is_list_like
 from bravado_core.schema import SWAGGER_PRIMITIVES
