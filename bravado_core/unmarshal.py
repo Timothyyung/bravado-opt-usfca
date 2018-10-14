@@ -156,7 +156,7 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
             result[prop_name] = None
             if schema.has_default(swagger_spec, prop_spec):
                 result[prop_name] = schema.get_default(swagger_spec, prop_spec)
-    print(result)
+
     return result
 
 
