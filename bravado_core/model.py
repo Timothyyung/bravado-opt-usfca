@@ -14,7 +14,7 @@ from bravado_core.schema import is_dict_like
 from bravado_core.schema import is_list_like
 from bravado_core.schema import is_ref
 from bravado_core.schema import SWAGGER_PRIMITIVES
-form bravado_core.schema import transform_dict_to_frozendict
+from bravado_core.schema import transform_dict_to_frozendict
 from bravado_core.util import determine_object_type
 from bravado_core.util import ObjectType
 from bravado_core.util import strip_xscope
