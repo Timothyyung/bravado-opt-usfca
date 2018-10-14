@@ -189,9 +189,9 @@ def _collect_models(container, json_reference, models, swagger_spec):
     """
     key = json_reference.split('/')[-1]
     if key == MODEL_MARKER and is_object(swagger_spec, container):
-        print(key)
         model_spec = swagger_spec.deref(container)
         model_name = _get_model_name(container)
+        print(model_name)
         model_type = models.get(model_name)
         if not model_type:
             models[model_name] = create_model_type(
