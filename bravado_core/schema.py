@@ -62,7 +62,7 @@ def is_ref(spec):
     except TypeError:
         return False
 
-def is_ref_buld:
+def is_ref_buld(spec):
     try:
         return '$ref' in spec and is_dict_like(spec)
     except TypeError:
