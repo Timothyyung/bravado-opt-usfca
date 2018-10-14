@@ -192,7 +192,6 @@ def _collect_models(container, json_reference, models, swagger_spec):
     if key == MODEL_MARKER and is_object(swagger_spec, container):
         model_spec = swagger_spec.deref(container)
         model_name = _get_model_name(container)
-        print(model_name)
         model_type = models.get(model_name)
         if not model_type:
             models[model_name] = create_model_type(
@@ -331,6 +330,7 @@ class Model(object):
         for attr_name in self._properties:
             if include_missing_properties or attr_name in dct:
                 self.__dict[attr_name] = dct.get(attr_name)
+                print(self.__dict[attr_name])
 
         # we've got additionalProperties to set on the model
         for attr_name in additional:
