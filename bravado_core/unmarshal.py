@@ -34,8 +34,7 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
         the case of a 'format' conversion', or Model type
     """
     if not is_frozendict_like(schema_object_spec) and not is_list_like(schema_object_spec):
-        print(schema_object_spec)
-        schema_object_spec = frozendict(transform_dict_to_frozendict(schema_object_spec))
+        schema_object_spec = transform_dict_to_frozendict(schema_object_spec)
 
     deref = swagger_spec.fast_deref
     schema_object_spec = deref(schema_object_spec)
@@ -202,6 +201,7 @@ def unmarshal_model(swagger_spec, model_spec, model_value):
         model_type = swagger_spec.definitions.get(child_model_name)
         model_spec = model_type._model_spec
 
+    print(model_spec)
     model_as_dict = unmarshal_object(swagger_spec, model_spec, model_value)
     model_instance = model_type._from_dict(model_as_dict)
     return model_instance
