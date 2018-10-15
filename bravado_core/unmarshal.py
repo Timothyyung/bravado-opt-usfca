@@ -151,7 +151,6 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
             result[k] = unmarshal_schema_object(swagger_spec, prop_spec, v)
         else:
             # Don't marshal when a spec is not available - just pass through
-            print(v)
             result[k] = v
 
     for prop_name, prop_spec in iteritems(properties):
