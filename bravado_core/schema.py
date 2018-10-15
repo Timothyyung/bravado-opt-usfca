@@ -200,6 +200,7 @@ def collapsed_properties(model_spec, swagger_spec):
     :param swagger_spec: :class:`bravado_core.spec.Spec`
     :returns: dict
     """
+    print(model_spec)
 
     properties = {}
 
