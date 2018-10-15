@@ -174,6 +174,7 @@ def unmarshal_model(swagger_spec, model_spec, model_value):
     :raises: SwaggerMappingError
     """
     deref = swagger_spec.fast_deref
+    print(model_spec)
     model_name = deref(model_spec).get(MODEL_MARKER)
     model_type = swagger_spec.definitions.get(model_name, None)
 
