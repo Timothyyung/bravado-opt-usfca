@@ -207,6 +207,7 @@ def collapsed_properties(model_spec, swagger_spec):
     if 'properties' in model_spec:
         for attr, attr_spec in iteritems(model_spec['properties']):
             properties[attr] = attr_spec
+            print(attr_spec)
 
     # allOf may or may not be present
     if 'allOf' in model_spec:
