@@ -139,7 +139,6 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
     prop_spec = properties.get(prop_name)
 
     if prop_spec is not None:
-        print(prop_spec)
         result_spec = deref(prop_spec)
         # If the de-referenced specification is for a x-nullable property
         # then copy the spec and add the x-nullable property.
