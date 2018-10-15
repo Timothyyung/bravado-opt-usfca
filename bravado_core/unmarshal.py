@@ -176,7 +176,7 @@ def unmarshal_model(swagger_spec, model_spec, model_value):
     if is_dict_like(model_spec):
         model_spec = transform_dict_to_frozendict(model_spec)
     deref = swagger_spec.fast_deref
-    print(deref.cache_info())
+    #print(deref.cache_info())
     model_name = deref(model_spec).get(MODEL_MARKER)
 
     model_type = swagger_spec.definitions.get(model_name, None)
