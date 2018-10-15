@@ -14,6 +14,7 @@ from bravado_core.schema import is_dict_like
 from bravado_core.schema import transform_dict_to_frozendict
 from bravado_core.schema import is_list_like
 from bravado_core.schema import SWAGGER_PRIMITIVES
+from frozendict import frozendict
 
 
 def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
@@ -34,7 +35,7 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
     """
     if not is_frozendict_like(schema_object_spec) and not is_list_like(schema_object_spec):
         print(schema_object_spec)
-        schema_object_spec = transform_dict_to_frozendict(schema_object_spec)
+        schema_object_spec = frozendict(ransform_dict_to_frozendict(schema_object_spec))
 
     deref = swagger_spec.fast_deref
     schema_object_spec = deref(schema_object_spec)
