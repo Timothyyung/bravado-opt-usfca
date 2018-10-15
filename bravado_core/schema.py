@@ -139,6 +139,7 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
     prop_spec = properties.get(prop_name)
 
     if prop_spec is not None:
+        print(prop_spec)
         result_spec = deref(prop_spec)
         # If the de-referenced specification is for a x-nullable property
         # then copy the spec and add the x-nullable property.
@@ -209,7 +210,6 @@ def collapsed_properties(model_spec, swagger_spec):
             if is_dict_like(attr_spec):
                 attr_spec = transform_dict_to_frozendict(attr_spec)
             properties[attr] = attr_spec
-            print(attr_spec)
 
     # allOf may or may not be present
     if 'allOf' in model_spec:
