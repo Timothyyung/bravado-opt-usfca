@@ -101,6 +101,7 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
     :rtype: list
     :raises: SwaggerMappingError
     """
+    print(array_spec)
     if array_value is None:
         return handle_null_value(swagger_spec, array_spec)
 
@@ -135,7 +136,6 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
 
     object_spec = deref(object_spec)
     required_fields = object_spec.get('required', [])
-    print(object_spec)
     properties = collapsed_properties(object_spec, swagger_spec)
 
     result = {}
