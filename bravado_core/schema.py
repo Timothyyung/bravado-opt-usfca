@@ -136,6 +136,7 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
 
     if properties is None:
         properties = collapsed_properties(deref(object_spec), swagger_spec)
+        print(properties)
     prop_spec = properties.get(prop_name)
 
     if prop_spec is not None:
