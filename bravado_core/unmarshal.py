@@ -111,7 +111,6 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
             type(array_value), array_value))
 
     item_spec = swagger_spec.deref(array_spec).get('items')
-    print(item_spec)
     return [
         unmarshal_schema_object(swagger_spec, item_spec, item)
         for item in array_value
@@ -150,6 +149,7 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
             else:
                 result[k] = None
         elif prop_spec:
+            print(prop_spec)
             result[k] = unmarshal_schema_object(swagger_spec, prop_spec, v)
         else:
             # Don't marshal when a spec is not available - just pass through
