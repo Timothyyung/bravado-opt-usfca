@@ -6,6 +6,7 @@ from six import iteritems
 
 from bravado_core.exception import SwaggerMappingError
 from frozendict import frozendict
+from fastcache import clru_cache
 
 
 # 'object' and 'array' are omitted since this should really be read as
