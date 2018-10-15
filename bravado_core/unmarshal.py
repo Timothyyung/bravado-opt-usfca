@@ -126,7 +126,7 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
     :rtype: dict
     :raises: SwaggerMappingError
     """
-    deref = swagger_spec.deref
+    deref = swagger_spec.fast_deref
 
     if object_value is None:
         return handle_null_value(swagger_spec, object_spec)
