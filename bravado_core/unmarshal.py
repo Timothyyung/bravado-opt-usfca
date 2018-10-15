@@ -63,7 +63,6 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
         # It is important that the 'model' check comes before 'object' check.
         # Model specs also have type 'object' but also have the additional
         # MODEL_MARKER key for identification.
-        print(schema_object_spec)
         return unmarshal_model(swagger_spec, schema_object_spec, value)
 
     if obj_type == 'object':
