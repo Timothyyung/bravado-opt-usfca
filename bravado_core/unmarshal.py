@@ -34,7 +34,7 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
         the case of a 'format' conversion', or Model type
     """
     if not is_frozendict_like(schema_object_spec) and not is_list_like(schema_object_spec):
-        print(type(schema_object_spec))
+        #print(type(schema_object_spec))
         schema_object_spec = transform_dict_to_frozendict(schema_object_spec)
 
     deref = swagger_spec.fast_deref
@@ -148,6 +148,7 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
             else:
                 result[k] = None
         elif prop_spec:
+            print(type(prop_spec))
             result[k] = unmarshal_schema_object(swagger_spec, prop_spec, v)
         else:
             # Don't marshal when a spec is not available - just pass through
