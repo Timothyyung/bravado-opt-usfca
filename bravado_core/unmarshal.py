@@ -63,9 +63,11 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
         # It is important that the 'model' check comes before 'object' check.
         # Model specs also have type 'object' but also have the additional
         # MODEL_MARKER key for identification.
+        print('hi')
         return unmarshal_model(swagger_spec, schema_object_spec, value)
 
     if obj_type == 'object':
+        print('hi2')
         return unmarshal_object(swagger_spec, schema_object_spec, value)
 
     if obj_type == 'file':
@@ -202,7 +204,7 @@ def unmarshal_model(swagger_spec, model_spec, model_value):
             )
         model_type = swagger_spec.definitions.get(child_model_name)
         model_spec = model_type._model_spec
-    print('hi')
+
     model_as_dict = unmarshal_object(swagger_spec, model_spec, model_value)
     model_instance = model_type._from_dict(model_as_dict)
     return model_instance
