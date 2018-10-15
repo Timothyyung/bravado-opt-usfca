@@ -150,7 +150,6 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
             else:
                 result[k] = None
         elif prop_spec:
-            print(prop_spec)
             result[k] = unmarshal_schema_object(swagger_spec, prop_spec, v)
         else:
             # Don't marshal when a spec is not available - just pass through
