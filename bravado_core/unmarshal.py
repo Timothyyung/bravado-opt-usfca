@@ -142,7 +142,6 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
     for k, v in iteritems(object_value):
         prop_spec = get_spec_for_prop(
             swagger_spec, object_spec, object_value, k, properties)
-        print(type(prop_spec))
         if v is None and k not in required_fields and prop_spec:
             if schema.has_default(swagger_spec, prop_spec):
                 result[k] = schema.get_default(swagger_spec, prop_spec)
@@ -152,6 +151,7 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
             result[k] = unmarshal_schema_object(swagger_spec, prop_spec, v)
         else:
             # Don't marshal when a spec is not available - just pass through
+            print(v)
             result[k] = v
 
     for prop_name, prop_spec in iteritems(properties):
