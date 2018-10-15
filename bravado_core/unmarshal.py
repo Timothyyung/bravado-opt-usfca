@@ -136,6 +136,7 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
     object_spec = deref(object_spec)
     required_fields = object_spec.get('required', [])
     properties = collapsed_properties(object_spec, swagger_spec)
+    print(properties)
 
     result = {}
     for k, v in iteritems(object_value):
