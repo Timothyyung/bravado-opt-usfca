@@ -209,8 +209,6 @@ def collapsed_properties(model_spec, swagger_spec):
     # properties may or may not be present
     if 'properties' in model_spec:
         for attr, attr_spec in iteritems(model_spec['properties']):
-            if is_dict_like(attr_spec):
-                attr_spec = transform_dict_to_frozendict(attr_spec)
             properties[attr] = attr_spec
 
     # allOf may or may not be present
