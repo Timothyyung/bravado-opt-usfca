@@ -150,6 +150,7 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
             else:
                 result[k] = None
         elif prop_spec:
+            print(prop_spec)
             result[k] = unmarshal_schema_object(swagger_spec, prop_spec, v)
         else:
             # Don't marshal when a spec is not available - just pass through
@@ -174,7 +175,6 @@ def unmarshal_model(swagger_spec, model_spec, model_value):
     :raises: SwaggerMappingError
     """
     deref = swagger_spec.fast_deref
-    print(model_spec)
     model_name = deref(model_spec).get(MODEL_MARKER)
     model_type = swagger_spec.definitions.get(model_name, None)
 
