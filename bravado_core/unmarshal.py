@@ -39,7 +39,7 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
 
     deref = swagger_spec.fast_deref
     schema_object_spec = deref(schema_object_spec)
-    deref.cache_info()
+    print(deref.cache_info())
 
     obj_type = schema_object_spec.get('type')
 
