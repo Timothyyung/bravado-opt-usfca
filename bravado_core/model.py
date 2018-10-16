@@ -197,6 +197,7 @@ def _collect_models(container, json_reference, models, swagger_spec):
             model_spec = transfer_list_to_tuple(model_spec)
         else:
             model_spec = transform_dict_to_frozendict(model_spec)
+        print(model_spec)
         model_name = _get_model_name(container)
         model_type = models.get(model_name)
         if not model_type:
