@@ -26,6 +26,7 @@ from bravado_core.model import model_discovery
 from bravado_core.resource import build_resources
 from bravado_core.schema import is_dict_like
 from bravado_core.schema import is_list_like
+from bravado_core.schema import transform_dict_to_frozendict
 from bravado_core.schema import is_ref
 from bravado_core.schema import is_ref_fast
 from bravado_core.security_definition import SecurityDefinition
@@ -172,6 +173,7 @@ class Spec(object):
         :param http_client: http client used to download remote $refs
         :param config: Configuration dict. See CONFIG_DEFAULTS.
         """
+        spec_dict = transform_dict_to_frozendict(spec_dict)
         spec = cls(spec_dict, origin_url, http_client, config)
         spec.build()
         return spec
