@@ -153,6 +153,7 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
         if is_frozendict_like(result_spec):
             return result_spec
         else:
+            print('ttt')
             return transform_dict_to_frozendict(result_spec)
         #return result_spec
 
