@@ -15,6 +15,7 @@ from bravado_core.schema import is_list_like
 from bravado_core.schema import is_ref
 from bravado_core.schema import SWAGGER_PRIMITIVES
 from bravado_core.schema import transform_dict_to_frozendict
+from bravado_core.schema import transfer_list_to_tuple
 from bravado_core.util import determine_object_type
 from bravado_core.util import ObjectType
 from bravado_core.util import strip_xscope
@@ -192,7 +193,10 @@ def _collect_models(container, json_reference, models, swagger_spec):
     key = json_reference.split('/')[-1]
     if key == MODEL_MARKER and is_object(swagger_spec, container):
         model_spec = swagger_spec.deref(container)
-        model_spec = transform_dict_to_frozendict(model_spec)
+        if is_list_like(model_spec):
+            model_spec = transfer_list_to_tuple(model_spec)
+        else:
+            model_spec = transform_dict_to_frozendict(model_spec)
         model_name = _get_model_name(container)
         model_type = models.get(model_name)
         if not model_type:
