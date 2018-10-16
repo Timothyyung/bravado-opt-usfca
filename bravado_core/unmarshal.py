@@ -42,7 +42,6 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
     else:
         deref = swagger_spec.deref
     deref = swagger_spec.deref
-    print(schema_object_spec)
     schema_object_spec = deref(schema_object_spec)
     #print(deref.cache_info())
 
