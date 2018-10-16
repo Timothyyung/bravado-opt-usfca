@@ -138,6 +138,7 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
     if properties is None:
         properties = collapsed_properties(deref(object_spec), swagger_spec)
     prop_spec = properties.get(prop_name)
+    print(prop_spec)
 
     if prop_spec is not None:
         result_spec = deref(prop_spec)
@@ -149,7 +150,6 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
         if 'x-nullable' in prop_spec and 'x-nullable' not in result_spec:
             result_spec = copy.deepcopy(result_spec)
             result_spec['x-nullable'] = prop_spec['x-nullable']
-        print(result_spec)
         return result_spec
 
     additional_props = deref(object_spec).get('additionalProperties', True)
