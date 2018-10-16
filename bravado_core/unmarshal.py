@@ -41,6 +41,7 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
         deref = swagger_spec.fast_deref
     else:
         deref = swagger_spec.deref
+    deref = swagger_spec.deref
     print(schema_object_spec)
     schema_object_spec = deref(schema_object_spec)
     #print(deref.cache_info())
@@ -177,8 +178,10 @@ def unmarshal_model(swagger_spec, model_spec, model_value):
     :rtype: Model instance
     :raises: SwaggerMappingError
     """
-    if not is_frozendict_like(model_spec) and is_dict_like(model_spec):
-        model_spec = transform_dict_to_frozendict(model_spec)
+    #if not is_frozendict_like(model_spec) and is_dict_like(model_spec):
+    #    model_spec = transform_dict_to_frozendict(model_spec)
+    if not is_frozendict_like(model_spec):
+        frozendict(model_spec)
     deref = swagger_spec.fast_deref
     #print(deref.cache_info())
     model_name = deref(model_spec).get(MODEL_MARKER)
