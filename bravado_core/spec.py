@@ -190,7 +190,6 @@ class Spec(object):
         self._validate_spec()
 
         model_discovery(self)
-        print(self.definitions)
 
         if self.config['internally_dereference_refs']:
             # Avoid to evaluate is_ref every time, no references are possible at this time
