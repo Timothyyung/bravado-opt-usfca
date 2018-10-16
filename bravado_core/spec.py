@@ -34,6 +34,7 @@ from bravado_core.spec_flattening import flattened_spec
 from bravado_core.util import cached_property
 from bravado_core.util import memoize_by_id
 from bravado_core.util import strip_xscope
+from frozendict import frozendict
 from fastcache import clru_cache
 
 
@@ -230,7 +231,7 @@ class Spec(object):
         # when asked to resolve.
         with in_scope(self.resolver, ref_dict):
             _, target = self.resolver.resolve(ref_dict['$ref'])
-            return target
+            return frozendict(target)
 
     # NOTE: deref gets overridden, if internally_dereference_refs is enabled, after calling build
     deref = _force_deref
