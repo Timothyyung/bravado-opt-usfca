@@ -43,6 +43,7 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
         #print(deref.cache_info())
     else:
         deref = swagger_spec.deref
+        print(schema_object_spec)
         schema_object_spec = frozendict(deref(schema_object_spec))
     #schema_object_spec = deref(schema_object_spec)
     #print(schema_object_spec)
@@ -145,7 +146,7 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
     object_spec = deref(object_spec)
     required_fields = object_spec.get('required', [])
     properties = collapsed_properties(object_spec, swagger_spec)
-    print(collapsed_properties.cache_info())
+    #print(collapsed_properties.cache_info())
 
     result = {}
     for k, v in iteritems(object_value):
