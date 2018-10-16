@@ -223,4 +223,4 @@ def collapsed_properties(model_spec, swagger_spec):
             more_properties = collapsed_properties(item_spec, swagger_spec)
             properties.update(more_properties)
 
-    return frozendict(properties)
+    return properties
