@@ -84,6 +84,7 @@ def is_frozendict_like(spec):
     return isinstance(spec, frozendict)
 
 def transform_dict_to_frozendict(spec):
+    print('ttttttt')
     for key, value in iteritems(spec):
         if is_list_like(value):
             spec[key] = transfer_list_to_tuple(value)
@@ -190,7 +191,7 @@ def handle_null_value(swagger_spec, schema_object_spec):
     raise SwaggerMappingError(
         'Spec {0} is a required value'.format(schema_object_spec))
 
-@clru_cache(maxsize=325, typed=False)
+#@clru_cache(maxsize=325, typed=False)
 def collapsed_properties(model_spec, swagger_spec):
     """Processes model spec and outputs dictionary with attributes
     as the keys and attribute spec as the value for the model.
