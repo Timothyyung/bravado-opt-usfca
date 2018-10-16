@@ -231,7 +231,10 @@ class Spec(object):
         # when asked to resolve.
         with in_scope(self.resolver, ref_dict):
             _, target = self.resolver.resolve(ref_dict['$ref'])
-            return frozendict(target)
+            if isinstance(target, list):
+                return tuple(target)
+            else:
+                return frozendict(target)
 
     # NOTE: deref gets overridden, if internally_dereference_refs is enabled, after calling build
     deref = _force_deref
