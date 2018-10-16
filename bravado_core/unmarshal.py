@@ -173,6 +173,7 @@ def unmarshal_model(swagger_spec, model_spec, model_value):
     :rtype: Model instance
     :raises: SwaggerMappingError
     """
+    print(model_spec)
     if is_dict_like(model_spec):
         model_spec = transform_dict_to_frozendict(model_spec)
     deref = swagger_spec.fast_deref
