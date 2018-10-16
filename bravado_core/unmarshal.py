@@ -111,7 +111,7 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
         raise SwaggerMappingError('Expected list like type for {0}:{1}'.format(
             type(array_value), array_value))
 
-    item_spec = swagger_spec.deref(array_spec).get('items')
+    item_spec = transform_dict_to_frozendict(swagger_spec.deref(array_spec).get('items'))
     return [
         unmarshal_schema_object(swagger_spec, item_spec, item)
         for item in array_value
