@@ -179,7 +179,6 @@ def unmarshal_model(swagger_spec, model_spec, model_value):
     #if not is_frozendict_like(model_spec) and is_dict_like(model_spec):
     #    model_spec = transform_dict_to_frozendict(model_spec)
     if not is_frozendict_like(model_spec):
-        print('ttt')
         model_spec = frozendict(model_spec)
     deref = swagger_spec.fast_deref
     #print(deref.cache_info())
