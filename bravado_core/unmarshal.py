@@ -40,7 +40,6 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
     deref = swagger_spec.deref
     schema_object_spec = deref(schema_object_spec)
     #print(deref.cache_info())
-    print('start')
 
     obj_type = schema_object_spec.get('type')
 
@@ -174,7 +173,6 @@ def unmarshal_model(swagger_spec, model_spec, model_value):
     :rtype: Model instance
     :raises: SwaggerMappingError
     """
-    print(model_spec)
     if is_dict_like(model_spec):
         model_spec = transform_dict_to_frozendict(model_spec)
     deref = swagger_spec.fast_deref
