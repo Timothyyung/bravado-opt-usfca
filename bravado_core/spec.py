@@ -223,6 +223,7 @@ class Spec(object):
 
     @lru_cache(maxsize=20)
     def _fast_deref(self, ref_dict):
+        print('ttt')
         if ref_dict is None or not is_ref_fast(ref_dict):
             return ref_dict
 

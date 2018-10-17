@@ -208,6 +208,7 @@ def collapsed_properties(model_spec, swagger_spec):
     """
 
     properties = {}
+    print('ttt')
 
     # properties may or may not be present
     if 'properties' in model_spec:
