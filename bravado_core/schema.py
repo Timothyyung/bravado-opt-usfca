@@ -118,7 +118,7 @@ def is_list_like(spec):
     return isinstance(spec, (list, tuple))
 
 @lru_cache(maxsize=100)
-def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, properties=None):
+def get_spec_for_prop(swagger_spec, object_spec, prop_name, properties=None):
     """Given a jsonschema object spec and value, retrieve the spec for the
      given property taking 'additionalProperties' into consideration.
 
@@ -169,9 +169,9 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
         # spec that all additional props MUST conform to
         return additional_props
 
-    raise SwaggerMappingError(
-        "Don't know what to do with `additionalProperties` in spec {0} "
-        "when inspecting value {1}".format(object_spec, object_value))
+    #raise SwaggerMappingError(
+    #    "Don't know what to do with `additionalProperties` in spec {0} "
+    #    "when inspecting value {1}".format(object_spec, object_value))
 
 
 def handle_null_value(swagger_spec, schema_object_spec):
