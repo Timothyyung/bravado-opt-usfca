@@ -35,7 +35,7 @@ from bravado_core.util import cached_property
 from bravado_core.util import memoize_by_id
 from bravado_core.util import strip_xscope
 from frozendict import frozendict
-from fastcache import clru_cache
+from functools import lru_cache
 
 
 log = logging.getLogger(__name__)
@@ -221,7 +221,7 @@ class Spec(object):
             _, target = self.resolver.resolve(ref_dict['$ref'])
             return target
 
-    @clru_cache(maxsize=325, typed=False)
+    @lru_cache(maxsize=325)
     def _fast_deref(self, ref_dict):
         if ref_dict is None or not is_ref_fast(ref_dict):
             return ref_dict

@@ -6,7 +6,7 @@ from six import iteritems
 
 from bravado_core.exception import SwaggerMappingError
 from frozendict import frozendict
-from fastcache import clru_cache
+from functools import lru_cache
 
 
 # 'object' and 'array' are omitted since this should really be read as
@@ -194,7 +194,7 @@ def handle_null_value(swagger_spec, schema_object_spec):
     raise SwaggerMappingError(
         'Spec {0} is a required value'.format(schema_object_spec))
 
-@clru_cache(maxsize=100, typed=False)
+@lru_cache(maxsize=100)
 def collapsed_properties(model_spec, swagger_spec):
     """Processes model spec and outputs dictionary with attributes
     as the keys and attribute spec as the value for the model.
