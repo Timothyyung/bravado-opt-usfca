@@ -40,7 +40,7 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
     if is_frozendict_like(schema_object_spec):
         deref = swagger_spec.fast_deref
         schema_object_spec = deref(schema_object_spec)
-        print(deref.cache_info())
+        #print(deref.cache_info())
     else:
         deref = swagger_spec.deref
         schema_object_spec = frozendict(deref(schema_object_spec))
