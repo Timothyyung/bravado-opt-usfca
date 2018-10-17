@@ -87,7 +87,7 @@ def transform_dict_to_frozendict(spec):
     for key, value in iteritems(spec):
         if is_list_like(value):
             spec[key] = transfer_list_to_tuple(value)
-        elif is_dict_like(value) and not is_frozendict_like(value):
+        elif not is_frozendict_like(value) and is_dict_like(value):
             spec[key] = transform_dict_to_frozendict(value)
 
     if is_frozendict_like(spec):
@@ -100,7 +100,7 @@ def transfer_list_to_tuple(spec):
     for item in spec:
         if is_list_like(item):
             array.append(transfer_list_to_tuple(item))
-        elif is_dict_like(item) and not is_frozendict_like(item):
+        elif not is_frozendict_like(item) and is_dict_like(item):
             array.append(transform_dict_to_frozendict(item))
         else:
             array.append(item)
