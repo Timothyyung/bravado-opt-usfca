@@ -221,7 +221,7 @@ class Spec(object):
             _, target = self.resolver.resolve(ref_dict['$ref'])
             return target
 
-    @lru_cache(maxsize=325)
+    @lru_cache(maxsize=20)
     def _fast_deref(self, ref_dict):
         if ref_dict is None or not is_ref_fast(ref_dict):
             return ref_dict

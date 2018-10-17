@@ -194,7 +194,7 @@ def handle_null_value(swagger_spec, schema_object_spec):
     raise SwaggerMappingError(
         'Spec {0} is a required value'.format(schema_object_spec))
 
-@lru_cache(maxsize=100)
+@lru_cache(maxsize=10)
 def collapsed_properties(model_spec, swagger_spec):
     """Processes model spec and outputs dictionary with attributes
     as the keys and attribute spec as the value for the model.
