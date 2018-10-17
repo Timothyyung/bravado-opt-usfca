@@ -117,7 +117,7 @@ def is_list_like(spec):
     """
     return isinstance(spec, (list, tuple))
 
-
+@lru_cache(maxsize=100)
 def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, properties=None):
     """Given a jsonschema object spec and value, retrieve the spec for the
      given property taking 'additionalProperties' into consideration.
