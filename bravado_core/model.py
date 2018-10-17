@@ -194,7 +194,6 @@ def _collect_models(container, json_reference, models, swagger_spec):
     if key == MODEL_MARKER and is_object(swagger_spec, container):
         model_spec = swagger_spec.deref(container)
         if is_list_like(model_spec):
-            print('ttt')
             model_spec = transfer_list_to_tuple(model_spec)
         else:
             model_spec = transform_dict_to_frozendict(model_spec)
@@ -766,6 +765,7 @@ def _post_process_spec(spec_dict, spec_resolver, on_container_callbacks):
                 )
 
         elif is_list_like(fragment):
+            print('ttt')
             for index in range(len(fragment)):
                 json_ref = '{}/{}'.format(json_reference or '', index)
                 fire_callbacks(fragment, json_ref)
