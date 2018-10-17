@@ -221,7 +221,7 @@ class Spec(object):
             _, target = self.resolver.resolve(ref_dict['$ref'])
             return target
 
-    @lru_cache(maxsize=20)
+    """@lru_cache(maxsize=20)
     def _fast_deref(self, ref_dict):
         if ref_dict is None or not is_ref_fast(ref_dict):
             return ref_dict
@@ -235,7 +235,7 @@ class Spec(object):
                 return transfer_list_to_tuple(target)
             elif isinstance(target, dict):
                 return transform_dict_to_frozendict(target)
-            return target
+            return target"""
 
     # NOTE: deref gets overridden, if internally_dereference_refs is enabled, after calling build
     deref = _force_deref

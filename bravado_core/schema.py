@@ -133,7 +133,7 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
     :return: spec for the given property or None if no spec found
     :rtype: dict or None
     """
-    deref = swagger_spec.fast_deref
+    deref = swagger_spec.deref
 
     if properties is None:
         properties = collapsed_properties(deref(object_spec), swagger_spec)
@@ -141,7 +141,7 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
     #print(prop_spec)
 
     if prop_spec is not None:
-        result_spec = deref(prop_spec)
+        result_spec = frozendict(deref(prop_spec))
         # If the de-referenced specification is for a x-nullable property
         # then copy the spec and add the x-nullable property.
         # If in the future there are other attributes on the property that
@@ -150,11 +150,11 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
         if 'x-nullable' in prop_spec and 'x-nullable' not in result_spec:
             result_spec = copy.deepcopy(result_spec)
             result_spec['x-nullable'] = prop_spec['x-nullable']
-        if is_frozendict_like(result_spec):
-            return result_spec
-        else:
-            print('ttt')
-            return transform_dict_to_frozendict(result_spec)
+        #if is_frozendict_like(result_spec):
+        return result_spec
+        #else:
+        #    print('ttt')
+        #    return transform_dict_to_frozendict(result_spec)
         #return result_spec
 
     additional_props = deref(object_spec).get('additionalProperties', True)
