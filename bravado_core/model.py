@@ -194,6 +194,7 @@ def _collect_models(container, json_reference, models, swagger_spec):
     if key == MODEL_MARKER and is_object(swagger_spec, container):
         model_spec = swagger_spec.deref(container)
         if is_list_like(model_spec):
+            print('ttt')
             model_spec = transfer_list_to_tuple(model_spec)
         else:
             model_spec = transform_dict_to_frozendict(model_spec)

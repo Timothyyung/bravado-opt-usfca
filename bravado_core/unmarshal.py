@@ -150,7 +150,7 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
     result = {}
     for k, v in iteritems(object_value):
         prop_spec = get_spec_for_prop(
-            swagger_spec, object_spec, k, properties)
+            swagger_spec, object_spec, object_value, k, properties)
         if v is None and k not in required_fields and prop_spec:
             if schema.has_default(swagger_spec, prop_spec):
                 result[k] = schema.get_default(swagger_spec, prop_spec)
