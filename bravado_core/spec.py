@@ -234,6 +234,7 @@ class Spec(object):
             if isinstance(target, list):
                 return transfer_list_to_tuple(target)
             elif isinstance(target, dict):
+                print('ttt')
                 return transform_dict_to_frozendict(target)
             return target
 
