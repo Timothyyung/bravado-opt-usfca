@@ -157,7 +157,6 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
             else:
                 result[k] = None
         elif prop_spec:
-            print(prop_spec)
             result[k] = unmarshal_schema_object(swagger_spec, prop_spec, v)
         else:
             # Don't marshal when a spec is not available - just pass through
@@ -206,6 +205,7 @@ def unmarshal_model(swagger_spec, model_spec, model_value):
     # Check if model is polymorphic
     discriminator = model_spec.get('discriminator')
     if discriminator is not None:
+        print('ttt')
         child_model_name = model_value.get(discriminator, None)
         if child_model_name not in swagger_spec.definitions:
             raise SwaggerMappingError(
