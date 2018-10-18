@@ -191,7 +191,6 @@ def _collect_models(container, json_reference, models, swagger_spec):
     :type swagger_spec: :class:`bravado_core.spec.Spec`
     """
     key = json_reference.split('/')[-1]
-    print(key)
     if key == MODEL_MARKER and is_object(swagger_spec, container):
         model_spec = transform_dict_to_frozendict(swagger_spec.deref(container))
         model_name = _get_model_name(container)
@@ -610,6 +609,7 @@ def is_model(swagger_spec, schema_object_spec):
     :return: True if the spec has been "marked" as a model type, false
         otherwise.
     """
+    print(schema_object_spec)
     deref = swagger_spec.deref
     schema_object_spec = deref(schema_object_spec)
     return deref(schema_object_spec.get(MODEL_MARKER)) is not None
