@@ -157,6 +157,7 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
         #return result_spec
 
     additional_props = deref(object_spec).get('additionalProperties', True)
+    print('ttt')
 
     if isinstance(additional_props, bool):
         # no spec for additional properties to conform to - this is basically
