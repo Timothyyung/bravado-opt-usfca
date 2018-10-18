@@ -45,7 +45,7 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
         deref = swagger_spec.deref
         schema_object_spec = frozendict(deref(schema_object_spec))
     #schema_object_spec = deref(schema_object_spec)
-    print(schema_object_spec)
+    #print(schema_object_spec)
     #
 
     obj_type = schema_object_spec.get('type')
@@ -157,6 +157,7 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
             else:
                 result[k] = None
         elif prop_spec:
+            print(prop_spec)
             result[k] = unmarshal_schema_object(swagger_spec, prop_spec, v)
         else:
             # Don't marshal when a spec is not available - just pass through
