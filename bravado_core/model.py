@@ -68,7 +68,6 @@ def _register_visited_model(json_reference, model_spec, model_name, visited_mode
                 model_name, json_reference, visited_models[model_name],
             ),
         )
-    print(model_spec)
     model_spec[MODEL_MARKER] = model_name
     visited_models[model_name] = json_reference
 
@@ -588,8 +587,8 @@ def create_model_type(swagger_spec, model_name, model_spec, bases=(Model,), json
     if 'allOf' in model_spec:
         print('1')
         for schema in model_spec['allOf']:
-            print(swagger_spec.deref(schema))
             inherited_name = swagger_spec.deref(schema).get(MODEL_MARKER, None)
+            print(inherited_name)
             if inherited_name:
                 inherits_from.append(inherited_name)
 
@@ -754,7 +753,7 @@ def _post_process_spec(spec_dict, spec_resolver, on_container_callbacks):
         :type json_reference: str
         """
         if is_dict_like(fragment):
-            for key, value in sorted(iteritems(fragment)):
+            for key, value in iteritems(fragment):
                 json_ref = '{}/{}'.format(json_reference or '', key)
                 fire_callbacks(fragment, json_ref)
                 descend(
