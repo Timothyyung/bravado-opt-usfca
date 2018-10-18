@@ -68,7 +68,7 @@ def _register_visited_model(json_reference, model_spec, model_name, visited_mode
                 model_name, json_reference, visited_models[model_name],
             ),
         )
-
+    print(model_name)
     model_spec[MODEL_MARKER] = model_name
     visited_models[model_name] = json_reference
 
