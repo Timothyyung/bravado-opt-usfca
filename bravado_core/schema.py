@@ -167,7 +167,8 @@ def collapsed_properties(model_spec, swagger_spec):
     :param swagger_spec: :class:`bravado_core.spec.Spec`
     :returns: dict
     """
-    i = id(model_spec)
+    spec = [model_spec,swagger_spec]
+    i = id(spec)
     try:
         return cache[i]
     except KeyError:
