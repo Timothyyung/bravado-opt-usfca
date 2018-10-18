@@ -214,7 +214,7 @@ def unmarshal_model(swagger_spec, model_spec, model_value):
             )
         model_type = swagger_spec.definitions.get(child_model_name)
         model_spec = model_type._model_spec
-
+    print(model_spec)
     model_as_dict = unmarshal_object(swagger_spec, model_spec, model_value)
     model_instance = model_type._from_dict(model_as_dict)
     return model_instance
