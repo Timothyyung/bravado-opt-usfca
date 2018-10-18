@@ -37,13 +37,13 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
     #    print(type(schema_object_spec))
     #    schema_object_spec = transform_dict_to_frozendict(schema_object_spec)
 
-    if is_frozendict_like(schema_object_spec):
-        deref = swagger_spec.fast_deref
-        schema_object_spec = deref(schema_object_spec)
+    #if is_frozendict_like(schema_object_spec):
+    #    deref = swagger_spec.fast_deref
+    #    schema_object_spec = deref(schema_object_spec)
         #print(deref.cache_info())
-    else:
-        deref = swagger_spec.deref
-        schema_object_spec = frozendict(deref(schema_object_spec))
+    #else:
+    deref = swagger_spec.deref
+    schema_object_spec = frozendict(deref(schema_object_spec))
     #schema_object_spec = deref(schema_object_spec)
     #print(schema_object_spec)
     #
@@ -117,7 +117,6 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
         raise SwaggerMappingError('Expected list like type for {0}:{1}'.format(
             type(array_value), array_value))
 
-    print(array_spec)
     item_spec = swagger_spec.fast_deref(array_spec).get('items')
     return [
         unmarshal_schema_object(swagger_spec, item_spec, item)
