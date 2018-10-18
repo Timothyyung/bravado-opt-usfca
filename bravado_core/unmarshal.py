@@ -182,6 +182,7 @@ def unmarshal_model(swagger_spec, model_spec, model_value):
     """
     #if not is_frozendict_like(model_spec) and is_dict_like(model_spec):
     #    model_spec = transform_dict_to_frozendict(model_spec)
+    print(model_spec)
     deref = swagger_spec.fast_deref
     #print(deref.cache_info())
     model_name = deref(model_spec).get(MODEL_MARKER)
@@ -205,7 +206,7 @@ def unmarshal_model(swagger_spec, model_spec, model_value):
     # Check if model is polymorphic
     discriminator = model_spec.get('discriminator')
     if discriminator is not None:
-        print('ttt')
+        #print('ttt')
         child_model_name = model_value.get(discriminator, None)
         if child_model_name not in swagger_spec.definitions:
             raise SwaggerMappingError(
