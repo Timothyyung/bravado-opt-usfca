@@ -68,6 +68,7 @@ def _register_visited_model(json_reference, model_spec, model_name, visited_mode
                 model_name, json_reference, visited_models[model_name],
             ),
         )
+    print(model_spec)
     model_spec[MODEL_MARKER] = model_name
     visited_models[model_name] = json_reference
 
@@ -192,7 +193,6 @@ def _collect_models(container, json_reference, models, swagger_spec):
     key = json_reference.split('/')[-1]
     if key == MODEL_MARKER and is_object(swagger_spec, container):
         model_spec = transform_dict_to_frozendict(swagger_spec.deref(container))
-        print(model_spec)
         model_name = _get_model_name(container)
         model_type = models.get(model_name)
         if not model_type:
