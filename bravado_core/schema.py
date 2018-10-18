@@ -216,7 +216,7 @@ def collapsed_properties(model_spec, swagger_spec):
 
     # allOf may or may not be present
     if 'allOf' in model_spec:
-        deref = swagger_spec.deref
+        deref = swagger_spec.fast_deref
         for item_spec in model_spec['allOf']:
             item_spec = deref(item_spec)
             more_properties = collapsed_properties(item_spec, swagger_spec)
