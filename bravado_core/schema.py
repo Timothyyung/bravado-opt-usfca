@@ -4,6 +4,9 @@ from collections import Mapping
 
 from six import iteritems
 
+from frozendict import frozendict
+from bravado_core.froze import to_frozen
+
 from bravado_core.exception import SwaggerMappingError
 
 
@@ -61,6 +64,14 @@ def is_ref(spec):
     except TypeError:
         return False
 
+def is_ref_frozen(spec):
+    try:
+        return '$ref' in spec and is_frozendict_like(spec)
+    except TypeError:
+        return False
+
+def is_frozendict_like(spec):
+    return isinstance(spec, (frozendict, Mapping))
 
 def is_dict_like(spec):
     """
@@ -101,7 +112,7 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
 
     if properties is None:
         properties = collapsed_properties(deref(object_spec), swagger_spec)
-    prop_spec = properties.get(prop_name)
+    prop_spec = to_frozen(properties.get(prop_name))
 
     if prop_spec is not None:
         result_spec = deref(prop_spec)
@@ -175,7 +186,7 @@ def collapsed_properties(model_spec, swagger_spec):
 
     # allOf may or may not be present
     if 'allOf' in model_spec:
-        deref = swagger_spec.deref
+        deref = swagger_spec._spec_deref
         for item_spec in model_spec['allOf']:
             item_spec = deref(item_spec)
             more_properties = collapsed_properties(item_spec, swagger_spec)

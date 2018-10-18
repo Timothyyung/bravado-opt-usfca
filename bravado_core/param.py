@@ -44,7 +44,7 @@ class Param(object):
     def __init__(self, swagger_spec, op, param_spec):
         self.op = op
         self.swagger_spec = swagger_spec
-        self.param_spec = swagger_spec.deref(param_spec)
+        self.param_spec = swagger_spec._spec_deref(param_spec)
 
     @property
     def name(self):

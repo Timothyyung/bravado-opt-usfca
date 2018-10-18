@@ -13,6 +13,8 @@ from bravado_core.schema import is_dict_like
 from bravado_core.schema import is_list_like
 from bravado_core.schema import SWAGGER_PRIMITIVES
 
+from bravado_core.froze import to_frozen
+
 
 def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
     """Unmarshal the value using the given schema object specification.
@@ -136,8 +138,8 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
         prop_spec = get_spec_for_prop(
             swagger_spec, object_spec, object_value, k, properties)
         if v is None and k not in required_fields and prop_spec:
-            if schema.has_default(swagger_spec, prop_spec):
-                result[k] = schema.get_default(swagger_spec, prop_spec)
+            if schema.has_default(swagger_spec, to_frozen(prop_spec)):
+                result[k] = schema.get_default(swagger_spec, to_frozen(prop_spec))
             else:
                 result[k] = None
         elif prop_spec:
@@ -149,7 +151,7 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
     for prop_name, prop_spec in iteritems(properties):
         if prop_name not in result and swagger_spec.config['include_missing_properties']:
             result[prop_name] = None
-            if schema.has_default(swagger_spec, prop_spec):
+            if schema.has_default(swagger_spec, to_frozen(prop_spec)):
                 result[prop_name] = schema.get_default(swagger_spec, prop_spec)
 
     return result
@@ -195,6 +197,6 @@ def unmarshal_model(swagger_spec, model_spec, model_value):
         model_type = swagger_spec.definitions.get(child_model_name)
         model_spec = model_type._model_spec
 
-    model_as_dict = unmarshal_object(swagger_spec, model_spec, model_value)
+    model_as_dict = unmarshal_object(swagger_spec, to_frozen(model_spec), model_value)
     model_instance = model_type._from_dict(model_as_dict)
     return model_instance

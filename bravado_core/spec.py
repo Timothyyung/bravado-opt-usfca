@@ -5,6 +5,11 @@ import os.path
 import warnings
 from contextlib import closing
 
+import functools
+from frozendict import frozendict
+from bravado_core.froze import to_frozen
+from bravado_core.schema import is_ref_frozen
+
 import yaml
 from jsonref import JsonRef
 from jsonschema import FormatChecker
@@ -189,7 +194,7 @@ class Spec(object):
 
         if self.config['internally_dereference_refs']:
             # Avoid to evaluate is_ref every time, no references are possible at this time
-            self.deref = lambda ref_dict: ref_dict
+            self._spec_deref = lambda ref_dict: ref_dict
             self._internal_spec_dict = self.deref_flattened_spec
 
         for user_defined_format in self.config['formats']:
@@ -199,6 +204,7 @@ class Spec(object):
 
         self.api_url = build_api_serving_url(self.spec_dict, self.origin_url)
 
+    @functools.lru_cache(maxsize=128)
     def _force_deref(self, ref_dict):
         """Dereference ref_dict (if it is indeed a ref) and return what the
         ref points to.
@@ -207,7 +213,7 @@ class Spec(object):
         :return: dereferenced value of ref_dict
         :rtype: scalar, list, dict
         """
-        if ref_dict is None or not is_ref(ref_dict):
+        if ref_dict is None or not is_ref_frozen(ref_dict):
             return ref_dict
 
         # Restore attached resolution scope before resolving since the
@@ -215,10 +221,18 @@ class Spec(object):
         # when asked to resolve.
         with in_scope(self.resolver, ref_dict):
             _, target = self.resolver.resolve(ref_dict['$ref'])
-            return target
+            return to_frozen(target)
 
     # NOTE: deref gets overridden, if internally_dereference_refs is enabled, after calling build
     deref = _force_deref
+
+    def _spec_deref(self, ref_dict):
+        if ref_dict is None or not is_ref(ref_dict):
+            return ref_dict
+
+        with in_scope(self.resolver, ref_dict):
+            _, target = self.resolver.resolve(ref_dict['$ref'])
+            return target
 
     def get_op_for_request(self, http_method, path_pattern):
         """Return the Swagger operation for the passed in request http method
