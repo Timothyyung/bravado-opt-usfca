@@ -17,6 +17,8 @@ SWAGGER_PRIMITIVES = (
     'null',
 )
 
+cache = {}
+
 
 def has_default(swagger_spec, schema_object_spec):
     return 'default' in swagger_spec.deref(schema_object_spec)
@@ -165,20 +167,24 @@ def collapsed_properties(model_spec, swagger_spec):
     :param swagger_spec: :class:`bravado_core.spec.Spec`
     :returns: dict
     """
+    i = id(model_spec)
+    try:
+        return cache[i]
+    except KeyError:
+        properties = {}
 
-    properties = {}
+        # properties may or may not be present
+        if 'properties' in model_spec:
+            for attr, attr_spec in iteritems(model_spec['properties']):
+                properties[attr] = attr_spec
 
-    # properties may or may not be present
-    if 'properties' in model_spec:
-        for attr, attr_spec in iteritems(model_spec['properties']):
-            properties[attr] = attr_spec
+        # allOf may or may not be present
+        if 'allOf' in model_spec:
+            deref = swagger_spec.deref
+            for item_spec in model_spec['allOf']:
+                item_spec = deref(item_spec)
+                more_properties = collapsed_properties(item_spec, swagger_spec)
+                properties.update(more_properties)
 
-    # allOf may or may not be present
-    if 'allOf' in model_spec:
-        deref = swagger_spec.deref
-        for item_spec in model_spec['allOf']:
-            item_spec = deref(item_spec)
-            more_properties = collapsed_properties(item_spec, swagger_spec)
-            properties.update(more_properties)
-
-    return properties
+        cache[i] = properties
+        return properties
