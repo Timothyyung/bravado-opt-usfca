@@ -586,8 +586,10 @@ def create_model_type(swagger_spec, model_name, model_spec, bases=(Model,), json
 
     inherits_from = []
     if 'allOf' in model_spec:
+        print('1')
         for schema in model_spec['allOf']:
             inherited_name = swagger_spec.fast_deref(schema).get(MODEL_MARKER, None)
+            print(inherited_name)
             if inherited_name:
                 inherits_from.append(inherited_name)
 
