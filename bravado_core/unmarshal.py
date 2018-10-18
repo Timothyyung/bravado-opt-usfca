@@ -33,7 +33,7 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
         the case of a 'format' conversion', or Model type
     """
     deref = swagger_spec.deref
-    schema_object_spec = deref(schema_object_spec)
+    schema_object_spec = deref(to_frozen(schema_object_spec))
 
     obj_type = schema_object_spec.get('type')
 
