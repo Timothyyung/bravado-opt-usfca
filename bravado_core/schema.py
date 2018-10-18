@@ -138,7 +138,7 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
     if properties is None:
         properties = collapsed_properties(deref(object_spec), swagger_spec)
     prop_spec = properties.get(prop_name)
-    #print(prop_spec)
+    print(prop_name)
 
     if prop_spec is not None:
         result_spec = deref(prop_spec)
@@ -157,7 +157,6 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
         #return result_spec
 
     additional_props = deref(object_spec).get('additionalProperties', True)
-    print('ttt')
 
     if isinstance(additional_props, bool):
         # no spec for additional properties to conform to - this is basically
