@@ -117,6 +117,7 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
         raise SwaggerMappingError('Expected list like type for {0}:{1}'.format(
             type(array_value), array_value))
 
+    print(array_spec)
     item_spec = swagger_spec.fast_deref(array_spec).get('items')
     return [
         unmarshal_schema_object(swagger_spec, item_spec, item)
@@ -215,7 +216,6 @@ def unmarshal_model(swagger_spec, model_spec, model_value):
             )
         model_type = swagger_spec.definitions.get(child_model_name)
         model_spec = model_type._model_spec
-        print(type(model_spec))
 
     model_as_dict = unmarshal_object(swagger_spec, model_spec, model_value)
     model_instance = model_type._from_dict(model_as_dict)
