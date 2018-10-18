@@ -138,7 +138,6 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
     if properties is None:
         properties = collapsed_properties(deref(object_spec), swagger_spec)
     prop_spec = properties.get(prop_name)
-    print(prop_name)
 
     if prop_spec is not None:
         result_spec = deref(prop_spec)
@@ -208,6 +207,7 @@ def collapsed_properties(model_spec, swagger_spec):
     """
 
     properties = {}
+    print(model_spec)
 
     # properties may or may not be present
     if 'properties' in model_spec:
