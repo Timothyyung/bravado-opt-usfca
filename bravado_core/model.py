@@ -191,7 +191,6 @@ def _collect_models(container, json_reference, models, swagger_spec):
         model_spec = swagger_spec.deref(container)
         model_name = _get_model_name(container)
         model_type = models.get(model_name)
-        print(model_name)
         if not model_type:
             models[model_name] = create_model_type(
                 swagger_spec=swagger_spec,
