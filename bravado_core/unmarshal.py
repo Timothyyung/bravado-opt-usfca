@@ -37,7 +37,7 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
     deref = swagger_spec.fast_deref
     schema_object_spec = deref(schema_object_spec)
     #schema_object_spec = deref(schema_object_spec)
-    #print(schema_object_spec)
+    print(schema_object_spec)
     #
 
     obj_type = schema_object_spec.get('type')
@@ -49,7 +49,6 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
         if swagger_spec.config['default_type_to_object']:
             obj_type = 'object'
         else:
-            print('ttt')
             return value
 
     if obj_type in SWAGGER_PRIMITIVES:
