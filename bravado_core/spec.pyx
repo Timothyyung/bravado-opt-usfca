@@ -18,20 +18,20 @@ from six.moves.urllib.parse import urlunparse
 from swagger_spec_validator import validator20
 from swagger_spec_validator.ref_validators import in_scope
 
-from bravado_core import formatter
-from bravado_core.exception import SwaggerSchemaError
-from bravado_core.exception import SwaggerValidationError
-from bravado_core.formatter import return_true_wrapper
-from bravado_core.model import model_discovery
-from bravado_core.resource import build_resources
-from bravado_core.schema import is_dict_like
-from bravado_core.schema import is_list_like
-from bravado_core.schema import is_ref
-from bravado_core.security_definition import SecurityDefinition
-from bravado_core.spec_flattening import flattened_spec
-from bravado_core.util import cached_property
-from bravado_core.util import memoize_by_id
-from bravado_core.util import strip_xscope
+import formatter
+from exception import SwaggerSchemaError
+from exception import SwaggerValidationError
+from formatter import return_true_wrapper
+from model import model_discovery
+from resource import build_resources
+from schema import is_dict_like
+from schema import is_list_like
+from schema import is_ref
+from security_definition import SecurityDefinition
+from spec_flattening import flattened_spec
+from util import cached_property
+from util import memoize_by_id
+from util import strip_xscope
 
 
 log = logging.getLogger(__name__)

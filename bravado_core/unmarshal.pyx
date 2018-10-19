@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 from six import iteritems
 
-from bravado_core import formatter
-from bravado_core import schema
-from bravado_core.exception import SwaggerMappingError
-from bravado_core.model import is_model
-from bravado_core.model import MODEL_MARKER
-from bravado_core.schema import collapsed_properties
-from bravado_core.schema import get_spec_for_prop
-from bravado_core.schema import handle_null_value
-from bravado_core.schema import is_dict_like
-from bravado_core.schema import is_list_like
-from bravado_core.schema import SWAGGER_PRIMITIVES
+import formatter
+import schema
+from exception import SwaggerMappingError
+from model import is_model
+from model import MODEL_MARKER
+from schema import collapsed_properties
+from schema import get_spec_for_prop
+from schema import handle_null_value
+from schema import is_dict_like
+from schema import is_list_like
+from schema import SWAGGER_PRIMITIVES
 
 
 def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
