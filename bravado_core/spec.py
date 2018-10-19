@@ -213,7 +213,7 @@ class Spec(object):
             return cache[i]
         except KeyError:
             if ref_dict is None or not is_ref(ref_dict):
-                cache[id] = ref_dict
+                cache[i] = ref_dict
                 return ref_dict
 
         # Restore attached resolution scope before resolving since the
