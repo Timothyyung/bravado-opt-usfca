@@ -606,7 +606,6 @@ def is_model(swagger_spec, schema_object_spec):
         otherwise.
     """
     deref = swagger_spec.deref
-    print('ttt')
     schema_object_spec = deref(schema_object_spec)
     return deref(schema_object_spec.get(MODEL_MARKER)) is not None
 
