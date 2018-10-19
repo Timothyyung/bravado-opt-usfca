@@ -587,7 +587,6 @@ def create_model_type(swagger_spec, model_name, model_spec, bases=(Model,), json
             if inherited_name:
                 inherits_from.append(inherited_name)
 
-    print(model_spec)
     return type(str(model_name), bases, dict(
         __doc__=ModelDocstring(),
         _swagger_spec=swagger_spec,
@@ -607,6 +606,7 @@ def is_model(swagger_spec, schema_object_spec):
         otherwise.
     """
     deref = swagger_spec.deref
+    print('ttt')
     schema_object_spec = deref(schema_object_spec)
     return deref(schema_object_spec.get(MODEL_MARKER)) is not None
 
