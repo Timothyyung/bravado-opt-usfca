@@ -164,7 +164,7 @@ def collapsed_properties(model_spec, swagger_spec):
     :returns: dict
     """
 
-    id = id(model_spec)
+    i = id(model_spec)
     try:
         return cache[id]
     except KeyError:
@@ -182,5 +182,5 @@ def collapsed_properties(model_spec, swagger_spec):
                 item_spec = deref(item_spec)
                 more_properties = collapsed_properties(item_spec, swagger_spec)
                 properties.update(more_properties)
-        cache[id] = properties
+        cache[i] = properties
         return properties

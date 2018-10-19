@@ -208,9 +208,9 @@ class Spec(object):
         :return: dereferenced value of ref_dict
         :rtype: scalar, list, dict
         """
-        id = id(ref_dict)
+        i = id(ref_dict)
         try:
-            return cache[id]
+            return cache[i]
         except KeyError:
             if ref_dict is None or not is_ref(ref_dict):
                 cache[id] = ref_dict
@@ -221,7 +221,7 @@ class Spec(object):
         # when asked to resolve.
             with in_scope(self.resolver, ref_dict):
                 _, target = self.resolver.resolve(ref_dict['$ref'])
-                cache[id] = ref_dict
+                cache[i] = ref_dict
                 return target
 
 
