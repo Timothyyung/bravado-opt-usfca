@@ -228,6 +228,7 @@ class Spec(object):
         try:
              return cache[i]
         except KeyError:
+            print('11')
             if ref_dict is None or not is_ref_fast(ref_dict):
                 cache[i] = ref_dict
                 return ref_dict
