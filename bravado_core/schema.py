@@ -95,7 +95,7 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
     :return: spec for the given property or None if no spec found
     :rtype: dict or None
     """
-    deref = swagger_spec.deref
+    deref = swagger_spec.fast_deref
 
     if properties is None:
         properties = collapsed_properties(deref(object_spec), swagger_spec)
@@ -177,7 +177,7 @@ def collapsed_properties(model_spec, swagger_spec):
 
     # allOf may or may not be present
         if 'allOf' in model_spec:
-            deref = swagger_spec.deref
+            deref = swagger_spec.fast_deref
             for item_spec in model_spec['allOf']:
                 item_spec = deref(item_spec)
                 more_properties = collapsed_properties(item_spec, swagger_spec)

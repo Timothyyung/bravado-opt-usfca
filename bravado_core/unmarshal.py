@@ -34,7 +34,7 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
     #    schema_object_spec = transform_dict_to_frozendict(schema_object_spec)
 
 
-    deref = swagger_spec.deref
+    deref = swagger_spec.fast_deref
     schema_object_spec = deref(schema_object_spec)
     #schema_object_spec = deref(schema_object_spec)
     #print(schema_object_spec)
@@ -109,7 +109,7 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
         raise SwaggerMappingError('Expected list like type for {0}:{1}'.format(
             type(array_value), array_value))
 
-    item_spec = swagger_spec.deref(array_spec).get('items')
+    item_spec = swagger_spec.fast_deref(array_spec).get('items')
     return [
         unmarshal_schema_object(swagger_spec, item_spec, item)
         for item in array_value
@@ -125,7 +125,7 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
     :rtype: dict
     :raises: SwaggerMappingError
     """
-    deref = swagger_spec.deref
+    deref = swagger_spec.fast_deref
 
     if object_value is None:
         return handle_null_value(swagger_spec, object_spec)
@@ -174,7 +174,7 @@ def unmarshal_model(swagger_spec, model_spec, model_value):
     """
     #if not is_frozendict_like(model_spec) and is_dict_like(model_spec):
     #    model_spec = transform_dict_to_frozendict(model_spec)
-    deref = swagger_spec.deref
+    deref = swagger_spec.fast_deref
     #print(deref.cache_info())
     model_name = deref(model_spec).get(MODEL_MARKER)
 
