@@ -588,6 +588,7 @@ def create_model_type(swagger_spec, model_name, model_spec, bases=(Model,), json
             if inherited_name:
                 inherits_from.append(inherited_name)
 
+    print(model_spec)
     return type(str(model_name), bases, dict(
         __doc__=ModelDocstring(),
         _swagger_spec=swagger_spec,
