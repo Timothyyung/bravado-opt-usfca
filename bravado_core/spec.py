@@ -229,11 +229,11 @@ class Spec(object):
         """
         i = id(ref_dict)
         try:
+            print(ref_dict)
             return self.cache[i]
         except KeyError:
             if ref_dict is None or not is_ref(ref_dict):
                 self.cache[i] = ref_dict
-                print('ttt')
                 return ref_dict
 
         # Restore attached resolution scope before resolving since the
