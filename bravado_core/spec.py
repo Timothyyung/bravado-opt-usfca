@@ -229,7 +229,6 @@ class Spec(object):
         """
         i = id(ref_dict)
         try:
-            print(ref_dict)
             return self.cache[i]
         except KeyError:
             if ref_dict is None or not is_ref(ref_dict):
