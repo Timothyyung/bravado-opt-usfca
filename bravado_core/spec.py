@@ -233,6 +233,7 @@ class Spec(object):
         except KeyError:
             if ref_dict is None or not is_ref(ref_dict):
                 self.cache[i] = ref_dict
+                print('ttt')
                 return ref_dict
 
         # Restore attached resolution scope before resolving since the
