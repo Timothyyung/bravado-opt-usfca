@@ -192,7 +192,6 @@ def _collect_models(container, json_reference, models, swagger_spec):
         model_name = _get_model_name(container)
         model_type = models.get(model_name)
         if not model_type:
-            print(model_name)
             models[model_name] = create_model_type(
                 swagger_spec=swagger_spec,
                 model_name=model_name,
@@ -584,6 +583,7 @@ def create_model_type(swagger_spec, model_name, model_spec, bases=(Model,), json
     inherits_from = []
     if 'allOf' in model_spec:
         for schema in model_spec['allOf']:
+            print(swagger_spec.deref(schema))
             inherited_name = swagger_spec.deref(schema).get(MODEL_MARKER, None)
             if inherited_name:
                 inherits_from.append(inherited_name)
