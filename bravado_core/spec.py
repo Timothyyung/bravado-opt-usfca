@@ -26,15 +26,12 @@ from bravado_core.model import model_discovery
 from bravado_core.resource import build_resources
 from bravado_core.schema import is_dict_like
 from bravado_core.schema import is_list_like
-from bravado_core.schema import transform_dict_to_frozendict
 from bravado_core.schema import is_ref
-from bravado_core.schema import is_ref_fast
 from bravado_core.security_definition import SecurityDefinition
 from bravado_core.spec_flattening import flattened_spec
 from bravado_core.util import cached_property
 from bravado_core.util import memoize_by_id
 from bravado_core.util import strip_xscope
-from frozendict import frozendict
 
 
 log = logging.getLogger(__name__)
