@@ -35,10 +35,10 @@ from bravado_core.util import cached_property
 from bravado_core.util import memoize_by_id
 from bravado_core.util import strip_xscope
 from frozendict import frozendict
-from functools import lru_cache
 
 
 log = logging.getLogger(__name__)
+cache = {}
 
 
 CONFIG_DEFAULTS = {
@@ -211,31 +211,22 @@ class Spec(object):
         :return: dereferenced value of ref_dict
         :rtype: scalar, list, dict
         """
-        if ref_dict is None or not is_ref(ref_dict):
-            return ref_dict
+        id = id(ref_dict)
+        try:
+            return cache[id]
+        except KeyError:
+            if ref_dict is None or not is_ref(ref_dict):
+                cache[id] = ref_dict
+                return ref_dict
 
         # Restore attached resolution scope before resolving since the
         # resolver doesn't have a traversal history (accumulated scope_stack)
         # when asked to resolve.
-        with in_scope(self.resolver, ref_dict):
-            _, target = self.resolver.resolve(ref_dict['$ref'])
-            return target
+            with in_scope(self.resolver, ref_dict):
+                _, target = self.resolver.resolve(ref_dict['$ref'])
+                cache[id] = ref_dict
+                return target
 
-    @lru_cache(maxsize=20)
-    def _fast_deref(self, ref_dict):
-        if ref_dict is None or not is_ref_fast(ref_dict):
-            return ref_dict
-
-        # Restore attached resolution scope before resolving since the
-        # resolver doesn't have a traversal history (accumulated scope_stack)
-        # when asked to resolve.
-        with in_scope(self.resolver, ref_dict):
-            _, target = self.resolver.resolve(ref_dict['$ref'])
-            if isinstance(target, list):
-                return transfer_list_to_tuple(target)
-            elif isinstance(target, dict):
-                return transform_dict_to_frozendict(target)
-            return target
 
     # NOTE: deref gets overridden, if internally_dereference_refs is enabled, after calling build
     deref = _force_deref
