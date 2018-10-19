@@ -81,6 +81,7 @@ def is_dict_like(spec):
     return isinstance(spec, (dict, Mapping))
 
 def is_frozendict_like(spec):
+    print('rrr')
     return isinstance(spec, frozendict)
 
 def transform_dict_to_frozendict(spec):
@@ -149,7 +150,7 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
         if 'x-nullable' in prop_spec and 'x-nullable' not in result_spec:
             result_spec = copy.deepcopy(result_spec)
             result_spec['x-nullable'] = prop_spec['x-nullable']
-        
+
         return result_spec
 
     additional_props = deref(object_spec).get('additionalProperties', True)
