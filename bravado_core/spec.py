@@ -213,7 +213,7 @@ class Spec(object):
         #     return cache[i]
         # except KeyError:
         if ref_dict is None or not is_ref(ref_dict):
-            cache[i] = ref_dict
+            # cache[i] = ref_dict
             return ref_dict
 
         # Restore attached resolution scope before resolving since the
@@ -221,7 +221,7 @@ class Spec(object):
         # when asked to resolve.
         with in_scope(self.resolver, ref_dict):
             _, target = self.resolver.resolve(ref_dict['$ref'])
-            cache[i] = target
+            # cache[i] = target
             return target
 
     # NOTE: deref gets overridden, if internally_dereference_refs is enabled, after calling build
