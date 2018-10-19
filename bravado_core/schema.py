@@ -150,7 +150,6 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
             result_spec = copy.deepcopy(result_spec)
             result_spec['x-nullable'] = prop_spec['x-nullable']
         if is_frozendict_like(result_spec):
-            print('1111')
             return result_spec
         else:
             print('2222')
