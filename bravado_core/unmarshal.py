@@ -33,7 +33,7 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
     #    print(type(schema_object_spec))
     #    schema_object_spec = transform_dict_to_frozendict(schema_object_spec)
 
-
+    print(schema_object_spec)
     deref = swagger_spec.fast_deref
     schema_object_spec = deref(schema_object_spec)
     #schema_object_spec = deref(schema_object_spec)
