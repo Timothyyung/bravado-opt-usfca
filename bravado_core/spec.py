@@ -240,7 +240,7 @@ class Spec(object):
         # when asked to resolve.
             with in_scope(self.resolver, ref_dict):
                 _, target = self.resolver.resolve(ref_dict['$ref'])
-                self.cache[i] = ref_dict
+                self.cache[i] = target
                 return target
 
 
