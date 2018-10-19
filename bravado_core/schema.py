@@ -5,7 +5,6 @@ from collections import Mapping
 from six import iteritems
 
 from bravado_core.exception import SwaggerMappingError
-from frozendict import frozendict
 
 
 # 'object' and 'array' are omitted since this should really be read as
@@ -62,12 +61,6 @@ def is_ref(spec):
     except TypeError:
         return False
 
-def is_ref_fast(spec):
-    try:
-        return '$ref' in spec and is_frozendict_like(spec)
-    except TypeError:
-        return False
-
 def is_dict_like(spec):
     """
     :param spec: swagger object specification in dict form
@@ -78,36 +71,6 @@ def is_dict_like(spec):
     # by executing a much cheaper isinstance(spec, dict) check before the more
     # expensive isinstance(spec, Mapping) check.
     return isinstance(spec, (dict, Mapping))
-
-def is_frozendict_like(spec):
-    return isinstance(spec, frozendict)
-
-def transform_dict_to_frozendict(spec):
-    for key, value in iteritems(spec):
-        if is_list_like(value):
-            spec[key] = transfer_list_to_tuple(value)
-        elif not is_frozendict_like(value) and is_dict_like(value):
-            spec[key] = transform_dict_to_frozendict(value)
-
-    if is_frozendict_like(spec):
-        return spec
-    return frozendict(spec)
-
-
-def transfer_list_to_tuple(spec):
-    array = []
-    for item in spec:
-        if is_list_like(item):
-            array.append(transfer_list_to_tuple(item))
-        elif not is_frozendict_like(item) and is_dict_like(item):
-            array.append(transform_dict_to_frozendict(item))
-        else:
-            array.append(item)
-
-    return tuple(array)
-
-
-
 
 def is_list_like(spec):
     """
@@ -132,7 +95,7 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
     :return: spec for the given property or None if no spec found
     :rtype: dict or None
     """
-    deref = swagger_spec.fast_deref
+    deref = swagger_spec.deref
 
     if properties is None:
         properties = collapsed_properties(deref(object_spec), swagger_spec)
