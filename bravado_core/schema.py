@@ -166,10 +166,9 @@ def collapsed_properties(model_spec, swagger_spec):
 
     i = id(model_spec)
     try:
-        print('1')
-        return cache[id]
+        return cache[i]
     except KeyError:
-        #print(model_spec)
+        print(model_spec)
         properties = {}
 
     # properties may or may not be present
