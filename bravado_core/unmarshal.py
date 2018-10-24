@@ -12,9 +12,20 @@ from bravado_core.schema import handle_null_value
 from bravado_core.schema import is_dict_like
 from bravado_core.schema import is_list_like
 from bravado_core.schema import SWAGGER_PRIMITIVES
-from multiprocessing.dummy import Pool
+import threading
 from functools import partial
 
+class unmarshal(threading.Thread):
+    def __init__(self, swagger_spec, item_spec, array_value):
+        threading.Thread.__init__(self)
+        self.swagger_spec = swagger_spec
+        self.item_spec = item_spec
+        self.array_value = array_value
+    def run(self):
+        return [
+        unmarshal_schema_object(self.swagger_spec, self.item_spec, item)
+        for item in self.array_value
+        ]
 
 def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
     """Unmarshal the value using the given schema object specification.
@@ -105,12 +116,13 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
             type(array_value), array_value))
 
     item_spec = swagger_spec.deref(array_spec).get('items')
-    func = partial(unmarshal_schema_object, swagger_spec, item_spec)
-    pool = Pool()
-    result = pool.map(func, array_value)
-    pool.close()
-    pool.join()
-    return result
+    #func = partial(unmarshal_schema_object, swagger_spec, item_spec)
+    #pool = Pool()
+    #result = pool.map(func, array_value)
+    #pool.close()
+    #pool.join()
+    unmarshal = unmarshal(swagger_spec, item_spec, array_value)
+    return unmarshal.start()
         #unmarshal_schema_object(swagger_spec, item_spec, item)
 
 
