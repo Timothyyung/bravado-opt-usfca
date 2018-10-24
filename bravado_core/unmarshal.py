@@ -17,10 +17,6 @@ from functools import partial
 
 
 def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
-    func = partial(unmarshal, swagger_spec, item_spec)
-    pool = Pool()
-
-def unmarshal(swagger_spec, schema_object_spec, value):
     """Unmarshal the value using the given schema object specification.
 
     Unmarshalling includes:
@@ -109,7 +105,8 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
             type(array_value), array_value))
 
     item_spec = swagger_spec.deref(array_spec).get('items')
-
+    func = partial(unmarshal_schema_object, swagger_spec, item_spec)
+    pool = Pool()
     result = pool.map(func, array_value)
     pool.close()
     pool.join()
@@ -149,7 +146,7 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
             else:
                 result[k] = None
         elif prop_spec:
-            result[k] = unmarshal(swagger_spec, prop_spec, v)
+            result[k] = unmarshal_schema_object(swagger_spec, prop_spec, v)
         else:
             # Don't marshal when a spec is not available - just pass through
             result[k] = v
