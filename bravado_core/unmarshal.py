@@ -105,6 +105,7 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
             type(array_value), array_value))
 
     item_spec = swagger_spec.deref(array_spec).get('items')
+    print('ttt')
     func = partial(unmarshal_schema_object, swagger_spec, item_spec)
     pool = Pool(5)
     result = pool.map(func, array_value)
