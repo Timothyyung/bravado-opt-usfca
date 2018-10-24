@@ -14,6 +14,10 @@ from bravado_core.schema import is_list_like
 from bravado_core.schema import SWAGGER_PRIMITIVES
 from multiprocessing.dummy import Pool
 from functools import partial
+func = partial(unmarshal_schema_object, swagger_spec, item_spec)
+pool = Pool()
+
+#def unmarshal(swagger_spec, schema_object_spec, value):
 
 
 def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
@@ -105,9 +109,7 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
             type(array_value), array_value))
 
     item_spec = swagger_spec.deref(array_spec).get('items')
-    print('ttt')
-    func = partial(unmarshal_schema_object, swagger_spec, item_spec)
-    pool = Pool(5)
+
     result = pool.map(func, array_value)
     pool.close()
     pool.join()
