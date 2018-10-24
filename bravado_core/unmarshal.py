@@ -16,10 +16,11 @@ from multiprocessing.dummy import Pool
 from functools import partial
 
 
-#def unmarshal(swagger_spec, schema_object_spec, value):
-
-
 def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
+    func = partial(unmarshal, swagger_spec, item_spec)
+    pool = Pool()
+
+def unmarshal(swagger_spec, schema_object_spec, value):
     """Unmarshal the value using the given schema object specification.
 
     Unmarshalling includes:
@@ -90,8 +91,7 @@ def unmarshal_primitive(swagger_spec, primitive_spec, value):
     value = formatter.to_python(swagger_spec, primitive_spec, value)
     return value
 
-func = partial(unmarshal_schema_object, swagger_spec, item_spec)
-pool = Pool()
+
 def unmarshal_array(swagger_spec, array_spec, array_value):
     """Unmarshal a jsonschema type of 'array' into a python list.
 
@@ -149,7 +149,7 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
             else:
                 result[k] = None
         elif prop_spec:
-            result[k] = unmarshal_schema_object(swagger_spec, prop_spec, v)
+            result[k] = unmarshal(swagger_spec, prop_spec, v)
         else:
             # Don't marshal when a spec is not available - just pass through
             result[k] = v
