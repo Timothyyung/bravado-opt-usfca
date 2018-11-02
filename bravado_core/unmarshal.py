@@ -104,7 +104,7 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
     item_spec = swagger_spec.deref(array_spec).get('items')
     item_spec_deref = swagger_spec.deref(item_spec)
     return [
-        unmarshal_schema_object_array(swagger_spec, item_spec_deref, item)
+        unmarshal_schema_object_sub(swagger_spec, item_spec_deref, item)
         for item in array_value
     ]
 
