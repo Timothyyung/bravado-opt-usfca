@@ -13,37 +13,6 @@ from bravado_core.schema import is_dict_like
 from bravado_core.schema import is_list_like
 from bravado_core.schema import SWAGGER_PRIMITIVES
 
-def unmarshal_schema_object_itr(swagger_spec,schema_object_spec, value):
-    deref = swagger_spec.deref
-    schema_object_spec = deref(schema_object_spec)
-    obj_type = schema_object_spec.get('type')
-
-    unvalue = []
-    if 'allOf' in schema_object_spec:
-        obj_type = 'object'
-    if not obj_type:
-         if swagger_spec.config['default_type_to_object']:
-            obj_type = 'object'
-         else:
-             return value
-    print (obj_type)
-    if obj_type == 'array':
-        item_spec = swagger_spec.deref(array_spec).get('items')
-
-
-        for item in value:
-            if obj_type in SWAGGER_PRIMITIVES:
-                unvalue.append(unmarshal_primitive(swagger_spec,item_spec,value))
-
-        return unvalue
-    else:
-        return []
-        
-                        
-            
-           
-        
-
 
 def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
     """Unmarshal the value using the given schema object specification.
@@ -76,8 +45,7 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
             return value
 
     if obj_type in SWAGGER_PRIMITIVES:
-        return unmarshal_primitive(swagger_spec,schema_object_spec, value)
-
+        return unmarshal_primitive(swagger_spec, schema_object_spec, value)
 
     if obj_type == 'array':
         return unmarshal_array(swagger_spec, schema_object_spec, value)
@@ -94,9 +62,6 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
 
     if obj_type == 'file':
         return value
-
-    
-
 
     raise SwaggerMappingError(
         "Don't know how to unmarshal value {0} with a type of {1}"
