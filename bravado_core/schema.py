@@ -100,7 +100,7 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
     try:
         return cache[i]
     except KeyError:
-        deref = swagger_spec.fast_deref
+        deref = swagger_spec.deref
 
         if properties is None:
             properties = collapsed_properties(deref(object_spec), swagger_spec)
@@ -117,7 +117,7 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
                 result_spec = copy.deepcopy(result_spec)
                 result_spec['x-nullable'] = prop_spec['x-nullable']
 
-            cache[i] = result_spec
+            #cache[i] = result_spec
             return result_spec
 
         additional_props = deref(object_spec).get('additionalProperties', True)
