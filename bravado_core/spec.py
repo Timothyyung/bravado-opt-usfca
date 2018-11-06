@@ -32,6 +32,7 @@ from bravado_core.spec_flattening import flattened_spec
 from bravado_core.util import cached_property
 from bravado_core.util import memoize_by_id
 from bravado_core.util import strip_xscope
+from bravado_core.LRUCache import LRUCache
 
 
 log = logging.getLogger(__name__)
@@ -123,6 +124,8 @@ class Spec(object):
         # spec dict used to build resources, in case internally_dereference_refs config is enabled
         # it will be overridden by the dereferenced specs (by build method). More context in PR#263
         self._internal_spec_dict = spec_dict
+
+        self.lru_cache = LRUCache(16)
 
     @cached_property
     def client_spec_dict(self):
