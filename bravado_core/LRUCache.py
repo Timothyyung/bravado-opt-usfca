@@ -32,7 +32,6 @@ class LRUCache(object):
 
         if self.maxsize > 0:
             if self.cache_len() == self.maxsize:
-                print("remove")
                 old_key = self.key.pop()
                 self.cache.pop(old_key)
 

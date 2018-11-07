@@ -125,7 +125,7 @@ class Spec(object):
         # it will be overridden by the dereferenced specs (by build method). More context in PR#263
         self._internal_spec_dict = spec_dict
 
-        self.lru_cache = LRUCache(3)
+        self.lru_cache = LRUCache(16)
 
     @cached_property
     def client_spec_dict(self):
