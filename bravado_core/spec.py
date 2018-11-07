@@ -33,6 +33,7 @@ from bravado_core.util import cached_property
 from bravado_core.util import memoize_by_id
 from bravado_core.util import strip_xscope
 from bravado_core.LRUCache import LRUCache
+from bravado_core.LRUCache2 import LRUCache2
 
 
 log = logging.getLogger(__name__)
@@ -125,7 +126,7 @@ class Spec(object):
         # it will be overridden by the dereferenced specs (by build method). More context in PR#263
         self._internal_spec_dict = spec_dict
 
-        self.lru_cache = LRUCache(16)
+        self.lru_cache = LRUCache2(16)
 
     @cached_property
     def client_spec_dict(self):
