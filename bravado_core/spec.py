@@ -124,6 +124,7 @@ class Spec(object):
         # it will be overridden by the dereferenced specs (by build method). More context in PR#263
         self._internal_spec_dict = spec_dict
         self.cache = {}
+        self.cache_schema = {}
 
     @cached_property
     def client_spec_dict(self):

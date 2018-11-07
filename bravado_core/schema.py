@@ -16,7 +16,7 @@ SWAGGER_PRIMITIVES = (
     'boolean',
     'null',
 )
-cache = {}
+#cache = {}
 
 def has_default(swagger_spec, schema_object_spec):
     return 'default' in swagger_spec.deref(schema_object_spec)
@@ -98,7 +98,7 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
 
     i = id(prop_name)
     try:
-        return swagger_spec.cache[i]
+        return swagger_spec.cache_schema[i]
     except KeyError:
         deref = swagger_spec.fast_deref
 
@@ -117,7 +117,7 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
                 result_spec = copy.deepcopy(result_spec)
                 result_spec['x-nullable'] = prop_spec['x-nullable']
 
-            swagger_spec.cache[i] = result_spec
+            swagger_spec.cache_schema[i] = result_spec
             return result_spec
 
         additional_props = deref(object_spec).get('additionalProperties', True)
@@ -125,13 +125,13 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
         if isinstance(additional_props, bool):
         # no spec for additional properties to conform to - this is basically
         # a way to send pretty much anything across the wire as is.
-            swagger_spec.cache[i] = None
+            swagger_spec.cache_schema[i] = None
             return None
 
         additional_props = deref(additional_props)
         if is_dict_like(additional_props):
         # spec that all additional props MUST conform to
-            swagger_spec.cache[i] = additional_props
+            swagger_spec.cache_schema[i] = additional_props
             return additional_props
 
         raise SwaggerMappingError(
@@ -174,7 +174,7 @@ def collapsed_properties(model_spec, swagger_spec):
 
     i = id(model_spec)
     try:
-        return swagger_spec.cache[i]
+        return swagger_spec.cache_schema[i]
     except KeyError:
         #print(model_spec)
         properties = {}
@@ -191,5 +191,5 @@ def collapsed_properties(model_spec, swagger_spec):
                 item_spec = deref(item_spec)
                 more_properties = collapsed_properties(item_spec, swagger_spec)
                 properties.update(more_properties)
-        swagger_spec.cache[i] = properties
+        swagger_spec.cache_schema[i] = properties
         return properties
