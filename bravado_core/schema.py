@@ -100,7 +100,7 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
     try:
         return cache[i]
     except KeyError:
-        deref = swagger_spec.fast_deref
+        deref = swagger_spec.deref
 
         if properties is None:
             properties = collapsed_properties(deref(object_spec), swagger_spec)
