@@ -32,9 +32,9 @@ cdef unmarshal_schema_object(swagger_spec, dict schema_object_spec, value):
     :rtype: int, float, long, string, unicode, boolean, list, dict, object (in
         the case of a 'format' conversion', or Model type
     """
-    """if value is None:
-        return handle_null_value(swagger_spec, schema_object_spec)"""
-    is_value_none_helper(swagger_spec, schema_object_spec, value)
+    if value is None:
+        return handle_null_value(swagger_spec, schema_object_spec)
+    """is_value_none_helper(swagger_spec, schema_object_spec, value)"""
 
     deref = swagger_spec.deref
     schema_object_spec = deref(schema_object_spec)
@@ -206,10 +206,10 @@ def unmarshal_model(swagger_spec, model_spec, model_value):
     return model_instance
 
 
-cdef return_is_value_none(swagger_spec, dict schema_object_spec, None value):
+"""cdef return_is_value_none(swagger_spec, dict schema_object_spec, None value):
     return handle_null_value(swagger_spec, schema_object_spec)
 
 cdef is_node_helper(swagger_spec, dict schema_object_spec, value):
-    try:
-        
+    try:"""
+
 
