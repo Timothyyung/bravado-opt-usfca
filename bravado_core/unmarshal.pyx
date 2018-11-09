@@ -30,6 +30,9 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
     :rtype: int, float, long, string, unicode, boolean, list, dict, object (in
         the case of a 'format' conversion', or Model type
     """
+    if value is None:
+        return handle_null_value(swagger_spec, schema_object_spec)
+
     deref = swagger_spec.deref
     schema_object_spec = deref(schema_object_spec)
 
@@ -79,8 +82,8 @@ def unmarshal_primitive(swagger_spec, primitive_spec, value):
         based on 'format'
     :raises: SwaggerMappingError
     """
-    if value is None:
-        return handle_null_value(swagger_spec, primitive_spec)
+    """if value is None:
+        return handle_null_value(swagger_spec, primitive_spec)"""
 
     value = formatter.to_python(swagger_spec, primitive_spec, value)
     return value
@@ -95,8 +98,8 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
     :rtype: list
     :raises: SwaggerMappingError
     """
-    if array_value is None:
-        return handle_null_value(swagger_spec, array_spec)
+    """if array_value is None:
+        return handle_null_value(swagger_spec, array_spec)"""
 
     if not is_list_like(array_value):
         raise SwaggerMappingError('Expected list like type for {0}:{1}'.format(
@@ -173,8 +176,8 @@ def unmarshal_model(swagger_spec, model_spec, model_value):
             'Unknown model {0} when trying to unmarshal {1}'
             .format(model_name, model_value))
 
-    if model_value is None:
-        return handle_null_value(swagger_spec, model_spec)
+    """ if model_value is None:
+        return handle_null_value(swagger_spec, model_spec)"""
 
     if not is_dict_like(model_value):
         raise SwaggerMappingError(
