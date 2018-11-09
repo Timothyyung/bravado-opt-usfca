@@ -9,8 +9,8 @@ from six.moves.urllib.parse import quote
 from bravado_core import schema
 from bravado_core.content_type import APP_JSON
 from bravado_core.exception import SwaggerMappingError
-from bravado_core.marshal import marshal_schema_object
-from bravado_core.unmarshal import unmarshal_schema_object
+from marshal import marshal_schema_object
+from unmarshal import unmarshal_schema_object
 from bravado_core.validate import validate_schema_object
 
 log = logging.getLogger(__name__)
