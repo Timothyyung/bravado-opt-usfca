@@ -13,10 +13,10 @@ from bravado_core.schema import is_dict_like
 from bravado_core.schema import is_list_like
 from bravado_core.schema import SWAGGER_PRIMITIVES
 
-from bravado_core.spec_pxd cimport Spec 
+"""from bravado_core.spec_pxd cimport Spec 
+"""
 
-
-cdef unmarshal_schema_object(Spec swagger_spec, schema_object_spec, value):
+cdef unmarshal_schema_object(swagger_spec, dict schema_object_spec, value):
     """Unmarshal the value using the given schema object specification.
 
     Unmarshalling includes:
