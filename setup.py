@@ -51,5 +51,5 @@ setup(
     extras_require={
         ':python_version<"3.4"': ['enum34'],
     },
-    ext_modules = cythonize('unmarshal.pyx')
+    ext_modules = cythonize('bravado_core/unmarshal.pyx')
 )
