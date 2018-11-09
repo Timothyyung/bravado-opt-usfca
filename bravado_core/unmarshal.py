@@ -13,31 +13,52 @@ from bravado_core.schema import is_dict_like
 from bravado_core.schema import is_list_like
 from bravado_core.schema import SWAGGER_PRIMITIVES
 
-def unmarshal_schema_object_itr(swagger_spec,schema_object_spec, value):
-    deref = swagger_spec.deref
-    schema_object_spec = deref(schema_object_spec)
-    obj_type = schema_object_spec.get('type')
+def unmarshal_array_itr(swagger_spec, array_spec, value):
 
     unvalue = []
+    deref = swagger_spec.deref
+    item_spec = deref(array_spec).get('items')
+     
+    schema_object_spec = deref(item_spec)
+    obj_type = schema_object_spec.get('type')
+
+    
     if 'allOf' in schema_object_spec:
         obj_type = 'object'
+
     if not obj_type:
-         if swagger_spec.config['default_type_to_object']:
+        if swagger_spec.config['default_type_to_object']:
             obj_type = 'object'
-         else:
-             return value
-    print (obj_type)
-    if obj_type == 'array':
-        item_spec = swagger_spec.deref(array_spec).get('items')
+        else:
+            return value
 
-
+    if obj_type in SWAGGER_PRIMITIVES:
         for item in value:
-            if obj_type in SWAGGER_PRIMITIVES:
-                unvalue.append(unmarshal_primitive(swagger_spec,item_spec,value))
+            unvalue.append(unmarshal_primitive(swagger_spec,schema_object_spec,item))
+            
 
-        return unvalue
-    else:
-        return []
+    if obj_type == 'array':
+        for item in value:
+            unvalue.append(unmarshal_array_itr(swagger_spec, schema_object_spec, item))
+
+    
+    if obj_type == 'object':
+        for item in value:
+            unvalue.append(unmarshal_object(swagger_spec, schema_object_spec, item))
+
+    if swagger_spec.config['use_models'] and \
+            is_model(swagger_spec, schema_object_spec):
+        # It is important that the 'model' check comes before 'object' check.
+        # Model specs also have type 'object' but also have the additional
+        # MODEL_MARKER key for identification.
+        for item in value:
+            unvalue.append(unmarshal_model(swagger_spec, schema_object_spec, item))
+
+
+    return unvalue
+    
+    
+    
 
 def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
     """Unmarshal the value using the given schema object specification.
@@ -73,7 +94,8 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
         return unmarshal_primitive(swagger_spec, schema_object_spec, value)
 
     if obj_type == 'array':
-        return unmarshal_array(swagger_spec, schema_object_spec, value)
+        #return unmarshal_array(swagger_spec,schema_object_spec,value)
+        return unmarshal_array_itr(swagger_spec, schema_object_spec, value)
 
     if swagger_spec.config['use_models'] and \
             is_model(swagger_spec, schema_object_spec):
