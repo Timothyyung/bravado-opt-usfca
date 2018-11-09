@@ -231,9 +231,9 @@ class Spec(object):
         :rtype: scalar, list, dict
         """
         result = self.lru_cache.get(ref_dict)
-        
+
         if result is None:
-            result = _force_deref(ref_dict)
+            result = self._force_deref(ref_dict)
             self.lru_cache.add(ref_dict, result)
             return result
         else:
