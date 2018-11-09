@@ -32,6 +32,7 @@ from bravado_core.spec_flattening import flattened_spec
 from bravado_core.util import cached_property
 from bravado_core.util import memoize_by_id
 from bravado_core.util import strip_xscope
+from bravado_core.LRUCache import LRUCache
 
 
 log = logging.getLogger(__name__)
@@ -125,6 +126,7 @@ class Spec(object):
         self._internal_spec_dict = spec_dict
         self.cache = {}
         self.cache_schema = {}
+        self.lru_cache = LRUCache()
 
     @cached_property
     def client_spec_dict(self):
@@ -228,22 +230,14 @@ class Spec(object):
         :return: dereferenced value of ref_dict
         :rtype: scalar, list, dict
         """
-        i = id(ref_dict)
-        try:
-            #print(self.cache[i])
-            return self.cache[i]
-        except KeyError:
-            if ref_dict is None or not is_ref(ref_dict):
-                self.cache[i] = ref_dict
-                return ref_dict
-
-        # Restore attached resolution scope before resolving since the
-        # resolver doesn't have a traversal history (accumulated scope_stack)
-        # when asked to resolve.
-            with in_scope(self.resolver, ref_dict):
-                _, target = self.resolver.resolve(ref_dict['$ref'])
-                self.cache[i] = target
-                return target
+        result = self.lru_cache.get(ref_dict)
+        
+        if result is None:
+            result = _force_deref(ref_dict)
+            self.lru_cache.add(ref_dict, result)
+            return result
+        else:
+            return result
 
 
     # NOTE: deref gets overridden, if internally_dereference_refs is enabled, after calling build
