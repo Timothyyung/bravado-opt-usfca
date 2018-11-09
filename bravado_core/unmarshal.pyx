@@ -13,8 +13,10 @@ from bravado_core.schema import is_dict_like
 from bravado_core.schema import is_list_like
 from bravado_core.schema import SWAGGER_PRIMITIVES
 
+from bravado_core.spec_pxd cimport Spec 
 
-def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
+
+cdef unmarshal_schema_object(Spec swagger_spec, schema_object_spec, value):
     """Unmarshal the value using the given schema object specification.
 
     Unmarshalling includes:
@@ -204,6 +206,6 @@ def unmarshal_model(swagger_spec, model_spec, model_value):
     return model_instance
 
 
-cdef is_value_none_helper(swagger_spec, schema_object_spec,value):
+cdef is_value_none_helper(swagger_spec, dict schema_object_spec, value):
     if value is None:
         return handle_null_value(swagger_spec, schema_object_spec)
