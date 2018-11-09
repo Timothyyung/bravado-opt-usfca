@@ -206,6 +206,10 @@ def unmarshal_model(swagger_spec, model_spec, model_value):
     return model_instance
 
 
-cdef is_value_none_helper(swagger_spec, dict schema_object_spec, value):
-    if value is None:
-        return handle_null_value(swagger_spec, schema_object_spec)
+cdef return_is_value_none(swagger_spec, dict schema_object_spec, None value):
+    return handle_null_value(swagger_spec, schema_object_spec)
+
+cdef is_node_helper(swagger_spec, dict schema_object_spec, value):
+    try:
+        
+

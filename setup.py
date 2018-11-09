@@ -7,6 +7,9 @@ import os
 from setuptools import setup
 
 import bravado_core
+from distutils.core import setup
+from Cython.Build import cythonize
+
 
 
 install_requires = [
@@ -48,4 +51,5 @@ setup(
     extras_require={
         ':python_version<"3.4"': ['enum34'],
     },
+    ext_modules = cythonize('unmarshal.pyx')
 )
