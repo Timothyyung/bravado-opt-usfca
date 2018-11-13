@@ -30,7 +30,7 @@ class LRUCache(object):
     def add(self, key, value):
         id = make_key(key)
 
-        if maxsize is None:
+        if self.maxsize is None:
             self.cache[id] = value
         elif self.maxsize > 0:
             if self.cache_len() == self.maxsize:
