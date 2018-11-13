@@ -3,6 +3,8 @@ class LRUCache(object):
     def __init__(self, maxsize = 128):
         if maxsize is not None and not isinstance(maxsize, int):
             raise TypeError('Expected maxsize to be an integer or None')
+        if maxsize <= 0:
+            raise TypeError('Expected maxsize to be bigger than 0')
         self.maxsize = maxsize
         self.cache = {}
         self.cache_len = self.cache.__len__
@@ -16,8 +18,6 @@ class LRUCache(object):
                 return self.cache[id]
             except KeyError:
                 return None
-        elif self.maxsize is None:
-            return None
         else:
             try:
                 result = self.cache[id]
@@ -32,7 +32,7 @@ class LRUCache(object):
 
         if self.maxsize is None:
             self.cache[id] = value
-        elif self.maxsize > 0:
+        else:
             if self.cache_len() == self.maxsize:
                 old_key = self.key.pop()
                 self.cache.pop(old_key)
