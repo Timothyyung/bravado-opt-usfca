@@ -51,5 +51,5 @@ setup(
     extras_require={
         ':python_version<"3.4"': ['enum34'],
     },
-    ext_modules = [Extension("spec", ["spec.c"])]
+    ext_modules = [Extension("bravado_core.spec", ["bravado_core/spec.c"])]
 )
