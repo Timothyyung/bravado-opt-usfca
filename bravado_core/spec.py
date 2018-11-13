@@ -233,9 +233,18 @@ class Spec(object):
         result = self.lru_cache.get(ref_dict)
 
         if result is None:
-            result = self._force_deref(ref_dict)
-            self.lru_cache.add(ref_dict, result)
-            return result
+            # result = self._force_deref(ref_dict)
+            if ref_dict is None or not is_ref(ref_dict):
+                self.lru_cache.add(ref_dict, ref_dict)
+                return ref_dict
+
+            # Restore attached resolution scope before resolving since the
+            # resolver doesn't have a traversal history (accumulated scope_stack)
+            # when asked to resolve.
+            with in_scope(self.resolver, ref_dict):
+                _, target = self.resolver.resolve(ref_dict['$ref'])
+                self.lru_cache.add(ref_dict, target)
+                return target
         else:
             return result
 
