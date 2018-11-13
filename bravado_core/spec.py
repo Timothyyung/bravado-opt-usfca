@@ -126,7 +126,7 @@ class Spec(object):
         self._internal_spec_dict = spec_dict
         self.cache = {}
         self.cache_schema = {}
-        self.lru_cache = LRUCache2()
+        self.lru_cache = LRUCache()
 
     @cached_property
     def client_spec_dict(self):
