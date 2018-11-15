@@ -110,9 +110,8 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
             type(array_value), array_value))
 
     item_spec = swagger_spec.fast_deref(array_spec).get('items')
-    item_spec = swagger_spec.fast_deref(item_spec)
     return [
-        unmarshal_model(swagger_spec, item_spec, item)
+        unmarshal_schema_object(swagger_spec, item_spec, item)
         for item in array_value
     ]
 
