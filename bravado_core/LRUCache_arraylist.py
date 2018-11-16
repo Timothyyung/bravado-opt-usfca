@@ -32,24 +32,25 @@ def lru_cache_a(maxsize=128):
             def wrapper(*args, **kwds):
                 nonlocal keys, full
                 key = make_key(args, kwds)
-                result = cache_get(key)
-                if result is not None:
+                try:
+                    result = cache[key]
                     keys.remove(key)
                     keys.insert(0, key)
                     return result
-                result = user_function(*args, **kwds)
-                if key in cache:
-                    pass
-                elif full:
-                    oldkey = keys.pop()
-                    cache.pop(oldkey)
-                    cache[key] = result
-                    keys.insert(0, key)
-                else:
-                    cache[key] = result
-                    keys.insert(0, key)
-                    full = (cache_len() >= maxsize)
-                return result
+                except KeyError:
+                    result = user_function(*args, **kwds)
+                    if key in cache:
+                        pass
+                    elif full:
+                        oldkey = keys.pop()
+                        cache.pop(oldkey)
+                        cache[key] = result
+                        keys.insert(0, key)
+                    else:
+                        cache[key] = result
+                        keys.insert(0, key)
+                        full = (cache_len() >= maxsize)
+                    return result
 
             return wrapper
     return decorator
