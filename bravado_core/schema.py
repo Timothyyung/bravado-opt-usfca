@@ -131,7 +131,48 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
         "Don't know what to do with `additionalProperties` in spec {0} "
         "when inspecting value {1}".format(object_spec, object_value))
 
-def get_spec_for_prop_dict(swagger_spec, object_spec, object_value, deref ,properties=None):
+def get_spec_for_prop_dict(swagger_spec, object_spec, object_value,properties=None):
+    result = {}
+
+    for k, v in iteritems(object_value):
+        deref = swagger_spec.deref
+        if properties is None:
+            properties = collapsed_properties(deref(object_spec), swagger_spec)
+        prop_spec = properties.get(k)
+
+        if prop_spec is not None:
+            result_spec = deref(prop_spec)
+        # If the de-referenced specification is for a x-nullable property
+        # then copy the spec and add the x-nullable property.
+        # If in the future there are other attributes on the property that
+        # modify a referenced schema, it can be done here (or rewrite
+        # unmarshal to pass the unreferenced property spec as another arg).
+            if 'x-nullable' in prop_spec and 'x-nullable' not in result_spec:
+                result_spec = copy.deepcopy(result_spec)
+                result_spec['x-nullable'] = prop_spec['x-nullable']
+                #return result_spec
+            result[k] = result_spec
+
+        additional_props = deref(object_spec).get('additionalProperties', True)
+
+        if isinstance(additional_props, bool):
+        # no spec for additional properties to conform to - this is basically
+        # a way to send pretty much anything across the wire as is.
+                #return None
+            result[k] = None
+
+        additional_props = deref(additional_props)
+        if is_dict_like(additional_props):
+        # spec that all additional props MUST conform to
+                #return additional_props
+            result[k] = additional_props
+
+        raise SwaggerMappingError(
+            "Don't know what to do with `additionalProperties` in spec {0} "
+            "when inspecting value {1}".format(object_spec, object_value))
+    return result
+
+def get_spec_for_prop_dict_(swagger_spec, object_spec, object_value,properties=None):
     """Given a jsonschema object spec and value, retrieve the spec for the
      given property taking 'additionalProperties' into consideration.
 
@@ -146,7 +187,7 @@ def get_spec_for_prop_dict(swagger_spec, object_spec, object_value, deref ,prope
     :return: spec for the given property or None if no spec found
     :rtype: dict or None
     """
-    # deref = swagger_spec.deref
+    deref = swagger_spec.deref
 
     if properties is None:
         properties = collapsed_properties(deref(object_spec), swagger_spec)

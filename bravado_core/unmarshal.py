@@ -133,7 +133,7 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
     properties = collapsed_properties(object_spec, swagger_spec)
 
     result = {}
-    result_spec_dict = get_spec_for_prop_dict(swagger_spec, object_spec, object_value, deref,properties)
+    result_spec_dict = get_spec_for_prop_dict(swagger_spec, object_spec, object_value, properties)
     for k, v in iteritems(object_value):
         # prop_spec = get_spec_for_prop(
         #    swagger_spec, object_spec, object_value, k, properties)
