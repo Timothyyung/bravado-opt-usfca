@@ -103,10 +103,48 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
             type(array_value), array_value))
 
     item_spec = swagger_spec.deref(array_spec).get('items')
-    return [
-        unmarshal_schema_object(swagger_spec, item_spec, item)
-        for item in array_value
-    ]
+    print (item_spec)
+    array = []
+    for item in array_value:
+        deref = swagger_spec.deref
+        a_object_spec = deref(item_spec)
+
+        obj_type = a_object_spec.get('type')
+        if 'allOf' in a_object_spec:
+            obj_type = 'object'
+
+        if not obj_type:
+            if swagger_spec.config['default_type_to_object']:
+                obj_type = 'object'
+            else:
+                array.append(item)
+
+        if obj_type in SWAGGER_PRIMITIVES:
+            array.append(unmarshal_primitive(swagger_spec, a_object_spec, item))
+
+        if obj_type == 'array':
+            array.append(unmarshal_array(swagger_spec, a_object_spec, item))
+
+        if swagger_spec.config['use_models'] and \
+                is_model(swagger_spec, a_object_spec):
+        # It is important that the 'model' check comes before 'object' check.
+        # Model specs also have type 'object' but also have the additional
+        # MODEL_MARKER key for identification.
+            array.append(unmarshal_model(swagger_spec, a_object_spec, item))
+
+        if obj_type == 'object':
+            print ( 'we found an object')
+            array.append(unmarshal_object(swagger_spec, a_object_spec, item))
+
+        if obj_type == 'file':
+            array.append(item)
+
+        raise SwaggerMappingError(
+            "Don't know how to unmarshal value {0} with a type of {1}"
+            .format(item, obj_type))
+
+    return array
+    
 
 
 def unmarshal_object(swagger_spec, object_spec, object_value):
@@ -137,7 +175,42 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
             swagger_spec, object_spec, object_value, k, properties)
         if v is None and k not in required_fields and prop_spec:
             if schema.has_default(swagger_spec, prop_spec):
-                result[k] = schema.get_default(swagger_spec, prop_spec)
+                deref = swagger_spec.deref
+                object_spec = deref(schema_object_spec)
+
+                obj_type = object_spec.get('type')
+
+                if 'allOf' in object_spec:
+                    obj_type = 'object'
+
+                if not obj_type:
+                    if swagger_spec.config['default_type_to_object']:
+                        obj_type = 'object'
+                else:
+                    result[k] =  value
+
+                if obj_type in SWAGGER_PRIMITIVES:
+                    result[k] =  unmarshal_primitive(swagger_spec, object_spec, value)
+
+                if obj_type == 'array':
+                    result[k] =  unmarshal_array(swagger_spec, object_spec, value)
+
+                if swagger_spec.config['use_models'] and \
+                    is_model(swagger_spec, object_spec):
+                        # It is important that the 'model' check comes before 'object' check.
+                        # Model specs also have type 'object' but also have the additional
+                        # MODEL_MARKER key for identification.
+                    result[k] =  unmarshal_model(swagger_spec, object_spec, value)
+
+                if obj_type == 'object':
+                    result[k] = unmarshal_object(swagger_spec, object_spec, value)
+
+                if obj_type == 'file':
+                    result[k] = value
+
+                raise SwaggerMappingError(
+                    "Don't object  know how to unmarshal value {0} with a type of {1}"
+                    .format(value, obj_type))
             else:
                 result[k] = None
         elif prop_spec:
