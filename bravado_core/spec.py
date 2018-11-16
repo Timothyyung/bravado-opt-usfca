@@ -32,9 +32,9 @@ from bravado_core.spec_flattening import flattened_spec
 from bravado_core.util import cached_property
 from bravado_core.util import memoize_by_id
 from bravado_core.util import strip_xscope
-from bravado_core.LRUCache import LRUCache
-from bravado_core.LRUCache2 import LRUCache2
-from bravado_core.Lru import lru_cache
+from bravado_core.LRUCache_arraylist import lru_cache_a
+from bravado_core.LRUCache_ordereddict import lru_cache_o
+from bravado_core.LRUCache_linklist import lru_cache_l
 
 log = logging.getLogger(__name__)
 
@@ -125,9 +125,9 @@ class Spec(object):
         # spec dict used to build resources, in case internally_dereference_refs config is enabled
         # it will be overridden by the dereferenced specs (by build method). More context in PR#263
         self._internal_spec_dict = spec_dict
-        self.cache = {}
+        # self.cache = {}
         self.cache_schema = {}
-        self.lru_cache = LRUCache(maxsize=None)
+        # self.lru_cache = LRUCache(maxsize=None)
 
     @cached_property
     def client_spec_dict(self):
@@ -223,7 +223,7 @@ class Spec(object):
             _, target = self.resolver.resolve(ref_dict['$ref'])
             return target
 
-    @lru_cache(maxsize=8)
+    @lru_cache_o(maxsize=8)
     def fast_deref(self, ref_dict):
         """Dereference ref_dict (if it is indeed a ref) and return what the
         ref points to.
@@ -238,7 +238,7 @@ class Spec(object):
             # result = self._force_deref(ref_dict)
 
         if ref_dict is None or not is_ref(ref_dict):
-            self.lru_cache.add(ref_dict, ref_dict)
+            # self.lru_cache.add(ref_dict, ref_dict)
             return ref_dict
 
         # Restore attached resolution scope before resolving since the
