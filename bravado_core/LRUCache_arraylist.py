@@ -21,12 +21,13 @@ def lru_cache_a(maxsize=128):
         if maxsize is None:
             def wrapper(*args, **kwds):
                 key = make_key(args, kwds)
-                result = cache_get(key, sentinel)
-                if result is not sentinel:
+                try:
+                    result = cache[key]
                     return result
-                result = user_function(*args, **kwds)
-                cache[key] = result
-                return result
+                except KeyError:
+                    result = user_function(*args, **kwds)
+                    cache[key] = result
+                    return result
             return wrapper
         else:
             def wrapper(*args, **kwds):
