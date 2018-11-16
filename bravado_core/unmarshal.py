@@ -134,14 +134,14 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
 
     result = {}
     #result_spec_dict = get_spec_for_prop_dict(swagger_spec, object_spec, object_value, properties)
-    additional_props = deref(object_spec).get('additionalProperties', True)
-    is_additional_props_bool = isinstance(additional_props, bool)
-    additional_props = deref(additional_props)
-    is_additional_props_dict = is_dict_like(additional_props)
+    #additional_props = deref(object_spec).get('additionalProperties', True)
+    #is_additional_props_bool = isinstance(additional_props, bool)
+    #additional_props = deref(additional_props)
+    #s_additional_props_dict = is_dict_like(additional_props)
+    #is_additional_props_bool,is_additional_props_dict,additional_props
     for k, v in iteritems(object_value):
         prop_spec = get_spec_for_prop(
-            swagger_spec, object_spec, object_value, k, deref, is_additional_props_bool,
-             is_additional_props_dict,additional_props, properties)
+            swagger_spec, object_spec, object_value, k, deref , properties)
         #prop_spec = result_spec_dict[k]
         if v is None and k not in required_fields and prop_spec:
             if schema.has_default(swagger_spec, prop_spec):
