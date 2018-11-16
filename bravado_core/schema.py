@@ -131,7 +131,7 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
         "Don't know what to do with `additionalProperties` in spec {0} "
         "when inspecting value {1}".format(object_spec, object_value))
 
-def get_spec_for_prop_dict(swagger_spec, object_spec, object_value, properties=None, deref):
+def get_spec_for_prop_dict(swagger_spec, object_spec, object_value, deref ,properties=None):
     """Given a jsonschema object spec and value, retrieve the spec for the
      given property taking 'additionalProperties' into consideration.
 
