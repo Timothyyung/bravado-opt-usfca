@@ -150,7 +150,7 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
             else:
                 result[k] = None
         elif prop_spec:
-            """obj_type = prop_spec.get('type')
+            obj_type = prop_spec.get('type')
 
             if 'allOf' in prop_spec:
                 obj_type = 'object'
@@ -162,8 +162,8 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
             if obj_type == 'array':
                 result[k] = unmarshal_array(swagger_spec, prop_spec, v)
             if obj_type == 'object':
-                result[k] = unmarshal_object(swagger_spec, prop_spec, v)"""
-            result[k] = unmarshal_schema_object(swagger_spec, prop_spec, v)
+                result[k] = unmarshal_object(swagger_spec, prop_spec, v)
+            #result[k] = unmarshal_schema_object(swagger_spec, prop_spec, v)
         else:
             # Don't marshal when a spec is not available - just pass through
             result[k] = v
