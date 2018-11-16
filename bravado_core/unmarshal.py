@@ -67,6 +67,10 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
         "Don't know how to unmarshal value {0} with a type of {1}"
         .format(value, obj_type))
 
+def unmarshal_switcher(swagger_spec, schema_object_spec, value):
+    pass
+
+
 
 def unmarshal_primitive(swagger_spec, primitive_spec, value):
     """Unmarshal a jsonschema primitive type into a python primitive.
