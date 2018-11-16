@@ -11,6 +11,7 @@ from bravado_core.schema import get_spec_for_prop
 from bravado_core.schema import handle_null_value
 from bravado_core.schema import is_dict_like
 from bravado_core.schema import is_list_like
+from bravado_core.schema import is_ref
 from bravado_core.schema import SWAGGER_PRIMITIVES
 
 
@@ -107,11 +108,26 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
             type(array_value), array_value))
 
     item_spec = swagger_spec.deref(array_spec).get('items')
-    item_spec = swagger_spec.deref(item_spec)
-    return [
-        unmarshal_model(swagger_spec, item_spec, item)
-        for item in array_value
-    ]
+
+    if is_ref(item_spec):
+        item_spec = swagger_spec.deref(item_spec)
+        return [
+            unmarshal_model(swagger_spec, item_spec, item)
+            for item in array_value
+            ]
+    else:
+        obj_type = item_spec.get('type')
+
+        if obj_type in SWAGGER_PRIMITIVES:
+            return [
+                unmarshal_primitive(swagger_spec, item_spec, item)
+                for item in array_value
+                ]
+        else:
+            return [
+                unmarshal_object(swagger_spec, item_spec, item)
+                for item in array_value
+                ]
 
 
 def unmarshal_object(swagger_spec, object_spec, object_value):
