@@ -852,7 +852,7 @@ struct __pyx_obj_12bravado_core_17LRUCache_linklist___pyx_scope_struct__lru_cach
 };
 
 
-/* "bravado_core/LRUCache_linklist.pyx":32
+/* "bravado_core/LRUCache_linklist.pyx":34
  *     root[:] = [root, root, None, None]
  * 
  *     def decorator(user_function):             # <<<<<<<<<<<<<<
@@ -1397,17 +1397,16 @@ static PyObject *__pyx_tp_new_12bravado_core_17LRUCache_linklist___pyx_scope_str
 static PyObject *__pyx_tp_new_12bravado_core_17LRUCache_linklist___pyx_scope_struct_1_decorator(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_tuple_;
-static PyObject *__pyx_slice__6;
 static PyObject *__pyx_tuple__2;
 static PyObject *__pyx_tuple__4;
-static PyObject *__pyx_tuple__7;
-static PyObject *__pyx_tuple__9;
-static PyObject *__pyx_tuple__11;
+static PyObject *__pyx_tuple__6;
+static PyObject *__pyx_tuple__8;
+static PyObject *__pyx_tuple__10;
 static PyObject *__pyx_codeobj__3;
 static PyObject *__pyx_codeobj__5;
-static PyObject *__pyx_codeobj__8;
-static PyObject *__pyx_codeobj__10;
-static PyObject *__pyx_codeobj__12;
+static PyObject *__pyx_codeobj__7;
+static PyObject *__pyx_codeobj__9;
+static PyObject *__pyx_codeobj__11;
 /* Late includes */
 
 /* "bravado_core/LRUCache_linklist.pyx":1
@@ -1670,7 +1669,7 @@ static PyObject *__pyx_pw_12bravado_core_17LRUCache_linklist_3lru_cache_l_inner(
   return __pyx_r;
 }
 
-/* "bravado_core/LRUCache_linklist.pyx":32
+/* "bravado_core/LRUCache_linklist.pyx":34
  *     root[:] = [root, root, None, None]
  * 
  *     def decorator(user_function):             # <<<<<<<<<<<<<<
@@ -1692,7 +1691,7 @@ static PyObject *__pyx_pw_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
   return __pyx_r;
 }
 
-/* "bravado_core/LRUCache_linklist.pyx":35
+/* "bravado_core/LRUCache_linklist.pyx":37
  * 
  *         if maxsize is None:
  *             def wrapper(*args, **kwds):             # <<<<<<<<<<<<<<
@@ -1746,22 +1745,22 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
   __pyx_outer_scope = (struct __pyx_obj_12bravado_core_17LRUCache_linklist___pyx_scope_struct_1_decorator *) __Pyx_CyFunction_GetClosure(__pyx_self);
   __pyx_cur_scope = __pyx_outer_scope;
 
-  /* "bravado_core/LRUCache_linklist.pyx":36
+  /* "bravado_core/LRUCache_linklist.pyx":38
  *         if maxsize is None:
  *             def wrapper(*args, **kwds):
  *                 key = id(args[1])             # <<<<<<<<<<<<<<
  *                 try:
  *                     result = cache[key]
  */
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_args, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_args, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_id, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_id, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_key = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "bravado_core/LRUCache_linklist.pyx":37
+  /* "bravado_core/LRUCache_linklist.pyx":39
  *             def wrapper(*args, **kwds):
  *                 key = id(args[1])
  *                 try:             # <<<<<<<<<<<<<<
@@ -1777,24 +1776,24 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
     __Pyx_XGOTREF(__pyx_t_5);
     /*try:*/ {
 
-      /* "bravado_core/LRUCache_linklist.pyx":38
+      /* "bravado_core/LRUCache_linklist.pyx":40
  *                 key = id(args[1])
  *                 try:
  *                     result = cache[key]             # <<<<<<<<<<<<<<
  *                     return result
  *                 except KeyError:
  */
-      if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache)) { __Pyx_RaiseClosureNameError("cache"); __PYX_ERR(0, 38, __pyx_L3_error) }
+      if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache)) { __Pyx_RaiseClosureNameError("cache"); __PYX_ERR(0, 40, __pyx_L3_error) }
       if (unlikely(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 38, __pyx_L3_error)
+        __PYX_ERR(0, 40, __pyx_L3_error)
       }
-      __pyx_t_2 = __Pyx_PyDict_GetItem(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache, __pyx_v_key); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 38, __pyx_L3_error)
+      __pyx_t_2 = __Pyx_PyDict_GetItem(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache, __pyx_v_key); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_v_result = __pyx_t_2;
       __pyx_t_2 = 0;
 
-      /* "bravado_core/LRUCache_linklist.pyx":39
+      /* "bravado_core/LRUCache_linklist.pyx":41
  *                 try:
  *                     result = cache[key]
  *                     return result             # <<<<<<<<<<<<<<
@@ -1806,7 +1805,7 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
       __pyx_r = __pyx_v_result;
       goto __pyx_L7_try_return;
 
-      /* "bravado_core/LRUCache_linklist.pyx":37
+      /* "bravado_core/LRUCache_linklist.pyx":39
  *             def wrapper(*args, **kwds):
  *                 key = id(args[1])
  *                 try:             # <<<<<<<<<<<<<<
@@ -1818,7 +1817,7 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "bravado_core/LRUCache_linklist.pyx":40
+    /* "bravado_core/LRUCache_linklist.pyx":42
  *                     result = cache[key]
  *                     return result
  *                 except KeyError:             # <<<<<<<<<<<<<<
@@ -1828,39 +1827,39 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
     __pyx_t_6 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_KeyError);
     if (__pyx_t_6) {
       __Pyx_AddTraceback("bravado_core.LRUCache_linklist.lru_cache_l_inner.decorator.wrapper", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_2, &__pyx_t_1, &__pyx_t_7) < 0) __PYX_ERR(0, 40, __pyx_L5_except_error)
+      if (__Pyx_GetException(&__pyx_t_2, &__pyx_t_1, &__pyx_t_7) < 0) __PYX_ERR(0, 42, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_GOTREF(__pyx_t_7);
 
-      /* "bravado_core/LRUCache_linklist.pyx":41
+      /* "bravado_core/LRUCache_linklist.pyx":43
  *                     return result
  *                 except KeyError:
  *                     result = user_function(*args, **kwds)             # <<<<<<<<<<<<<<
  *                     cache[key] = result
  *                     return result
  */
-      if (unlikely(!__pyx_cur_scope->__pyx_v_user_function)) { __Pyx_RaiseClosureNameError("user_function"); __PYX_ERR(0, 41, __pyx_L5_except_error) }
-      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_cur_scope->__pyx_v_user_function, __pyx_v_args, __pyx_v_kwds); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 41, __pyx_L5_except_error)
+      if (unlikely(!__pyx_cur_scope->__pyx_v_user_function)) { __Pyx_RaiseClosureNameError("user_function"); __PYX_ERR(0, 43, __pyx_L5_except_error) }
+      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_cur_scope->__pyx_v_user_function, __pyx_v_args, __pyx_v_kwds); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 43, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_XDECREF_SET(__pyx_v_result, __pyx_t_8);
       __pyx_t_8 = 0;
 
-      /* "bravado_core/LRUCache_linklist.pyx":42
+      /* "bravado_core/LRUCache_linklist.pyx":44
  *                 except KeyError:
  *                     result = user_function(*args, **kwds)
  *                     cache[key] = result             # <<<<<<<<<<<<<<
  *                     return result
  *             return wrapper
  */
-      if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache)) { __Pyx_RaiseClosureNameError("cache"); __PYX_ERR(0, 42, __pyx_L5_except_error) }
+      if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache)) { __Pyx_RaiseClosureNameError("cache"); __PYX_ERR(0, 44, __pyx_L5_except_error) }
       if (unlikely(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 42, __pyx_L5_except_error)
+        __PYX_ERR(0, 44, __pyx_L5_except_error)
       }
-      if (unlikely(PyDict_SetItem(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache, __pyx_v_key, __pyx_v_result) < 0)) __PYX_ERR(0, 42, __pyx_L5_except_error)
+      if (unlikely(PyDict_SetItem(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache, __pyx_v_key, __pyx_v_result) < 0)) __PYX_ERR(0, 44, __pyx_L5_except_error)
 
-      /* "bravado_core/LRUCache_linklist.pyx":43
+      /* "bravado_core/LRUCache_linklist.pyx":45
  *                     result = user_function(*args, **kwds)
  *                     cache[key] = result
  *                     return result             # <<<<<<<<<<<<<<
@@ -1878,7 +1877,7 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
     goto __pyx_L5_except_error;
     __pyx_L5_except_error:;
 
-    /* "bravado_core/LRUCache_linklist.pyx":37
+    /* "bravado_core/LRUCache_linklist.pyx":39
  *             def wrapper(*args, **kwds):
  *                 key = id(args[1])
  *                 try:             # <<<<<<<<<<<<<<
@@ -1904,7 +1903,7 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
     goto __pyx_L0;
   }
 
-  /* "bravado_core/LRUCache_linklist.pyx":35
+  /* "bravado_core/LRUCache_linklist.pyx":37
  * 
  *         if maxsize is None:
  *             def wrapper(*args, **kwds):             # <<<<<<<<<<<<<<
@@ -1928,7 +1927,7 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
   return __pyx_r;
 }
 
-/* "bravado_core/LRUCache_linklist.pyx":46
+/* "bravado_core/LRUCache_linklist.pyx":48
  *             return wrapper
  *         else:
  *             def wrapper(*args, **kwds):             # <<<<<<<<<<<<<<
@@ -1995,22 +1994,22 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
   __pyx_outer_scope = (struct __pyx_obj_12bravado_core_17LRUCache_linklist___pyx_scope_struct_1_decorator *) __Pyx_CyFunction_GetClosure(__pyx_self);
   __pyx_cur_scope = __pyx_outer_scope;
 
-  /* "bravado_core/LRUCache_linklist.pyx":48
+  /* "bravado_core/LRUCache_linklist.pyx":50
  *             def wrapper(*args, **kwds):
  *                 nonlocal root, full
  *                 key = id(args[1])             # <<<<<<<<<<<<<<
  *                 try:
  *                     link = cache[key]
  */
-  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_args, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt_Tuple(__pyx_v_args, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_id, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_id, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_key = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "bravado_core/LRUCache_linklist.pyx":49
+  /* "bravado_core/LRUCache_linklist.pyx":51
  *                 nonlocal root, full
  *                 key = id(args[1])
  *                 try:             # <<<<<<<<<<<<<<
@@ -2026,24 +2025,24 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
     __Pyx_XGOTREF(__pyx_t_5);
     /*try:*/ {
 
-      /* "bravado_core/LRUCache_linklist.pyx":50
+      /* "bravado_core/LRUCache_linklist.pyx":52
  *                 key = id(args[1])
  *                 try:
  *                     link = cache[key]             # <<<<<<<<<<<<<<
  *                     link_prev, link_next, _key, result = link
  *                     link_prev[NEXT] = link_next
  */
-      if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache)) { __Pyx_RaiseClosureNameError("cache"); __PYX_ERR(0, 50, __pyx_L3_error) }
+      if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache)) { __Pyx_RaiseClosureNameError("cache"); __PYX_ERR(0, 52, __pyx_L3_error) }
       if (unlikely(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-        __PYX_ERR(0, 50, __pyx_L3_error)
+        __PYX_ERR(0, 52, __pyx_L3_error)
       }
-      __pyx_t_2 = __Pyx_PyDict_GetItem(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache, __pyx_v_key); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L3_error)
+      __pyx_t_2 = __Pyx_PyDict_GetItem(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache, __pyx_v_key); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 52, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_v_link = __pyx_t_2;
       __pyx_t_2 = 0;
 
-      /* "bravado_core/LRUCache_linklist.pyx":51
+      /* "bravado_core/LRUCache_linklist.pyx":53
  *                 try:
  *                     link = cache[key]
  *                     link_prev, link_next, _key, result = link             # <<<<<<<<<<<<<<
@@ -2056,7 +2055,7 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
         if (unlikely(size != 4)) {
           if (size > 4) __Pyx_RaiseTooManyValuesError(4);
           else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-          __PYX_ERR(0, 51, __pyx_L3_error)
+          __PYX_ERR(0, 53, __pyx_L3_error)
         }
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
         if (likely(PyTuple_CheckExact(sequence))) {
@@ -2079,7 +2078,7 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
           Py_ssize_t i;
           PyObject** temps[4] = {&__pyx_t_2,&__pyx_t_1,&__pyx_t_6,&__pyx_t_7};
           for (i=0; i < 4; i++) {
-            PyObject* item = PySequence_ITEM(sequence, i); if (unlikely(!item)) __PYX_ERR(0, 51, __pyx_L3_error)
+            PyObject* item = PySequence_ITEM(sequence, i); if (unlikely(!item)) __PYX_ERR(0, 53, __pyx_L3_error)
             __Pyx_GOTREF(item);
             *(temps[i]) = item;
           }
@@ -2088,7 +2087,7 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
       } else {
         Py_ssize_t index = -1;
         PyObject** temps[4] = {&__pyx_t_2,&__pyx_t_1,&__pyx_t_6,&__pyx_t_7};
-        __pyx_t_8 = PyObject_GetIter(__pyx_v_link); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 51, __pyx_L3_error)
+        __pyx_t_8 = PyObject_GetIter(__pyx_v_link); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 53, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_8);
         __pyx_t_9 = Py_TYPE(__pyx_t_8)->tp_iternext;
         for (index=0; index < 4; index++) {
@@ -2096,7 +2095,7 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
           __Pyx_GOTREF(item);
           *(temps[index]) = item;
         }
-        if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 4) < 0) __PYX_ERR(0, 51, __pyx_L3_error)
+        if (__Pyx_IternextUnpackEndCheck(__pyx_t_9(__pyx_t_8), 4) < 0) __PYX_ERR(0, 53, __pyx_L3_error)
         __pyx_t_9 = NULL;
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
         goto __pyx_L10_unpacking_done;
@@ -2104,7 +2103,7 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
         __pyx_t_9 = NULL;
         if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-        __PYX_ERR(0, 51, __pyx_L3_error)
+        __PYX_ERR(0, 53, __pyx_L3_error)
         __pyx_L10_unpacking_done:;
       }
       __pyx_v_link_prev = __pyx_t_2;
@@ -2116,68 +2115,76 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
       __pyx_v_result = __pyx_t_7;
       __pyx_t_7 = 0;
 
-      /* "bravado_core/LRUCache_linklist.pyx":52
+      /* "bravado_core/LRUCache_linklist.pyx":54
  *                     link = cache[key]
  *                     link_prev, link_next, _key, result = link
  *                     link_prev[NEXT] = link_next             # <<<<<<<<<<<<<<
  *                     link_next[PREV] = link_prev
  *                     last = root[PREV]
  */
-      if (unlikely(__Pyx_SetItemInt(__pyx_v_link_prev, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_NEXT, __pyx_v_link_next, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) __PYX_ERR(0, 52, __pyx_L3_error)
+      if (unlikely(__Pyx_SetItemInt(__pyx_v_link_prev, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_NEXT, __pyx_v_link_next, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) __PYX_ERR(0, 54, __pyx_L3_error)
 
-      /* "bravado_core/LRUCache_linklist.pyx":53
+      /* "bravado_core/LRUCache_linklist.pyx":55
  *                     link_prev, link_next, _key, result = link
  *                     link_prev[NEXT] = link_next
  *                     link_next[PREV] = link_prev             # <<<<<<<<<<<<<<
  *                     last = root[PREV]
  *                     last[NEXT] = root[PREV] = link
  */
-      if (unlikely(__Pyx_SetItemInt(__pyx_v_link_next, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_PREV, __pyx_v_link_prev, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) __PYX_ERR(0, 53, __pyx_L3_error)
+      if (unlikely(__Pyx_SetItemInt(__pyx_v_link_next, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_PREV, __pyx_v_link_prev, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) __PYX_ERR(0, 55, __pyx_L3_error)
 
-      /* "bravado_core/LRUCache_linklist.pyx":54
+      /* "bravado_core/LRUCache_linklist.pyx":56
  *                     link_prev[NEXT] = link_next
  *                     link_next[PREV] = link_prev
  *                     last = root[PREV]             # <<<<<<<<<<<<<<
  *                     last[NEXT] = root[PREV] = link
  *                     link[PREV] = last
  */
-      if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root)) { __Pyx_RaiseClosureNameError("root"); __PYX_ERR(0, 54, __pyx_L3_error) }
-      __pyx_t_7 = __Pyx_GetItemInt(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_PREV, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 54, __pyx_L3_error)
+      if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root)) { __Pyx_RaiseClosureNameError("root"); __PYX_ERR(0, 56, __pyx_L3_error) }
+      if (unlikely(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root == Py_None)) {
+        PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+        __PYX_ERR(0, 56, __pyx_L3_error)
+      }
+      __pyx_t_7 = __Pyx_GetItemInt_List(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_PREV, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 56, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_7);
       __pyx_v_last = __pyx_t_7;
       __pyx_t_7 = 0;
 
-      /* "bravado_core/LRUCache_linklist.pyx":55
+      /* "bravado_core/LRUCache_linklist.pyx":57
  *                     link_next[PREV] = link_prev
  *                     last = root[PREV]
  *                     last[NEXT] = root[PREV] = link             # <<<<<<<<<<<<<<
  *                     link[PREV] = last
  *                     link[NEXT] = root
  */
-      if (unlikely(__Pyx_SetItemInt(__pyx_v_last, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_NEXT, __pyx_v_link, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) __PYX_ERR(0, 55, __pyx_L3_error)
-      if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root)) { __Pyx_RaiseClosureNameError("root"); __PYX_ERR(0, 55, __pyx_L3_error) }
-      if (unlikely(__Pyx_SetItemInt(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_PREV, __pyx_v_link, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) __PYX_ERR(0, 55, __pyx_L3_error)
+      if (unlikely(__Pyx_SetItemInt(__pyx_v_last, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_NEXT, __pyx_v_link, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) __PYX_ERR(0, 57, __pyx_L3_error)
+      if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root)) { __Pyx_RaiseClosureNameError("root"); __PYX_ERR(0, 57, __pyx_L3_error) }
+      if (unlikely(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root == Py_None)) {
+        PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+        __PYX_ERR(0, 57, __pyx_L3_error)
+      }
+      if (unlikely(__Pyx_SetItemInt(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_PREV, __pyx_v_link, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) __PYX_ERR(0, 57, __pyx_L3_error)
 
-      /* "bravado_core/LRUCache_linklist.pyx":56
+      /* "bravado_core/LRUCache_linklist.pyx":58
  *                     last = root[PREV]
  *                     last[NEXT] = root[PREV] = link
  *                     link[PREV] = last             # <<<<<<<<<<<<<<
  *                     link[NEXT] = root
  *                     return result
  */
-      if (unlikely(__Pyx_SetItemInt(__pyx_v_link, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_PREV, __pyx_v_last, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) __PYX_ERR(0, 56, __pyx_L3_error)
+      if (unlikely(__Pyx_SetItemInt(__pyx_v_link, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_PREV, __pyx_v_last, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) __PYX_ERR(0, 58, __pyx_L3_error)
 
-      /* "bravado_core/LRUCache_linklist.pyx":57
+      /* "bravado_core/LRUCache_linklist.pyx":59
  *                     last[NEXT] = root[PREV] = link
  *                     link[PREV] = last
  *                     link[NEXT] = root             # <<<<<<<<<<<<<<
  *                     return result
  *                 except KeyError:
  */
-      if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root)) { __Pyx_RaiseClosureNameError("root"); __PYX_ERR(0, 57, __pyx_L3_error) }
-      if (unlikely(__Pyx_SetItemInt(__pyx_v_link, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_NEXT, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_root, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) __PYX_ERR(0, 57, __pyx_L3_error)
+      if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root)) { __Pyx_RaiseClosureNameError("root"); __PYX_ERR(0, 59, __pyx_L3_error) }
+      if (unlikely(__Pyx_SetItemInt(__pyx_v_link, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_NEXT, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_root, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) __PYX_ERR(0, 59, __pyx_L3_error)
 
-      /* "bravado_core/LRUCache_linklist.pyx":58
+      /* "bravado_core/LRUCache_linklist.pyx":60
  *                     link[PREV] = last
  *                     link[NEXT] = root
  *                     return result             # <<<<<<<<<<<<<<
@@ -2189,7 +2196,7 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
       __pyx_r = __pyx_v_result;
       goto __pyx_L7_try_return;
 
-      /* "bravado_core/LRUCache_linklist.pyx":49
+      /* "bravado_core/LRUCache_linklist.pyx":51
  *                 nonlocal root, full
  *                 key = id(args[1])
  *                 try:             # <<<<<<<<<<<<<<
@@ -2204,7 +2211,7 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "bravado_core/LRUCache_linklist.pyx":59
+    /* "bravado_core/LRUCache_linklist.pyx":61
  *                     link[NEXT] = root
  *                     return result
  *                 except KeyError:             # <<<<<<<<<<<<<<
@@ -2214,43 +2221,43 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
     __pyx_t_10 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_KeyError);
     if (__pyx_t_10) {
       __Pyx_AddTraceback("bravado_core.LRUCache_linklist.lru_cache_l_inner.decorator.wrapper", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_7, &__pyx_t_6, &__pyx_t_1) < 0) __PYX_ERR(0, 59, __pyx_L5_except_error)
+      if (__Pyx_GetException(&__pyx_t_7, &__pyx_t_6, &__pyx_t_1) < 0) __PYX_ERR(0, 61, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_GOTREF(__pyx_t_1);
 
-      /* "bravado_core/LRUCache_linklist.pyx":60
+      /* "bravado_core/LRUCache_linklist.pyx":62
  *                     return result
  *                 except KeyError:
  *                     result = user_function(*args, **kwds)             # <<<<<<<<<<<<<<
  *                     if key in cache:
  *                         pass
  */
-      if (unlikely(!__pyx_cur_scope->__pyx_v_user_function)) { __Pyx_RaiseClosureNameError("user_function"); __PYX_ERR(0, 60, __pyx_L5_except_error) }
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_cur_scope->__pyx_v_user_function, __pyx_v_args, __pyx_v_kwds); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 60, __pyx_L5_except_error)
+      if (unlikely(!__pyx_cur_scope->__pyx_v_user_function)) { __Pyx_RaiseClosureNameError("user_function"); __PYX_ERR(0, 62, __pyx_L5_except_error) }
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_cur_scope->__pyx_v_user_function, __pyx_v_args, __pyx_v_kwds); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 62, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_XDECREF_SET(__pyx_v_result, __pyx_t_2);
       __pyx_t_2 = 0;
 
-      /* "bravado_core/LRUCache_linklist.pyx":61
+      /* "bravado_core/LRUCache_linklist.pyx":63
  *                 except KeyError:
  *                     result = user_function(*args, **kwds)
  *                     if key in cache:             # <<<<<<<<<<<<<<
  *                         pass
  *                     elif full:
  */
-      if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache)) { __Pyx_RaiseClosureNameError("cache"); __PYX_ERR(0, 61, __pyx_L5_except_error) }
+      if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache)) { __Pyx_RaiseClosureNameError("cache"); __PYX_ERR(0, 63, __pyx_L5_except_error) }
       if (unlikely(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache == Py_None)) {
         PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-        __PYX_ERR(0, 61, __pyx_L5_except_error)
+        __PYX_ERR(0, 63, __pyx_L5_except_error)
       }
-      __pyx_t_11 = (__Pyx_PyDict_ContainsTF(__pyx_v_key, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache, Py_EQ)); if (unlikely(__pyx_t_11 < 0)) __PYX_ERR(0, 61, __pyx_L5_except_error)
+      __pyx_t_11 = (__Pyx_PyDict_ContainsTF(__pyx_v_key, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache, Py_EQ)); if (unlikely(__pyx_t_11 < 0)) __PYX_ERR(0, 63, __pyx_L5_except_error)
       __pyx_t_12 = (__pyx_t_11 != 0);
       if (__pyx_t_12) {
         goto __pyx_L13;
       }
 
-      /* "bravado_core/LRUCache_linklist.pyx":63
+      /* "bravado_core/LRUCache_linklist.pyx":65
  *                     if key in cache:
  *                         pass
  *                     elif full:             # <<<<<<<<<<<<<<
@@ -2260,112 +2267,141 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
       __pyx_t_12 = (__pyx_cur_scope->__pyx_outer_scope->__pyx_v_full != 0);
       if (__pyx_t_12) {
 
-        /* "bravado_core/LRUCache_linklist.pyx":64
+        /* "bravado_core/LRUCache_linklist.pyx":66
  *                         pass
  *                     elif full:
  *                         oldroot = root             # <<<<<<<<<<<<<<
  *                         oldroot[KEY] = key
  *                         oldroot[RESULT] = result
  */
-        if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root)) { __Pyx_RaiseClosureNameError("root"); __PYX_ERR(0, 64, __pyx_L5_except_error) }
+        if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root)) { __Pyx_RaiseClosureNameError("root"); __PYX_ERR(0, 66, __pyx_L5_except_error) }
         __Pyx_INCREF(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root);
         __pyx_v_oldroot = __pyx_cur_scope->__pyx_outer_scope->__pyx_v_root;
 
-        /* "bravado_core/LRUCache_linklist.pyx":65
+        /* "bravado_core/LRUCache_linklist.pyx":67
  *                     elif full:
  *                         oldroot = root
  *                         oldroot[KEY] = key             # <<<<<<<<<<<<<<
  *                         oldroot[RESULT] = result
  *                         root = oldroot[NEXT]
  */
-        if (unlikely(__Pyx_SetItemInt(__pyx_v_oldroot, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_KEY, __pyx_v_key, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) __PYX_ERR(0, 65, __pyx_L5_except_error)
+        if (unlikely(__pyx_v_oldroot == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          __PYX_ERR(0, 67, __pyx_L5_except_error)
+        }
+        if (unlikely(__Pyx_SetItemInt(__pyx_v_oldroot, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_KEY, __pyx_v_key, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) __PYX_ERR(0, 67, __pyx_L5_except_error)
 
-        /* "bravado_core/LRUCache_linklist.pyx":66
+        /* "bravado_core/LRUCache_linklist.pyx":68
  *                         oldroot = root
  *                         oldroot[KEY] = key
  *                         oldroot[RESULT] = result             # <<<<<<<<<<<<<<
  *                         root = oldroot[NEXT]
  *                         oldkey = root[KEY]
  */
-        if (unlikely(__Pyx_SetItemInt(__pyx_v_oldroot, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_RESULT, __pyx_v_result, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) __PYX_ERR(0, 66, __pyx_L5_except_error)
+        if (unlikely(__pyx_v_oldroot == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          __PYX_ERR(0, 68, __pyx_L5_except_error)
+        }
+        if (unlikely(__Pyx_SetItemInt(__pyx_v_oldroot, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_RESULT, __pyx_v_result, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) __PYX_ERR(0, 68, __pyx_L5_except_error)
 
-        /* "bravado_core/LRUCache_linklist.pyx":67
+        /* "bravado_core/LRUCache_linklist.pyx":69
  *                         oldroot[KEY] = key
  *                         oldroot[RESULT] = result
  *                         root = oldroot[NEXT]             # <<<<<<<<<<<<<<
  *                         oldkey = root[KEY]
  *                         oldresult = root[RESULT]
  */
-        __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_oldroot, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_NEXT, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 67, __pyx_L5_except_error)
+        if (unlikely(__pyx_v_oldroot == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          __PYX_ERR(0, 69, __pyx_L5_except_error)
+        }
+        __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_oldroot, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_NEXT, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 69, __pyx_L5_except_error)
         __Pyx_GOTREF(__pyx_t_2);
+        if (!(likely(PyList_CheckExact(__pyx_t_2))||((__pyx_t_2) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "list", Py_TYPE(__pyx_t_2)->tp_name), 0))) __PYX_ERR(0, 69, __pyx_L5_except_error)
         __Pyx_XGOTREF(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root);
-        __Pyx_XDECREF_SET(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root, __pyx_t_2);
+        __Pyx_XDECREF_SET(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root, ((PyObject*)__pyx_t_2));
         __Pyx_GIVEREF(__pyx_t_2);
         __pyx_t_2 = 0;
 
-        /* "bravado_core/LRUCache_linklist.pyx":68
+        /* "bravado_core/LRUCache_linklist.pyx":70
  *                         oldroot[RESULT] = result
  *                         root = oldroot[NEXT]
  *                         oldkey = root[KEY]             # <<<<<<<<<<<<<<
  *                         oldresult = root[RESULT]
  *                         root[KEY] = root[RESULT] = None
  */
-        __pyx_t_2 = __Pyx_GetItemInt(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_KEY, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 68, __pyx_L5_except_error)
+        if (unlikely(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          __PYX_ERR(0, 70, __pyx_L5_except_error)
+        }
+        __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_KEY, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 70, __pyx_L5_except_error)
         __Pyx_GOTREF(__pyx_t_2);
         __pyx_v_oldkey = __pyx_t_2;
         __pyx_t_2 = 0;
 
-        /* "bravado_core/LRUCache_linklist.pyx":69
+        /* "bravado_core/LRUCache_linklist.pyx":71
  *                         root = oldroot[NEXT]
  *                         oldkey = root[KEY]
  *                         oldresult = root[RESULT]             # <<<<<<<<<<<<<<
  *                         root[KEY] = root[RESULT] = None
  *                         del cache[oldkey]
  */
-        __pyx_t_2 = __Pyx_GetItemInt(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_RESULT, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 69, __pyx_L5_except_error)
+        if (unlikely(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          __PYX_ERR(0, 71, __pyx_L5_except_error)
+        }
+        __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_RESULT, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L5_except_error)
         __Pyx_GOTREF(__pyx_t_2);
         __pyx_v_oldresult = __pyx_t_2;
         __pyx_t_2 = 0;
 
-        /* "bravado_core/LRUCache_linklist.pyx":70
+        /* "bravado_core/LRUCache_linklist.pyx":72
  *                         oldkey = root[KEY]
  *                         oldresult = root[RESULT]
  *                         root[KEY] = root[RESULT] = None             # <<<<<<<<<<<<<<
  *                         del cache[oldkey]
  *                         cache[key] = oldroot
  */
-        if (unlikely(__Pyx_SetItemInt(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_KEY, Py_None, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) __PYX_ERR(0, 70, __pyx_L5_except_error)
-        if (unlikely(__Pyx_SetItemInt(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_RESULT, Py_None, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) __PYX_ERR(0, 70, __pyx_L5_except_error)
+        if (unlikely(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          __PYX_ERR(0, 72, __pyx_L5_except_error)
+        }
+        if (unlikely(__Pyx_SetItemInt(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_KEY, Py_None, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) __PYX_ERR(0, 72, __pyx_L5_except_error)
+        if (unlikely(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          __PYX_ERR(0, 72, __pyx_L5_except_error)
+        }
+        if (unlikely(__Pyx_SetItemInt(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_RESULT, Py_None, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) __PYX_ERR(0, 72, __pyx_L5_except_error)
 
-        /* "bravado_core/LRUCache_linklist.pyx":71
+        /* "bravado_core/LRUCache_linklist.pyx":73
  *                         oldresult = root[RESULT]
  *                         root[KEY] = root[RESULT] = None
  *                         del cache[oldkey]             # <<<<<<<<<<<<<<
  *                         cache[key] = oldroot
  *                     else:
  */
-        if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache)) { __Pyx_RaiseClosureNameError("cache"); __PYX_ERR(0, 71, __pyx_L5_except_error) }
+        if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache)) { __Pyx_RaiseClosureNameError("cache"); __PYX_ERR(0, 73, __pyx_L5_except_error) }
         if (unlikely(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache == Py_None)) {
           PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-          __PYX_ERR(0, 71, __pyx_L5_except_error)
+          __PYX_ERR(0, 73, __pyx_L5_except_error)
         }
-        if (unlikely(PyDict_DelItem(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache, __pyx_v_oldkey) < 0)) __PYX_ERR(0, 71, __pyx_L5_except_error)
+        if (unlikely(PyDict_DelItem(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache, __pyx_v_oldkey) < 0)) __PYX_ERR(0, 73, __pyx_L5_except_error)
 
-        /* "bravado_core/LRUCache_linklist.pyx":72
+        /* "bravado_core/LRUCache_linklist.pyx":74
  *                         root[KEY] = root[RESULT] = None
  *                         del cache[oldkey]
  *                         cache[key] = oldroot             # <<<<<<<<<<<<<<
  *                     else:
  *                         last = root[PREV]
  */
-        if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache)) { __Pyx_RaiseClosureNameError("cache"); __PYX_ERR(0, 72, __pyx_L5_except_error) }
+        if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache)) { __Pyx_RaiseClosureNameError("cache"); __PYX_ERR(0, 74, __pyx_L5_except_error) }
         if (unlikely(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache == Py_None)) {
           PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-          __PYX_ERR(0, 72, __pyx_L5_except_error)
+          __PYX_ERR(0, 74, __pyx_L5_except_error)
         }
-        if (unlikely(PyDict_SetItem(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache, __pyx_v_key, __pyx_v_oldroot) < 0)) __PYX_ERR(0, 72, __pyx_L5_except_error)
+        if (unlikely(PyDict_SetItem(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache, __pyx_v_key, __pyx_v_oldroot) < 0)) __PYX_ERR(0, 74, __pyx_L5_except_error)
 
-        /* "bravado_core/LRUCache_linklist.pyx":63
+        /* "bravado_core/LRUCache_linklist.pyx":65
  *                     if key in cache:
  *                         pass
  *                     elif full:             # <<<<<<<<<<<<<<
@@ -2375,7 +2411,7 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
         goto __pyx_L13;
       }
 
-      /* "bravado_core/LRUCache_linklist.pyx":74
+      /* "bravado_core/LRUCache_linklist.pyx":76
  *                         cache[key] = oldroot
  *                     else:
  *                         last = root[PREV]             # <<<<<<<<<<<<<<
@@ -2383,21 +2419,25 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
  *                         last[NEXT] = root[PREV] = cache[key] = link
  */
       /*else*/ {
-        if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root)) { __Pyx_RaiseClosureNameError("root"); __PYX_ERR(0, 74, __pyx_L5_except_error) }
-        __pyx_t_2 = __Pyx_GetItemInt(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_PREV, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 74, __pyx_L5_except_error)
+        if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root)) { __Pyx_RaiseClosureNameError("root"); __PYX_ERR(0, 76, __pyx_L5_except_error) }
+        if (unlikely(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          __PYX_ERR(0, 76, __pyx_L5_except_error)
+        }
+        __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_PREV, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 76, __pyx_L5_except_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_XDECREF_SET(__pyx_v_last, __pyx_t_2);
         __pyx_t_2 = 0;
 
-        /* "bravado_core/LRUCache_linklist.pyx":75
+        /* "bravado_core/LRUCache_linklist.pyx":77
  *                     else:
  *                         last = root[PREV]
  *                         link = [last, root, key, result]             # <<<<<<<<<<<<<<
  *                         last[NEXT] = root[PREV] = cache[key] = link
  *                         full = (cache_len() >= maxsize)
  */
-        if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root)) { __Pyx_RaiseClosureNameError("root"); __PYX_ERR(0, 75, __pyx_L5_except_error) }
-        __pyx_t_2 = PyList_New(4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 75, __pyx_L5_except_error)
+        if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root)) { __Pyx_RaiseClosureNameError("root"); __PYX_ERR(0, 77, __pyx_L5_except_error) }
+        __pyx_t_2 = PyList_New(4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 77, __pyx_L5_except_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_INCREF(__pyx_v_last);
         __Pyx_GIVEREF(__pyx_v_last);
@@ -2414,31 +2454,35 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
         __Pyx_XDECREF_SET(__pyx_v_link, __pyx_t_2);
         __pyx_t_2 = 0;
 
-        /* "bravado_core/LRUCache_linklist.pyx":76
+        /* "bravado_core/LRUCache_linklist.pyx":78
  *                         last = root[PREV]
  *                         link = [last, root, key, result]
  *                         last[NEXT] = root[PREV] = cache[key] = link             # <<<<<<<<<<<<<<
  *                         full = (cache_len() >= maxsize)
  *                     return result
  */
-        if (unlikely(__Pyx_SetItemInt(__pyx_v_last, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_NEXT, __pyx_v_link, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) __PYX_ERR(0, 76, __pyx_L5_except_error)
-        if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root)) { __Pyx_RaiseClosureNameError("root"); __PYX_ERR(0, 76, __pyx_L5_except_error) }
-        if (unlikely(__Pyx_SetItemInt(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_PREV, __pyx_v_link, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) __PYX_ERR(0, 76, __pyx_L5_except_error)
-        if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache)) { __Pyx_RaiseClosureNameError("cache"); __PYX_ERR(0, 76, __pyx_L5_except_error) }
+        if (unlikely(__Pyx_SetItemInt(__pyx_v_last, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_NEXT, __pyx_v_link, int, 1, __Pyx_PyInt_From_int, 0, 1, 1) < 0)) __PYX_ERR(0, 78, __pyx_L5_except_error)
+        if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root)) { __Pyx_RaiseClosureNameError("root"); __PYX_ERR(0, 78, __pyx_L5_except_error) }
+        if (unlikely(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root == Py_None)) {
+          PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          __PYX_ERR(0, 78, __pyx_L5_except_error)
+        }
+        if (unlikely(__Pyx_SetItemInt(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_root, __pyx_cur_scope->__pyx_outer_scope->__pyx_v_PREV, __pyx_v_link, int, 1, __Pyx_PyInt_From_int, 1, 1, 1) < 0)) __PYX_ERR(0, 78, __pyx_L5_except_error)
+        if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache)) { __Pyx_RaiseClosureNameError("cache"); __PYX_ERR(0, 78, __pyx_L5_except_error) }
         if (unlikely(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache == Py_None)) {
           PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-          __PYX_ERR(0, 76, __pyx_L5_except_error)
+          __PYX_ERR(0, 78, __pyx_L5_except_error)
         }
-        if (unlikely(PyDict_SetItem(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache, __pyx_v_key, __pyx_v_link) < 0)) __PYX_ERR(0, 76, __pyx_L5_except_error)
+        if (unlikely(PyDict_SetItem(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache, __pyx_v_key, __pyx_v_link) < 0)) __PYX_ERR(0, 78, __pyx_L5_except_error)
 
-        /* "bravado_core/LRUCache_linklist.pyx":77
+        /* "bravado_core/LRUCache_linklist.pyx":79
  *                         link = [last, root, key, result]
  *                         last[NEXT] = root[PREV] = cache[key] = link
  *                         full = (cache_len() >= maxsize)             # <<<<<<<<<<<<<<
  *                     return result
  * 
  */
-        if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache_len)) { __Pyx_RaiseClosureNameError("cache_len"); __PYX_ERR(0, 77, __pyx_L5_except_error) }
+        if (unlikely(!__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache_len)) { __Pyx_RaiseClosureNameError("cache_len"); __PYX_ERR(0, 79, __pyx_L5_except_error) }
         __Pyx_INCREF(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache_len);
         __pyx_t_8 = __pyx_cur_scope->__pyx_outer_scope->__pyx_v_cache_len; __pyx_t_13 = NULL;
         if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_8))) {
@@ -2452,21 +2496,21 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
         }
         __pyx_t_2 = (__pyx_t_13) ? __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_t_13) : __Pyx_PyObject_CallNoArg(__pyx_t_8);
         __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 77, __pyx_L5_except_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 79, __pyx_L5_except_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-        __pyx_t_8 = __Pyx_PyInt_From_int(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_maxsize); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 77, __pyx_L5_except_error)
+        __pyx_t_8 = __Pyx_PyInt_From_int(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_maxsize); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 79, __pyx_L5_except_error)
         __Pyx_GOTREF(__pyx_t_8);
-        __pyx_t_13 = PyObject_RichCompare(__pyx_t_2, __pyx_t_8, Py_GE); __Pyx_XGOTREF(__pyx_t_13); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 77, __pyx_L5_except_error)
+        __pyx_t_13 = PyObject_RichCompare(__pyx_t_2, __pyx_t_8, Py_GE); __Pyx_XGOTREF(__pyx_t_13); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 79, __pyx_L5_except_error)
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-        __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_13); if (unlikely((__pyx_t_12 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 77, __pyx_L5_except_error)
+        __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_13); if (unlikely((__pyx_t_12 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 79, __pyx_L5_except_error)
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
         __pyx_cur_scope->__pyx_outer_scope->__pyx_v_full = __pyx_t_12;
       }
       __pyx_L13:;
 
-      /* "bravado_core/LRUCache_linklist.pyx":78
+      /* "bravado_core/LRUCache_linklist.pyx":80
  *                         last[NEXT] = root[PREV] = cache[key] = link
  *                         full = (cache_len() >= maxsize)
  *                     return result             # <<<<<<<<<<<<<<
@@ -2484,7 +2528,7 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
     goto __pyx_L5_except_error;
     __pyx_L5_except_error:;
 
-    /* "bravado_core/LRUCache_linklist.pyx":49
+    /* "bravado_core/LRUCache_linklist.pyx":51
  *                 nonlocal root, full
  *                 key = id(args[1])
  *                 try:             # <<<<<<<<<<<<<<
@@ -2510,7 +2554,7 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
     goto __pyx_L0;
   }
 
-  /* "bravado_core/LRUCache_linklist.pyx":46
+  /* "bravado_core/LRUCache_linklist.pyx":48
  *             return wrapper
  *         else:
  *             def wrapper(*args, **kwds):             # <<<<<<<<<<<<<<
@@ -2544,7 +2588,7 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
   return __pyx_r;
 }
 
-/* "bravado_core/LRUCache_linklist.pyx":32
+/* "bravado_core/LRUCache_linklist.pyx":34
  *     root[:] = [root, root, None, None]
  * 
  *     def decorator(user_function):             # <<<<<<<<<<<<<<
@@ -2565,7 +2609,7 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_12bravado_core_17LRUCache_linklist___pyx_scope_struct_1_decorator *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(0, 32, __pyx_L1_error)
+    __PYX_ERR(0, 34, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -2576,33 +2620,33 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_user_function);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_user_function);
 
-  /* "bravado_core/LRUCache_linklist.pyx":34
+  /* "bravado_core/LRUCache_linklist.pyx":36
  *     def decorator(user_function):
  * 
  *         if maxsize is None:             # <<<<<<<<<<<<<<
  *             def wrapper(*args, **kwds):
  *                 key = id(args[1])
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_maxsize); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_cur_scope->__pyx_outer_scope->__pyx_v_maxsize); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = (__pyx_t_1 == Py_None);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "bravado_core/LRUCache_linklist.pyx":35
+    /* "bravado_core/LRUCache_linklist.pyx":37
  * 
  *         if maxsize is None:
  *             def wrapper(*args, **kwds):             # <<<<<<<<<<<<<<
  *                 key = id(args[1])
  *                 try:
  */
-    __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner_9decorator_1wrapper, 0, __pyx_n_s_lru_cache_l_inner_locals_decorat, ((PyObject*)__pyx_cur_scope), __pyx_n_s_bravado_core_LRUCache_linklist, __pyx_d, ((PyObject *)__pyx_codeobj__3)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner_9decorator_1wrapper, 0, __pyx_n_s_lru_cache_l_inner_locals_decorat, ((PyObject*)__pyx_cur_scope), __pyx_n_s_bravado_core_LRUCache_linklist, __pyx_d, ((PyObject *)__pyx_codeobj__3)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_v_wrapper = __pyx_t_1;
     __pyx_t_1 = 0;
 
-    /* "bravado_core/LRUCache_linklist.pyx":44
+    /* "bravado_core/LRUCache_linklist.pyx":46
  *                     cache[key] = result
  *                     return result
  *             return wrapper             # <<<<<<<<<<<<<<
@@ -2614,7 +2658,7 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
     __pyx_r = __pyx_v_wrapper;
     goto __pyx_L0;
 
-    /* "bravado_core/LRUCache_linklist.pyx":34
+    /* "bravado_core/LRUCache_linklist.pyx":36
  *     def decorator(user_function):
  * 
  *         if maxsize is None:             # <<<<<<<<<<<<<<
@@ -2623,7 +2667,7 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
  */
   }
 
-  /* "bravado_core/LRUCache_linklist.pyx":46
+  /* "bravado_core/LRUCache_linklist.pyx":48
  *             return wrapper
  *         else:
  *             def wrapper(*args, **kwds):             # <<<<<<<<<<<<<<
@@ -2631,12 +2675,12 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
  *                 key = id(args[1])
  */
   /*else*/ {
-    __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner_9decorator_3wrapper, 0, __pyx_n_s_lru_cache_l_inner_locals_decorat, ((PyObject*)__pyx_cur_scope), __pyx_n_s_bravado_core_LRUCache_linklist, __pyx_d, ((PyObject *)__pyx_codeobj__5)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner_9decorator_3wrapper, 0, __pyx_n_s_lru_cache_l_inner_locals_decorat, ((PyObject*)__pyx_cur_scope), __pyx_n_s_bravado_core_LRUCache_linklist, __pyx_d, ((PyObject *)__pyx_codeobj__5)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_v_wrapper = __pyx_t_1;
     __pyx_t_1 = 0;
 
-    /* "bravado_core/LRUCache_linklist.pyx":80
+    /* "bravado_core/LRUCache_linklist.pyx":82
  *                     return result
  * 
  *             return wrapper             # <<<<<<<<<<<<<<
@@ -2648,7 +2692,7 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner
     goto __pyx_L0;
   }
 
-  /* "bravado_core/LRUCache_linklist.pyx":32
+  /* "bravado_core/LRUCache_linklist.pyx":34
  *     root[:] = [root, root, None, None]
  * 
  *     def decorator(user_function):             # <<<<<<<<<<<<<<
@@ -2694,17 +2738,17 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_2lru_cache_l_inner(
   }
   __pyx_cur_scope->__pyx_v_maxsize = __pyx_v_maxsize;
 
-  /* "bravado_core/LRUCache_linklist.pyx":19
- *     cdef bint full
- *     cdef cache_len
+  /* "bravado_core/LRUCache_linklist.pyx":21
+ *     cdef list root
+ * 
  *     PREV = 0             # <<<<<<<<<<<<<<
  *     NEXT = 1
  *     KEY = 2
  */
   __pyx_cur_scope->__pyx_v_PREV = 0;
 
-  /* "bravado_core/LRUCache_linklist.pyx":20
- *     cdef cache_len
+  /* "bravado_core/LRUCache_linklist.pyx":22
+ * 
  *     PREV = 0
  *     NEXT = 1             # <<<<<<<<<<<<<<
  *     KEY = 2
@@ -2712,7 +2756,7 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_2lru_cache_l_inner(
  */
   __pyx_cur_scope->__pyx_v_NEXT = 1;
 
-  /* "bravado_core/LRUCache_linklist.pyx":21
+  /* "bravado_core/LRUCache_linklist.pyx":23
  *     PREV = 0
  *     NEXT = 1
  *     KEY = 2             # <<<<<<<<<<<<<<
@@ -2721,7 +2765,7 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_2lru_cache_l_inner(
  */
   __pyx_cur_scope->__pyx_v_KEY = 2;
 
-  /* "bravado_core/LRUCache_linklist.pyx":22
+  /* "bravado_core/LRUCache_linklist.pyx":24
  *     NEXT = 1
  *     KEY = 2
  *     RESULT = 3             # <<<<<<<<<<<<<<
@@ -2730,20 +2774,20 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_2lru_cache_l_inner(
  */
   __pyx_cur_scope->__pyx_v_RESULT = 3;
 
-  /* "bravado_core/LRUCache_linklist.pyx":26
+  /* "bravado_core/LRUCache_linklist.pyx":28
  *     #PREV, NEXT, KEY, RESULT = 0, 1, 2, 3
  * 
  *     cache = {}             # <<<<<<<<<<<<<<
  *     full = False
  *     cache_len = cache.__len__
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 28, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
   __pyx_cur_scope->__pyx_v_cache = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "bravado_core/LRUCache_linklist.pyx":27
+  /* "bravado_core/LRUCache_linklist.pyx":29
  * 
  *     cache = {}
  *     full = False             # <<<<<<<<<<<<<<
@@ -2752,40 +2796,40 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_2lru_cache_l_inner(
  */
   __pyx_cur_scope->__pyx_v_full = 0;
 
-  /* "bravado_core/LRUCache_linklist.pyx":28
+  /* "bravado_core/LRUCache_linklist.pyx":30
  *     cache = {}
  *     full = False
  *     cache_len = cache.__len__             # <<<<<<<<<<<<<<
  *     root = []
  *     root[:] = [root, root, None, None]
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_cache, __pyx_n_s_len); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 28, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_cache, __pyx_n_s_len); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 30, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
   __pyx_cur_scope->__pyx_v_cache_len = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "bravado_core/LRUCache_linklist.pyx":29
+  /* "bravado_core/LRUCache_linklist.pyx":31
  *     full = False
  *     cache_len = cache.__len__
  *     root = []             # <<<<<<<<<<<<<<
  *     root[:] = [root, root, None, None]
  * 
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_1);
-  __pyx_cur_scope->__pyx_v_root = __pyx_t_1;
+  __pyx_cur_scope->__pyx_v_root = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "bravado_core/LRUCache_linklist.pyx":30
+  /* "bravado_core/LRUCache_linklist.pyx":32
  *     cache_len = cache.__len__
  *     root = []
  *     root[:] = [root, root, None, None]             # <<<<<<<<<<<<<<
  * 
  *     def decorator(user_function):
  */
-  __pyx_t_1 = PyList_New(4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 30, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 32, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_root);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_root);
@@ -2799,22 +2843,22 @@ static PyObject *__pyx_pf_12bravado_core_17LRUCache_linklist_2lru_cache_l_inner(
   __Pyx_INCREF(Py_None);
   __Pyx_GIVEREF(Py_None);
   PyList_SET_ITEM(__pyx_t_1, 3, Py_None);
-  if (__Pyx_PyObject_SetSlice(__pyx_cur_scope->__pyx_v_root, __pyx_t_1, 0, 0, NULL, NULL, &__pyx_slice__6, 0, 0, 1) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
+  if (__Pyx_PyObject_SetSlice(__pyx_cur_scope->__pyx_v_root, __pyx_t_1, 0, 0, NULL, NULL, NULL, 0, 0, 1) < 0) __PYX_ERR(0, 32, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "bravado_core/LRUCache_linklist.pyx":32
+  /* "bravado_core/LRUCache_linklist.pyx":34
  *     root[:] = [root, root, None, None]
  * 
  *     def decorator(user_function):             # <<<<<<<<<<<<<<
  * 
  *         if maxsize is None:
  */
-  __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner_1decorator, 0, __pyx_n_s_lru_cache_l_inner_locals_decorat_2, ((PyObject*)__pyx_cur_scope), __pyx_n_s_bravado_core_LRUCache_linklist, __pyx_d, ((PyObject *)__pyx_codeobj__8)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 32, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_12bravado_core_17LRUCache_linklist_17lru_cache_l_inner_1decorator, 0, __pyx_n_s_lru_cache_l_inner_locals_decorat_2, ((PyObject*)__pyx_cur_scope), __pyx_n_s_bravado_core_LRUCache_linklist, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_decorator = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "bravado_core/LRUCache_linklist.pyx":81
+  /* "bravado_core/LRUCache_linklist.pyx":83
  * 
  *             return wrapper
  *     return decorator             # <<<<<<<<<<<<<<
@@ -2900,7 +2944,7 @@ static int __pyx_tp_clear_12bravado_core_17LRUCache_linklist___pyx_scope_struct_
   p->__pyx_v_cache_len = Py_None; Py_INCREF(Py_None);
   Py_XDECREF(tmp);
   tmp = ((PyObject*)p->__pyx_v_root);
-  p->__pyx_v_root = Py_None; Py_INCREF(Py_None);
+  p->__pyx_v_root = ((PyObject*)Py_None); Py_INCREF(Py_None);
   Py_XDECREF(tmp);
   return 0;
 }
@@ -3163,8 +3207,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 4, __pyx_L1_error)
-  __pyx_builtin_id = __Pyx_GetBuiltinName(__pyx_n_s_id); if (!__pyx_builtin_id) __PYX_ERR(0, 36, __pyx_L1_error)
-  __pyx_builtin_KeyError = __Pyx_GetBuiltinName(__pyx_n_s_KeyError); if (!__pyx_builtin_KeyError) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_builtin_id = __Pyx_GetBuiltinName(__pyx_n_s_id); if (!__pyx_builtin_id) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_builtin_KeyError = __Pyx_GetBuiltinName(__pyx_n_s_KeyError); if (!__pyx_builtin_KeyError) __PYX_ERR(0, 42, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -3196,62 +3240,51 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "bravado_core/LRUCache_linklist.pyx":35
+  /* "bravado_core/LRUCache_linklist.pyx":37
  * 
  *         if maxsize is None:
  *             def wrapper(*args, **kwds):             # <<<<<<<<<<<<<<
  *                 key = id(args[1])
  *                 try:
  */
-  __pyx_tuple__2 = PyTuple_Pack(4, __pyx_n_s_args, __pyx_n_s_kwds, __pyx_n_s_key, __pyx_n_s_result); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(4, __pyx_n_s_args, __pyx_n_s_kwds, __pyx_n_s_key, __pyx_n_s_result); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
-  __pyx_codeobj__3 = (PyObject*)__Pyx_PyCode_New(0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__2, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_LRUCache_linklist_pyx, __pyx_n_s_wrapper, 35, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__3)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_codeobj__3 = (PyObject*)__Pyx_PyCode_New(0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__2, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_LRUCache_linklist_pyx, __pyx_n_s_wrapper, 37, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__3)) __PYX_ERR(0, 37, __pyx_L1_error)
 
-  /* "bravado_core/LRUCache_linklist.pyx":46
+  /* "bravado_core/LRUCache_linklist.pyx":48
  *             return wrapper
  *         else:
  *             def wrapper(*args, **kwds):             # <<<<<<<<<<<<<<
  *                 nonlocal root, full
  *                 key = id(args[1])
  */
-  __pyx_tuple__4 = PyTuple_Pack(12, __pyx_n_s_args, __pyx_n_s_kwds, __pyx_n_s_key, __pyx_n_s_link, __pyx_n_s_link_prev, __pyx_n_s_link_next, __pyx_n_s_key_2, __pyx_n_s_result, __pyx_n_s_last, __pyx_n_s_oldroot, __pyx_n_s_oldkey, __pyx_n_s_oldresult); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(12, __pyx_n_s_args, __pyx_n_s_kwds, __pyx_n_s_key, __pyx_n_s_link, __pyx_n_s_link_prev, __pyx_n_s_link_next, __pyx_n_s_key_2, __pyx_n_s_result, __pyx_n_s_last, __pyx_n_s_oldroot, __pyx_n_s_oldkey, __pyx_n_s_oldresult); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
-  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(0, 0, 12, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_LRUCache_linklist_pyx, __pyx_n_s_wrapper, 46, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(0, 0, 12, 0, CO_OPTIMIZED|CO_NEWLOCALS|CO_VARARGS|CO_VARKEYWORDS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_LRUCache_linklist_pyx, __pyx_n_s_wrapper, 48, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(0, 48, __pyx_L1_error)
 
-  /* "bravado_core/LRUCache_linklist.pyx":30
- *     cache_len = cache.__len__
- *     root = []
- *     root[:] = [root, root, None, None]             # <<<<<<<<<<<<<<
- * 
- *     def decorator(user_function):
- */
-  __pyx_slice__6 = PySlice_New(Py_None, Py_None, Py_None); if (unlikely(!__pyx_slice__6)) __PYX_ERR(0, 30, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_slice__6);
-  __Pyx_GIVEREF(__pyx_slice__6);
-
-  /* "bravado_core/LRUCache_linklist.pyx":32
+  /* "bravado_core/LRUCache_linklist.pyx":34
  *     root[:] = [root, root, None, None]
  * 
  *     def decorator(user_function):             # <<<<<<<<<<<<<<
  * 
  *         if maxsize is None:
  */
-  __pyx_tuple__7 = PyTuple_Pack(4, __pyx_n_s_user_function, __pyx_n_s_wrapper, __pyx_n_s_wrapper, __pyx_n_s_wrapper); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 32, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__7);
-  __Pyx_GIVEREF(__pyx_tuple__7);
-  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(1, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_LRUCache_linklist_pyx, __pyx_n_s_decorator, 32, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 32, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(4, __pyx_n_s_user_function, __pyx_n_s_wrapper, __pyx_n_s_wrapper, __pyx_n_s_wrapper); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__6);
+  __Pyx_GIVEREF(__pyx_tuple__6);
+  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(1, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_LRUCache_linklist_pyx, __pyx_n_s_decorator, 34, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 34, __pyx_L1_error)
 
   /* "bravado_core/LRUCache_linklist.pyx":1
  * def lru_cache_l(maxsize):             # <<<<<<<<<<<<<<
  *     try:
  *         if maxsize <= 0:
  */
-  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_n_s_maxsize); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__9);
-  __Pyx_GIVEREF(__pyx_tuple__9);
-  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_LRUCache_linklist_pyx, __pyx_n_s_lru_cache_l, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_n_s_maxsize); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__8);
+  __Pyx_GIVEREF(__pyx_tuple__8);
+  __pyx_codeobj__9 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__8, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_LRUCache_linklist_pyx, __pyx_n_s_lru_cache_l, 1, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__9)) __PYX_ERR(0, 1, __pyx_L1_error)
 
   /* "bravado_core/LRUCache_linklist.pyx":9
  *         raise TypeError('Expected maxsize to be an integer that bigger than 0')
@@ -3260,10 +3293,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *     #if maxsize <= 0:
  *         #raise TypeError('Expected maxsize to be an integer that bigger than 0')
  */
-  __pyx_tuple__11 = PyTuple_Pack(11, __pyx_n_s_maxsize, __pyx_n_s_PREV, __pyx_n_s_NEXT, __pyx_n_s_KEY, __pyx_n_s_RESULT, __pyx_n_s_cache, __pyx_n_s_full, __pyx_n_s_cache_len, __pyx_n_s_root, __pyx_n_s_decorator, __pyx_n_s_decorator); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 9, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__11);
-  __Pyx_GIVEREF(__pyx_tuple__11);
-  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(1, 0, 11, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_LRUCache_linklist_pyx, __pyx_n_s_lru_cache_l_inner, 9, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __pyx_tuple__10 = PyTuple_Pack(11, __pyx_n_s_maxsize, __pyx_n_s_PREV, __pyx_n_s_NEXT, __pyx_n_s_KEY, __pyx_n_s_RESULT, __pyx_n_s_cache, __pyx_n_s_full, __pyx_n_s_cache_len, __pyx_n_s_root, __pyx_n_s_decorator, __pyx_n_s_decorator); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__10);
+  __Pyx_GIVEREF(__pyx_tuple__10);
+  __pyx_codeobj__11 = (PyObject*)__Pyx_PyCode_New(1, 0, 11, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__10, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_LRUCache_linklist_pyx, __pyx_n_s_lru_cache_l_inner, 9, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__11)) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -3321,7 +3354,7 @@ static int __Pyx_modinit_type_init_code(void) {
     __pyx_type_12bravado_core_17LRUCache_linklist___pyx_scope_struct__lru_cache_l_inner.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_12bravado_core_17LRUCache_linklist___pyx_scope_struct__lru_cache_l_inner = &__pyx_type_12bravado_core_17LRUCache_linklist___pyx_scope_struct__lru_cache_l_inner;
-  if (PyType_Ready(&__pyx_type_12bravado_core_17LRUCache_linklist___pyx_scope_struct_1_decorator) < 0) __PYX_ERR(0, 32, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_12bravado_core_17LRUCache_linklist___pyx_scope_struct_1_decorator) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
   __pyx_type_12bravado_core_17LRUCache_linklist___pyx_scope_struct_1_decorator.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_12bravado_core_17LRUCache_linklist___pyx_scope_struct_1_decorator.tp_dictoffset && __pyx_type_12bravado_core_17LRUCache_linklist___pyx_scope_struct_1_decorator.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_12bravado_core_17LRUCache_linklist___pyx_scope_struct_1_decorator.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;

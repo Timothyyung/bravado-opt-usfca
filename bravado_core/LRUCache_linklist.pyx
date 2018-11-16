@@ -16,6 +16,8 @@ def lru_cache_l_inner(int maxsize=128):
     cdef dict cache
     cdef bint full
     cdef cache_len
+    cdef list root
+
     PREV = 0
     NEXT = 1
     KEY = 2
