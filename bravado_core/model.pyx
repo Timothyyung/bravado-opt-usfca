@@ -313,8 +313,8 @@ class Model(object):
         # Create the attribute value dictionary
         # We need bypass the overloaded __setattr__ method
         # Note the name mangling!
-        #object.__setattr__(self, '_Model__dict', dict())
-        self["_Model__dict"] = dict()
+        object.__setattr__(self, '_Model__dict', dict())
+        #self["_Model__dict"] = dict()
 
         # Additional property names in dct
         cdef bint additional
