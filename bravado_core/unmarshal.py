@@ -162,7 +162,7 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
             if obj_type == 'array':
                 result[k] = unmarshal_array(swagger_spec, prop_spec, v)
             if swagger_spec.config['use_models'] and \
-                    is_model(swagger_spec, schema_object_spec):
+                    is_model(swagger_spec, prop_spec):
                 print("!!!!!!!!!!!!!!!")
                 result[k] = unmarshal_model(swagger_spec, prop_spec, v)
             if obj_type == 'object':
