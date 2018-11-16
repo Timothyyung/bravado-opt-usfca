@@ -12,7 +12,16 @@ def lru_cache_l_inner(int maxsize=128):
     #if maxsize is not None and not isinstance(maxsize, int):
         #raise TypeError('Expected maxsize to be an integer or None')
 
-    PREV, NEXT, KEY, RESULT = 0, 1, 2, 3
+    cdef int PREV, NEXT, KEY, RESULT
+    cdef dict cache
+    cdef bint full
+    cdef cache_len
+    PREV = 0
+    NEXT = 1
+    KEY = 2
+    RESULT = 3
+
+    #PREV, NEXT, KEY, RESULT = 0, 1, 2, 3
 
     cache = {}
     full = False
