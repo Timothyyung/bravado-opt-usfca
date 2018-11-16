@@ -176,7 +176,7 @@ def collapsed_properties(model_spec, swagger_spec):
     # try:
         # return swagger_spec.cache_schema[i]
     # except KeyError:
-        properties = {}
+    properties = {}
 
     # properties may or may not be present
     if 'properties' in model_spec:
