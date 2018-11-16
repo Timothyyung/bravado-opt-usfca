@@ -150,12 +150,12 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
             else:
                 result[k] = None
         elif prop_spec:
-            obj_type = prop_spec.get('type')
-
             if 'allOf' in prop_spec:
-                obj_type = 'object'
+                result[k] = unmarshal_object(swagger_spec, prop_spec, v)
             else:
                 result[k] = v
+
+            obj_type = prop_spec.get('type')
 
             if obj_type in SWAGGER_PRIMITIVES:
                 result[k] = unmarshal_primitive(swagger_spec, prop_spec, v)
