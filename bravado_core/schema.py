@@ -172,24 +172,23 @@ def collapsed_properties(model_spec, swagger_spec):
     :returns: dict
     """
 
-    i = id(model_spec)
-    try:
-        return swagger_spec.cache_schema[i]
-    except KeyError:
-        #print(model_spec)
+    # i = id(model_spec)
+    # try:
+        # return swagger_spec.cache_schema[i]
+    # except KeyError:
         properties = {}
 
     # properties may or may not be present
-        if 'properties' in model_spec:
-            for attr, attr_spec in iteritems(model_spec['properties']):
-                properties[attr] = attr_spec
+    if 'properties' in model_spec:
+        for attr, attr_spec in iteritems(model_spec['properties']):
+            properties[attr] = attr_spec
 
     # allOf may or may not be present
-        if 'allOf' in model_spec:
-            deref = swagger_spec.deref
-            for item_spec in model_spec['allOf']:
-                item_spec = deref(item_spec)
-                more_properties = collapsed_properties(item_spec, swagger_spec)
-                properties.update(more_properties)
-        swagger_spec.cache_schema[i] = properties
-        return properties
+    if 'allOf' in model_spec:
+        deref = swagger_spec.deref
+        for item_spec in model_spec['allOf']:
+            item_spec = deref(item_spec)
+            more_properties = collapsed_properties(item_spec, swagger_spec)
+            properties.update(more_properties)
+        # swagger_spec.cache_schema[i] = properties
+    return properties
