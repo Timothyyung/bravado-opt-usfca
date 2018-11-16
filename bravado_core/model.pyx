@@ -317,7 +317,7 @@ class Model(object):
         #self["_Model__dict"] = dict()
 
         # Additional property names in dct
-        cdef dict additional
+        cdef set additional
         cdef bint is_additional_prop = self._model_spec.get('additionalProperties', True)
         additional = set(dct).difference(self._properties)
 
