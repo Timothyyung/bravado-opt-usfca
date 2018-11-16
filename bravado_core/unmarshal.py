@@ -8,7 +8,6 @@ from bravado_core.model import is_model
 from bravado_core.model import MODEL_MARKER
 from bravado_core.schema import collapsed_properties
 from bravado_core.schema import get_spec_for_prop
-from bravado_core.schema import get_spec_for_prop_dict
 from bravado_core.schema import handle_null_value
 from bravado_core.schema import is_dict_like
 from bravado_core.schema import is_list_like
