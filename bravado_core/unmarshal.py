@@ -150,10 +150,23 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
             else:
                 result[k] = None
         elif prop_spec:
-            print(prop_spec)
-            #if is_ref(prop_spec):
-            #    prop_spec = swagger_spec.deref(prop_spec)
-            result[k] = unmarshal_schema_object(swagger_spec, prop_spec, v)
+            obj_type = prop_spec.get('type')
+
+            if 'allOf' in prop_spec:
+                obj_type = 'object'
+            else:
+                result[k] = v
+
+            if obj_type in SWAGGER_PRIMITIVES:
+                result[k] = unmarshal_primitive(swagger_spec, prop_spec, v)
+            if obj_type == 'array':
+                result[k] = unmarshal_array(swagger_spec, prop_spec, v)
+            if swagger_spec.config['use_models'] and \
+                    is_model(swagger_spec, schema_object_spec):
+                print("!!!!!!!!!!!!!!!")
+                result[k] = unmarshal_model(swagger_spec, prop_spec, v)
+            if obj_type == 'object':
+                result[k] = unmarshal_object(swagger_spec, prop_spec, v)
         else:
             # Don't marshal when a spec is not available - just pass through
             result[k] = v
