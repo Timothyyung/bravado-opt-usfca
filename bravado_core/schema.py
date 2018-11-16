@@ -96,7 +96,7 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
     :rtype: dict or None
     """
 
-    deref = swagger_spec.fast_deref
+    deref = swagger_spec.deref
 
     if properties is None:
         properties = collapsed_properties(deref(object_spec), swagger_spec)
@@ -104,27 +104,26 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
 
     if prop_spec is not None:
         result_spec = deref(prop_spec)
-    # If the de-referenced specification is for a x-nullable property
-    # then copy the spec and add the x-nullable property.
-    # If in the future there are other attributes on the property that
-    # modify a referenced schema, it can be done here (or rewrite
-    # unmarshal to pass the unreferenced property spec as another arg).
+        # If the de-referenced specification is for a x-nullable property
+        # then copy the spec and add the x-nullable property.
+        # If in the future there are other attributes on the property that
+        # modify a referenced schema, it can be done here (or rewrite
+        # unmarshal to pass the unreferenced property spec as another arg).
         if 'x-nullable' in prop_spec and 'x-nullable' not in result_spec:
             result_spec = copy.deepcopy(result_spec)
             result_spec['x-nullable'] = prop_spec['x-nullable']
-
         return result_spec
 
     additional_props = deref(object_spec).get('additionalProperties', True)
 
     if isinstance(additional_props, bool):
-    # no spec for additional properties to conform to - this is basically
-    # a way to send pretty much anything across the wire as is.
+        # no spec for additional properties to conform to - this is basically
+        # a way to send pretty much anything across the wire as is.
         return None
 
     additional_props = deref(additional_props)
     if is_dict_like(additional_props):
-    # spec that all additional props MUST conform to
+        # spec that all additional props MUST conform to
         return additional_props
 
     raise SwaggerMappingError(
