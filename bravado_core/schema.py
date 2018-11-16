@@ -96,7 +96,7 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
     :rtype: dict or None
     """
 
-    deref = swagger_spec.deref
+    deref = swagger_spec.fast_deref
 
     if properties is None:
         properties = collapsed_properties(deref(object_spec), swagger_spec)
