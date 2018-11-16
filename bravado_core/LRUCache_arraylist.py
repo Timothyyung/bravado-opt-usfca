@@ -1,18 +1,11 @@
-def _make_key(args, kwds):
-    return id(args[1])
-
 def lru_cache_a(maxsize=128):
     if isinstance(maxsize, int) and maxsize <= 0:
         raise TypeError('Expected maxsize to be an integer that bigger than 0')
     if maxsize is not None and not isinstance(maxsize, int):
         raise TypeError('Expected maxsize to be an integer or None')
 
-    sentinel = object()
-    make_key = _make_key
-
     cache = {}
     full = False
-    cache_get = cache.get
     cache_len = cache.__len__
     keys = []
 
@@ -20,7 +13,7 @@ def lru_cache_a(maxsize=128):
 
         if maxsize is None:
             def wrapper(*args, **kwds):
-                key = make_key(args, kwds)
+                key = id(args[1])
                 try:
                     result = cache[key]
                     return result
@@ -32,7 +25,7 @@ def lru_cache_a(maxsize=128):
         else:
             def wrapper(*args, **kwds):
                 nonlocal keys, full
-                key = make_key(args, kwds)
+                key = id(args[1])
                 try:
                     result = cache[key]
                     keys.remove(key)
