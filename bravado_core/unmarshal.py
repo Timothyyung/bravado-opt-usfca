@@ -8,6 +8,7 @@ from bravado_core.model import is_model
 from bravado_core.model import MODEL_MARKER
 from bravado_core.schema import collapsed_properties
 from bravado_core.schema import get_spec_for_prop
+from bravado_core.schema import get_spec_for_prop_dict
 from bravado_core.schema import handle_null_value
 from bravado_core.schema import is_dict_like
 from bravado_core.schema import is_list_like
@@ -132,9 +133,11 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
     properties = collapsed_properties(object_spec, swagger_spec)
 
     result = {}
+    result_spec_dict = get_spec_for_prop_dict(swagger_spec, object_spec, object_value, properties, deref)
     for k, v in iteritems(object_value):
-        prop_spec = get_spec_for_prop(
-            swagger_spec, object_spec, object_value, k, properties)
+        # prop_spec = get_spec_for_prop(
+        #    swagger_spec, object_spec, object_value, k, properties)
+        prop_spec = result_spec_dict[k]
         if v is None and k not in required_fields and prop_spec:
             if schema.has_default(swagger_spec, prop_spec):
                 result[k] = schema.get_default(swagger_spec, prop_spec)

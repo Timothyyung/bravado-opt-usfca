@@ -131,6 +131,64 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
         "Don't know what to do with `additionalProperties` in spec {0} "
         "when inspecting value {1}".format(object_spec, object_value))
 
+def get_spec_for_prop_dict(swagger_spec, object_spec, object_value, properties=None, deref):
+    """Given a jsonschema object spec and value, retrieve the spec for the
+     given property taking 'additionalProperties' into consideration.
+
+    :param swagger_spec: Spec object
+    :type swagger_spec: bravado_core.spec.Spec
+    :param object_spec: spec for a jsonschema 'object' in dict form
+    :param object_value: jsonschema object containing the given property. Only
+        used in error message.
+    :param prop_name: name of the property to retrieve the spec for
+    :param properties: collapsed properties of the object
+
+    :return: spec for the given property or None if no spec found
+    :rtype: dict or None
+    """
+    # deref = swagger_spec.deref
+
+    if properties is None:
+        properties = collapsed_properties(deref(object_spec), swagger_spec)
+    
+    result_spec_dict = {}
+    additional_props = deref(object_spec).get('additionalProperties', True)
+    is_additional_props_bool = isinstance(additional_props, bool)
+    additional_props = deref(additional_props)
+    is_additional_props_dict = is_dict_like(additional_props)
+
+    
+    for k, v in iteritems(object_value):
+        prop_spec = properties.get(k)
+
+        if prop_spec is not None:
+            result_spec = deref(prop_spec)
+            result_spec_dict[k] = result_spec
+        # If the de-referenced specification is for a x-nullable property
+        # then copy the spec and add the x-nullable property.
+        # If in the future there are other attributes on the property that
+        # modify a referenced schema, it can be done here (or rewrite
+        # unmarshal to pass the unreferenced property spec as another arg).
+            if 'x-nullable' in prop_spec and 'x-nullable' not in result_spec:
+                result_spec = copy.deepcopy(result_spec)
+                result_spec['x-nullable'] = prop_spec['x-nullable']
+                result_spec_dict[k] = result_spec
+        
+
+
+        if is_additional_props_bool:
+        # no spec for additional properties to conform to - this is basically
+        # a way to send pretty much anything across the wire as is.
+            result_spec_dict[k] = None
+
+        if is_additional_props_dict:
+        # spec that all additional props MUST conform to
+            result_spec_dict[k] = additional_props
+
+        raise SwaggerMappingError(
+            "Don't know what to do with `additionalProperties` in spec {0} "
+            "when inspecting value {1}".format(object_spec, object_value))
+    return result_spec_dict
 
 def handle_null_value(swagger_spec, schema_object_spec):
     """Handle a null value for the associated schema object spec. Checks the
