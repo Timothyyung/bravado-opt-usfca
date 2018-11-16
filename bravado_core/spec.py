@@ -126,7 +126,7 @@ class Spec(object):
         # it will be overridden by the dereferenced specs (by build method). More context in PR#263
         self._internal_spec_dict = spec_dict
         # self.cache = {}
-        self.cache_schema = {}
+        # self.cache_schema = {}
         # self.lru_cache = LRUCache(maxsize=None)
 
     @cached_property
