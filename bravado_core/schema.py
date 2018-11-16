@@ -82,7 +82,9 @@ def is_list_like(spec):
     return isinstance(spec, (list, tuple))
 
 
-def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, properties=None):
+
+def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, deref,
+ is_additional_props_bool, is_additional_props_dict, additional_props , properties=None):
     """Given a jsonschema object spec and value, retrieve the spec for the
      given property taking 'additionalProperties' into consideration.
 
@@ -97,7 +99,7 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
     :return: spec for the given property or None if no spec found
     :rtype: dict or None
     """
-    deref = swagger_spec.deref
+    #deref = swagger_spec.deref
 
     if properties is None:
         properties = collapsed_properties(deref(object_spec), swagger_spec)
@@ -115,15 +117,17 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
             result_spec['x-nullable'] = prop_spec['x-nullable']
         return result_spec
 
-    additional_props = deref(object_spec).get('additionalProperties', True)
+    #additional_props = deref(object_spec).get('additionalProperties', True)
 
-    if isinstance(additional_props, bool):
+    #if isinstance(additional_props, bool):
+    if is_additional_props_bool:
         # no spec for additional properties to conform to - this is basically
         # a way to send pretty much anything across the wire as is.
         return None
 
-    additional_props = deref(additional_props)
-    if is_dict_like(additional_props):
+    #additional_props = deref(additional_props)
+    #if is_dict_like(additional_props):
+    if is_additional_props_dict:
         # spec that all additional props MUST conform to
         return additional_props
 
