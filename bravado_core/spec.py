@@ -223,7 +223,7 @@ class Spec(object):
             _, target = self.resolver.resolve(ref_dict['$ref'])
             return target
 
-    @lru_cache_l(maxsize=8)
+    @lru_cache_a(maxsize=8)
     def fast_deref(self, ref_dict):
         """Dereference ref_dict (if it is indeed a ref) and return what the
         ref points to.
