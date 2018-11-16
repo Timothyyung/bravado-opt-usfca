@@ -303,7 +303,7 @@ class Model(object):
         """
         self.__init_from_dict(kwargs)
 
-    def __init_from_dict(self, dct, include_missing_properties=True):
+    def __init_from_dict(self, dict dct, include_missing_properties=True):
         """Initialize model from a dictionary of property values.
 
         :param dict dct: Dictionary of property values by name. They need not
@@ -313,12 +313,15 @@ class Model(object):
         # Create the attribute value dictionary
         # We need bypass the overloaded __setattr__ method
         # Note the name mangling!
-        object.__setattr__(self, '_Model__dict', dict())
+        #object.__setattr__(self, '_Model__dict', dict())
+        self["_Model__dict"] = dict()
 
         # Additional property names in dct
+        cdef bint additional
+        cdef bint is_additional_prop = self._model_spec.get('additionalProperties', True)
         additional = set(dct).difference(self._properties)
 
-        if additional and not self._model_spec.get('additionalProperties', True):
+        if additional and not is_additional_prop:
             raise AttributeError(
                 "Model {0} does not have attributes for: {1}"
                 .format(type(self), list(additional))
