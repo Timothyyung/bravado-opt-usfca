@@ -232,17 +232,9 @@ class Spec(object):
         try:
             return self.cache_spec[i]
         except KeyError:
-            if ref_dict is None or not is_ref(ref_dict):
-                self.cache_spec[i] = ref_dict
-                return ref_dict
-
-        # Restore attached resolution scope before resolving since the
-        # resolver doesn't have a traversal history (accumulated scope_stack)
-        # when asked to resolve.
-            with in_scope(self.resolver, ref_dict):
-                _, target = self.resolver.resolve(ref_dict['$ref'])
-                self.cache_spec[i] = target
-                return target
+            result = _force_deref(self, ref_dict)
+            self.cache_spec[i] = result;
+            return result
 
 
     # NOTE: deref gets overridden, if internally_dereference_refs is enabled, after calling build
