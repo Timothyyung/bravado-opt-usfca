@@ -123,7 +123,7 @@ class Spec(object):
         # spec dict used to build resources, in case internally_dereference_refs config is enabled
         # it will be overridden by the dereferenced specs (by build method). More context in PR#263
         self._internal_spec_dict = spec_dict
-        self.cache = {}
+        self.cache_spec = {}
         self.cache_schema = {}
 
     @cached_property
@@ -230,11 +230,10 @@ class Spec(object):
         """
         i = id(ref_dict)
         try:
-            #print(self.cache[i])
-            return self.cache[i]
+            return self.cache_spec[i]
         except KeyError:
             if ref_dict is None or not is_ref(ref_dict):
-                self.cache[i] = ref_dict
+                self.cache_spec[i] = ref_dict
                 return ref_dict
 
         # Restore attached resolution scope before resolving since the
@@ -242,7 +241,7 @@ class Spec(object):
         # when asked to resolve.
             with in_scope(self.resolver, ref_dict):
                 _, target = self.resolver.resolve(ref_dict['$ref'])
-                self.cache[i] = target
+                self.cache_spec[i] = target
                 return target
 
 
