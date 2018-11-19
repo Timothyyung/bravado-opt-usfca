@@ -9,6 +9,7 @@ from bravado_core.exception import SwaggerMappingError
 
 # 'object' and 'array' are omitted since this should really be read as
 # "Swagger types that map to python primitives"
+cdef set SWAGGER_PRIMITIVES
 SWAGGER_PRIMITIVES = (
     'integer',
     'number',
@@ -17,6 +18,10 @@ SWAGGER_PRIMITIVES = (
     'null',
 )
 
+cdef str format_str = 'format'
+cdef str default_str = 'default'
+cdef bint false_cython = False
+cdef str x_nullable_str = 'x-nullable'
 
 def has_default(swagger_spec, schema_object_spec):
     return 'default' in swagger_spec.deref(schema_object_spec)
