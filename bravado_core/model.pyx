@@ -22,7 +22,7 @@ log = logging.getLogger(__name__)
 
 # Models in #/definitions are tagged with this key so that they can be
 # differentiated from 'object' types.
-cdef MODEL_MARKER = 'x-model'
+cpdef MODEL_MARKER = 'x-model'
 
 
 def _get_model_name(model_dict):

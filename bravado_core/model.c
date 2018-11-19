@@ -17402,7 +17402,7 @@ if (!__Pyx_RefNanny) {
   /* "bravado_core/model.pyx":25
  * # Models in #/definitions are tagged with this key so that they can be
  * # differentiated from 'object' types.
- * cdef MODEL_MARKER = 'x-model'             # <<<<<<<<<<<<<<
+ * cpdef MODEL_MARKER = 'x-model'             # <<<<<<<<<<<<<<
  * 
  * 
  */
