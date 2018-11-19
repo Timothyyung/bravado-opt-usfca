@@ -72,8 +72,8 @@ cpdef bint is_ref(spec):
     :rtype: boolean
     """
     try:
-        #return '$ref' in spec and is_dict_like(spec)
-        return is_ref_helper(spec)
+        return '$ref' in spec and is_dict_like(spec)
+        #return is_ref_helper(spec)
     except TypeError:
         return False
 
