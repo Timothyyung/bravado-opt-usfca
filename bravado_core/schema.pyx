@@ -61,7 +61,7 @@ cpdef is_prop_nullable(swagger_spec, schema_object_spec):
     return swagger_spec_dict.get('x-nullable', False)
 
 
-def is_ref(spec):
+cpdef bint is_ref(spec):
     """ Check if the given spec is a Mapping and contains a $ref.
 
     FYI: This function gets called A LOT during unmarshalling and is_dict_like
@@ -72,10 +72,14 @@ def is_ref(spec):
     :rtype: boolean
     """
     try:
-        return '$ref' in spec and is_dict_like(spec)
+        #return '$ref' in spec and is_dict_like(spec)
+        return is_ref_helper(spec)
     except TypeError:
         return False
 
+cdef bint is_ref_helper(dict spec) except -1:
+    cdef str r = '$ref' 
+    return r in spec
 
 def is_dict_like(spec):
     """
