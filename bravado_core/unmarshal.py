@@ -103,14 +103,14 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
             type(array_value), array_value))
 
     item_spec = swagger_spec.deref(array_spec).get('items')
-    
-    #deref objects outside of the loop and pass unmarshal without going through 'unmarshal_schema_object'
-    #Reduces removes the call to unmarshal_schema_object and reduces the call the deref from n times to one
-    
+
+    # deref objects outside of the loop and pass unmarshal without going through 'unmarshal_schema_object'
+    # Reduces removes the call to unmarshal_schema_object and reduces the call the deref from n times to one
+
     deref = swagger_spec.deref
     schema_object_spec = deref(item_spec)
     obj_type = schema_object_spec.get('type')
-    
+
     if 'allOf' in schema_object_spec:
         obj_type = 'object'
 
@@ -135,7 +135,7 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
             for item in array_value
         ]
     if swagger_spec.config['use_models'] and \
-        is_model(swagger_spec, schema_object_spec):
+            is_model(swagger_spec, schema_object_spec):
         # It is important that the 'model' check comes before 'object' check.
         # Model specs also have type 'object' but also have the additional
         # MODEL_MARKER key for identification.
@@ -151,20 +151,17 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
             unmarshal_object(swagger_spec, schema_object_spec, item)
             for item in array_value
         ]
-        
 
     if obj_type == 'file':
         return[
             item
             for item in array_value
-                ]
+        ]
 
     raise SwaggerMappingError(
         "Don't know how to unmarshal value {0} with a type of {1}"
         .format(item, obj_type))
     return
-    
-    
 
 
 def unmarshal_object(swagger_spec, object_spec, object_value):
@@ -195,7 +192,7 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
             swagger_spec, object_spec, object_value, k, properties)
         if v is None and k not in required_fields and prop_spec:
             if schema.has_default(swagger_spec, prop_spec):
-                result[k] = schema.get_default(swagger_spec,prop_spec)
+                result[k] = schema.get_default(swagger_spec, prop_spec)
             else:
                 result[k] = None
         elif prop_spec:
