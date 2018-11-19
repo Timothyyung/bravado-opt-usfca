@@ -4305,7 +4305,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__3);
 
   /* "bravado_core/schema.pyx":14
- * cdef set SWAGGER_PRIMITIVES
+ * cdef tuple SWAGGER_PRIMITIVES
  * SWAGGER_PRIMITIVES = (
  *     'integer',             # <<<<<<<<<<<<<<
  *     'number',
@@ -4825,19 +4825,16 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "bravado_core/schema.pyx":14
- * cdef set SWAGGER_PRIMITIVES
+ * cdef tuple SWAGGER_PRIMITIVES
  * SWAGGER_PRIMITIVES = (
  *     'integer',             # <<<<<<<<<<<<<<
  *     'number',
  *     'string',
  */
-  if (!(likely(PySet_CheckExact(__pyx_tuple__4))||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "set", Py_TYPE(__pyx_tuple__4)->tp_name), 0))) __PYX_ERR(0, 14, __pyx_L1_error)
-  __pyx_t_2 = __pyx_tuple__4;
-  __Pyx_INCREF(__pyx_t_2);
+  __Pyx_INCREF(__pyx_tuple__4);
   __Pyx_XGOTREF(__pyx_v_12bravado_core_6schema_SWAGGER_PRIMITIVES);
-  __Pyx_DECREF_SET(__pyx_v_12bravado_core_6schema_SWAGGER_PRIMITIVES, ((PyObject*)__pyx_t_2));
-  __Pyx_GIVEREF(__pyx_t_2);
-  __pyx_t_2 = 0;
+  __Pyx_DECREF_SET(__pyx_v_12bravado_core_6schema_SWAGGER_PRIMITIVES, __pyx_tuple__4);
+  __Pyx_GIVEREF(__pyx_tuple__4);
 
   /* "bravado_core/schema.pyx":21
  * )

@@ -9,7 +9,7 @@ from bravado_core.exception import SwaggerMappingError
 
 # 'object' and 'array' are omitted since this should really be read as
 # "Swagger types that map to python primitives"
-cdef set SWAGGER_PRIMITIVES
+cdef tuple SWAGGER_PRIMITIVES
 SWAGGER_PRIMITIVES = (
     'integer',
     'number',
