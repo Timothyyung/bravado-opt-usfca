@@ -51,6 +51,7 @@ setup(
     extras_require={
         ':python_version<"3.4"': ['enum34'],
     },
-    ext_modules = [Extension("bravado_core.model", ["bravado_core/model.c"])],
-    ext_modules = [Extension("bravado_core.schema", ["bravado_core/schema.c"])],
+    ext_modules = [Extension("bravado_core.model", ["bravado_core/model.c"]),
+    Extension("bravado_core.schema", ["bravado_core/schema.c"])],
+    
 )
