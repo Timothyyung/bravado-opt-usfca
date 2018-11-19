@@ -46,7 +46,6 @@ def _raise_or_warn_duplicated_model(swagger_spec, message):
 def _register_visited_model(json_reference, model_spec, model_name, visited_models, is_blessed, swagger_spec):
     """
     Registers a model that has been tagged by a callback method.
-
     :param json_reference: JSON Uri where model spec could be found
     :type json_reference: str
     :param model_spec: swagger specification of the model
@@ -76,20 +75,16 @@ def _tag_models(container, json_reference, visited_models, swagger_spec):
     """
     Callback used during the swagger spec ingestion process to tag models
     with a 'x-model'. This is only done in the root document.
-
     A list of visited models is maintained to avoid duplication of tagging.
-
     NOTE: this callback tags models only if they are on the root of a swagger file
     in the definitions section (ie. (<swagger_file>)?#/definitions/<key>)).
     In order to tag the model with MODEL_MARKER the model (contained in container[key])
     need to represent an object.
-
     INFO: Implementation detail.
     Respect ``collect_models`` this callback gets executed on the model_spec's parent container.
     This is needed because this callback could modify (adding MODEL_MARKER) the model_spec;
     performing this operation when the container represents model_spec will generate errors
     because we're iterating over an object that gets mutated by the callback.
-
     :param container: container being visited
     :param json_reference: URI of the current container
     :type json_reference: str
@@ -124,17 +119,14 @@ def _bless_models(container, json_reference, visited_models, swagger_spec):
     """
     Callback used during the swagger spec ingestion process to add
     ``x-model`` attribute to models which does not define it.
-
     The callbacks is in charge of adding MODEL_MARKER in case a model
     (identifies as an object of type SCHEMA) has enough information for
     determining a model name (ie. has ``title`` attribute defined)
-
     INFO: Implementation detail.
     Respect ``collect_models`` this callback gets executed on the model_spec's parent container.
     This is needed because this callback could modify (adding MODEL_MARKER) the model_spec;
     performing this operation when the container represents model_spec will generate errors
     because we're iterating over an object that gets mutated by the callback.
-
     :param container: container being visited
     :param json_reference: URI of the current container
     :type json_reference: str
@@ -177,12 +169,10 @@ def _collect_models(container, json_reference, models, swagger_spec):
     """
     Callback used during the swagger spec ingestion to collect all the
     tagged models and create appropriate python types for them.
-
     NOTE: this callback creates the model python type only if the container
     represents a valid "model", the container has been marked with a model name
     (has MODEL_MARKER key) and the referenced model does not have the python
     model type generated.
-
     :param container: container being visited
     :param json_reference: URI of the current container
     :type json_reference: str
@@ -250,9 +240,7 @@ class ModelMeta(abc.ABCMeta):
 @six.add_metaclass(ModelMeta)
 class Model(object):
     """Base class for Swagger models.
-
     Attribute access:
-
     Model property values can be accessed as attributes with the same name.
     Because there are no restrictions in the Swagger spec on the names of
     model properties, there is no way to avoid conflicts between those and
@@ -265,27 +253,19 @@ class Model(object):
     which is uncommon. Truly private attributes are prefixed with double
     underscores in the source code (and thus by "_Model__" after
     `name-mangling`_).
-
     Attribute access has been modified somewhat from the Python default.
     Non-dynamic attributes like methods, etc. will always be returned over
     property values when there is a name conflict. To access a property
     explicitly use the ``model[prop_name]`` syntax as if it were a dictionary
     (setting and deleting properties also works).
-
     .. _name-mangling: https://docs.python.org/3.5/tutorial/classes.html#private-variables
-
     .. attribute:: _swagger_spec
-
         Class attribute that must be assigned on subclasses.
         :class:`bravado_core.spec.Spec` the model was created from.
-
     .. attribute:: _model_spec
-
         Class attribute that must be assigned on subclasses. JSON-like dict
         that describes the model.
-
     .. attribute:: _properties
-
         Class attribute that must be assigned on subclasses. Dict mapping
         property names to their specs. See
         :func:`bravado_core.schema.collapsed_properties`.
@@ -300,14 +280,12 @@ class Model(object):
 
     def __init__(self, **kwargs):
         """Initialize from property values in keyword arguments.
-
         :param \\**kwargs: Property values by name.
         """
         self.__init_from_dict(kwargs)
 
     def __init_from_dict(self, dict dct, include_missing_properties=True):
         """Initialize model from a dictionary of property values.
-
         :param dict dct: Dictionary of property values by name. They need not
             actually exist in :attr:`_properties`.
         """
@@ -348,7 +326,6 @@ class Model(object):
 
     def __getattr__(self, attr_name):
         """Only search through properties if attribute not found normally.
-
         :type attr_name: str
         """
         try:
@@ -361,14 +338,12 @@ class Model(object):
 
     def __setattr__(self, attr_name, val):
         """Setting an attribute assigns a value to a property.
-
         :type attr_name: str
         """
         self[attr_name] = val
 
     def __delattr__(self, attr_name):
         """Deleting an attribute deletes the property (see __delitem__).
-
         :type attr_name: str
         """
         try:
@@ -378,24 +353,20 @@ class Model(object):
 
     def __getitem__(self, property_name):
         """Get a property value by name.
-
         :type property_name: str
         """
         return self.__dict[property_name]
 
     def __setitem__(self, property_name, val):
         """Set a property value by name.
-
         :type property_name: str
         """
         self.__dict[property_name] = val
 
     def __delitem__(self, property_name):
         """Unset a property by name.
-
         Properties defined in the spec will be set to ``None``.
         Additional properties will be completely removed.
-
         :type property_name: str
         """
         if property_name in self._properties:
@@ -405,7 +376,6 @@ class Model(object):
 
     def __eq__(self, other):
         """Check for equality with another instance.
-
         Two model instances are equal if they have the same type and the same
         properties and values (including additional properties).
         """
@@ -439,12 +409,10 @@ class Model(object):
 
     def _as_dict(self, additional_properties=True, recursive=True):
         """Get property values as dictionary.
-
         :param bool additional_properties: Whether to include additional properties
             set on the instance but not defined in the spec.
         :param bool recursive: Whether to convert all property values which
             are themselves models to dicts as well.
-
         :rtype: dict
         """
 
@@ -479,10 +447,8 @@ class Model(object):
     @classmethod
     def _from_dict(cls, dct):
         """Create a model instance from dictionary of property values.
-
         The only advantage of this over ``__init__(**dct)`` is that using
         the property name ``self`` will not result in an error.
-
         :param dict dct: Property values by name.
         :rtype: .Model
         """
@@ -502,7 +468,6 @@ class Model(object):
 
     def _marshal(self):
         """Marshal into a json-like dict.
-
         :rtype: dict
         """
         from bravado_core.marshal import marshal_model
@@ -519,7 +484,6 @@ class Model(object):
     @classmethod
     def _unmarshal(cls, val):
         """Unmarshal a dict into an instance of the model.
-
         :type val: dict
         :rtype: .Model
         """
@@ -545,11 +509,9 @@ class Model(object):
 
 class ModelDocstring(object):
     """Descriptor for model classes that dynamically generates docstrings.
-
     Docstrings are generated lazily the first time they are accessed, then
     stored in the ``__docstring__`` attribute of the class. Subsequent
     calls to :meth:`__get__` will return the stored value.
-
     Note that this can't just be used as a descriptor on the :class:`.Model`
     base class as all subclasses will automatically be given their own
     __doc__ attribute when the class is defined/created (set to ``None`` if no
@@ -570,11 +532,9 @@ class ModelDocstring(object):
 def create_model_type(swagger_spec, model_name, model_spec, bases=(Model,), json_reference=None):
     """Create a dynamic class from the model data defined in the swagger
     spec.
-
     The docstring for this class is dynamically generated because generating
     the docstring is relatively expensive, and would only be used in rare
     cases for interactive debugging in a REPL.
-
     :type swagger_spec: :class:`bravado_core.spec.Spec`
     :param model_name: model name
     :param model_spec: json-like dict that describes a model.
@@ -679,22 +639,17 @@ def create_model_docstring(swagger_spec, model_spec):
 
 def _post_process_spec(spec_dict, spec_resolver, on_container_callbacks):
     """Post-process the passed in swagger_spec.spec_dict.
-
     For each container type (list or dict) that is traversed in spec_dict,
     the list of passed in callbacks is called with arguments (container, key).
-
     When the container is a dict, key is obviously the key for the value being
     traversed.
-
     When the container is a list, key is an integer index into the list of the
     value being traversed.
-
     In addition to firing the passed in callbacks, $refs are annotated with
     an 'x-scope' key that contains the current _scope_stack of the RefResolver.
     The 'x-scope' _scope_stack is used during request/response marshalling to
     assume a given scope before de-reffing $refs (otherwise, de-reffing won't
     work).
-
     :param on_container_callbacks: list of callbacks to be invoked on each
         container type.
         NOTE: the individual callbacks should not mutate the current container
@@ -827,10 +782,8 @@ def _run_post_processing(spec):
 def _get_unprocessed_uri(swagger_spec, processed_uris):
     """
     Retrieve an un-process URI from swagger spec referred URIs
-
     :type swagger_spec: bravado_core.spec.Spec
     :param processed_uris: URIs of the already processed URIs
-
     :rtype: str
     """
     for uri in swagger_spec.resolver.store:
