@@ -104,15 +104,13 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
 
     item_spec = swagger_spec.deref(array_spec).get('items')
     
-    objectlist = []
-   
+    #deref objects outside of the loop and pass unmarshal without going through 'unmarshal_schema_object'
+    #Reduces removes the call to unmarshal_schema_object and reduces the call the deref from n times to one
+    
     deref = swagger_spec.deref
     schema_object_spec = deref(item_spec)
     obj_type = schema_object_spec.get('type')
-
-  #  unmarshal_schema_object(swagger_spec,item_spec,item)
-
-
+    
     if 'allOf' in schema_object_spec:
         obj_type = 'object'
 
@@ -156,8 +154,9 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
         
 
     if obj_type == 'file':
-        return[item
-                for item in array_value
+        return[
+            item
+            for item in array_value
                 ]
 
     raise SwaggerMappingError(
