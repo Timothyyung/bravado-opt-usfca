@@ -42,7 +42,7 @@ cpdef _raise_or_warn_duplicated_model(swagger_spec,str message):
     return
 
 
-def _register_visited_model(json_reference, model_spec, model_name, visited_models, is_blessed, swagger_spec):
+cpdef _register_visited_model(str json_reference, model_spec, str model_name, dict visited_models, bint is_blessed, swagger_spec):
     """
     Registers a model that has been tagged by a callback method.
 
