@@ -22,14 +22,14 @@ log = logging.getLogger(__name__)
 
 # Models in #/definitions are tagged with this key so that they can be
 # differentiated from 'object' types.
-cpdef MODEL_MARKER = 'x-model'
-
+MODEL_MARKER = 'x-model'
+cdef str title_str = 'title'
 
 def _get_model_name(model_dict):
     """Determine model name from model dictionary representation and Swagger Path"""
     model_name = model_dict.get(MODEL_MARKER)
     if not model_name:
-        model_name = model_dict.get('title')
+        model_name = model_dict.get(title_str)
     return model_name
 
 
