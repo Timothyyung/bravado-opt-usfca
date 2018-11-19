@@ -22,13 +22,15 @@ cdef str default_str = 'default'
 cdef bint false_cython = False
 cdef str x_nullable_str = 'x-nullable'
 
-def has_default(swagger_spec, schema_object_spec):
+cpdef has_default(swagger_spec, schema_object_spec):
     cdef dict swagger_spec_dict = swagger_spec.deref(schema_object_spec)
     return 'default' in swagger_spec_dict
 
 
-def get_default(swagger_spec, schema_object_spec):
-    return swagger_spec.deref(schema_object_spec).get('default')
+cpdef get_default(swagger_spec, schema_object_spec):
+    cdef dict swagger_spec_dict = swagger_spec.deref(schema_object_spec)
+    #return swagger_spec.deref(schema_object_spec).get('default')
+    return swagger_spec_dict.get('default')
 
 
 def is_required(swagger_spec, schema_object_spec):

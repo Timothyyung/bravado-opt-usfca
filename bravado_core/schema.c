@@ -903,18 +903,6 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_GetAttrStr(PyObject* obj, PyObject
 /* GetBuiltinName.proto */
 static PyObject *__Pyx_GetBuiltinName(PyObject *name);
 
-/* RaiseArgTupleInvalid.proto */
-static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
-    Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
-
-/* RaiseDoubleKeywords.proto */
-static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_name);
-
-/* ParseKeywords.proto */
-static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[],\
-    PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args,\
-    const char* function_name);
-
 /* PyCFunctionFastCall.proto */
 #if CYTHON_FAST_PYCCALL
 static CYTHON_INLINE PyObject *__Pyx_PyCFunction_FastCall(PyObject *func, PyObject **args, Py_ssize_t nargs);
@@ -968,6 +956,46 @@ static CYTHON_INLINE int __Pyx_PyDict_ContainsTF(PyObject* item, PyObject* dict,
     int result = PyDict_Contains(dict, item);
     return unlikely(result < 0) ? result : (result == (eq == Py_EQ));
 }
+
+/* RaiseArgTupleInvalid.proto */
+static void __Pyx_RaiseArgtupleInvalid(const char* func_name, int exact,
+    Py_ssize_t num_min, Py_ssize_t num_max, Py_ssize_t num_found);
+
+/* RaiseDoubleKeywords.proto */
+static void __Pyx_RaiseDoubleKeywordsError(const char* func_name, PyObject* kw_name);
+
+/* ParseKeywords.proto */
+static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[],\
+    PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args,\
+    const char* function_name);
+
+/* dict_getitem_default.proto */
+static PyObject* __Pyx_PyDict_GetItemDefault(PyObject* d, PyObject* key, PyObject* default_value);
+
+/* UnpackUnboundCMethod.proto */
+typedef struct {
+    PyObject *type;
+    PyObject **method_name;
+    PyCFunction func;
+    PyObject *method;
+    int flag;
+} __Pyx_CachedCFunction;
+
+/* CallUnboundCMethod1.proto */
+static PyObject* __Pyx__CallUnboundCMethod1(__Pyx_CachedCFunction* cfunc, PyObject* self, PyObject* arg);
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_CallUnboundCMethod1(__Pyx_CachedCFunction* cfunc, PyObject* self, PyObject* arg);
+#else
+#define __Pyx_CallUnboundCMethod1(cfunc, self, arg)  __Pyx__CallUnboundCMethod1(cfunc, self, arg)
+#endif
+
+/* CallUnboundCMethod2.proto */
+static PyObject* __Pyx__CallUnboundCMethod2(__Pyx_CachedCFunction* cfunc, PyObject* self, PyObject* arg1, PyObject* arg2);
+#if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030600B1
+static CYTHON_INLINE PyObject *__Pyx_CallUnboundCMethod2(__Pyx_CachedCFunction *cfunc, PyObject *self, PyObject *arg1, PyObject *arg2);
+#else
+#define __Pyx_CallUnboundCMethod2(cfunc, self, arg1, arg2)  __Pyx__CallUnboundCMethod2(cfunc, self, arg1, arg2)
+#endif
 
 /* PySequenceContains.proto */
 static CYTHON_INLINE int __Pyx_PySequence_ContainsTF(PyObject* item, PyObject* seq, int eq) {
@@ -1090,23 +1118,6 @@ static CYTHON_INLINE int __Pyx_IterFinish(void);
 /* UnpackItemEndCheck.proto */
 static int __Pyx_IternextUnpackEndCheck(PyObject *retval, Py_ssize_t expected);
 
-/* UnpackUnboundCMethod.proto */
-typedef struct {
-    PyObject *type;
-    PyObject **method_name;
-    PyCFunction func;
-    PyObject *method;
-    int flag;
-} __Pyx_CachedCFunction;
-
-/* CallUnboundCMethod1.proto */
-static PyObject* __Pyx__CallUnboundCMethod1(__Pyx_CachedCFunction* cfunc, PyObject* self, PyObject* arg);
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_CallUnboundCMethod1(__Pyx_CachedCFunction* cfunc, PyObject* self, PyObject* arg);
-#else
-#define __Pyx_CallUnboundCMethod1(cfunc, self, arg)  __Pyx__CallUnboundCMethod1(cfunc, self, arg)
-#endif
-
 /* Import.proto */
 static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level);
 
@@ -1173,6 +1184,8 @@ static PyObject *__pyx_v_12bravado_core_6schema_format_str = 0;
 static PyObject *__pyx_v_12bravado_core_6schema_default_str = 0;
 static int __pyx_v_12bravado_core_6schema_false_cython;
 static PyObject *__pyx_v_12bravado_core_6schema_x_nullable_str = 0;
+static PyObject *__pyx_f_12bravado_core_6schema_has_default(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
+static PyObject *__pyx_f_12bravado_core_6schema_get_default(PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
 #define __Pyx_MODULE_NAME "bravado_core.schema"
 extern int __pyx_module_is_main_bravado_core__schema;
 int __pyx_module_is_main_bravado_core__schema = 0;
@@ -1217,8 +1230,6 @@ static const char __pyx_k_properties[] = "properties";
 static const char __pyx_k_schema_pyx[] = "schema.pyx";
 static const char __pyx_k_x_nullable[] = "x-nullable";
 static const char __pyx_k_collections[] = "collections";
-static const char __pyx_k_get_default[] = "get_default";
-static const char __pyx_k_has_default[] = "has_default";
 static const char __pyx_k_is_required[] = "is_required";
 static const char __pyx_k_object_spec[] = "object_spec";
 static const char __pyx_k_result_spec[] = "result_spec";
@@ -1232,7 +1243,6 @@ static const char __pyx_k_additional_props[] = "additional_props";
 static const char __pyx_k_is_prop_nullable[] = "is_prop_nullable";
 static const char __pyx_k_get_spec_for_prop[] = "get_spec_for_prop";
 static const char __pyx_k_handle_null_value[] = "handle_null_value";
-static const char __pyx_k_swagger_spec_dict[] = "swagger_spec_dict";
 static const char __pyx_k_SWAGGER_PRIMITIVES[] = "SWAGGER_PRIMITIVES";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_schema_object_spec[] = "schema_object_spec";
@@ -1266,11 +1276,9 @@ static PyObject *__pyx_n_s_default;
 static PyObject *__pyx_n_s_deref;
 static PyObject *__pyx_n_s_format;
 static PyObject *__pyx_n_s_get;
-static PyObject *__pyx_n_s_get_default;
 static PyObject *__pyx_n_s_get_format;
 static PyObject *__pyx_n_s_get_spec_for_prop;
 static PyObject *__pyx_n_s_handle_null_value;
-static PyObject *__pyx_n_s_has_default;
 static PyObject *__pyx_n_s_has_format;
 static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_in;
@@ -1303,7 +1311,6 @@ static PyObject *__pyx_n_s_six;
 static PyObject *__pyx_n_s_spec;
 static PyObject *__pyx_n_s_string;
 static PyObject *__pyx_n_s_swagger_spec;
-static PyObject *__pyx_n_s_swagger_spec_dict;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_update;
 static PyObject *__pyx_kp_s_x_nullable;
@@ -1320,6 +1327,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_18is_list_like(CYTHON_UNUSED Py
 static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_swagger_spec, PyObject *__pyx_v_object_spec, PyObject *__pyx_v_object_value, PyObject *__pyx_v_prop_name, PyObject *__pyx_v_properties); /* proto */
 static PyObject *__pyx_pf_12bravado_core_6schema_22handle_null_value(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_swagger_spec, PyObject *__pyx_v_schema_object_spec); /* proto */
 static PyObject *__pyx_pf_12bravado_core_6schema_24collapsed_properties(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_model_spec, PyObject *__pyx_v_swagger_spec); /* proto */
+static __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_get = {0, &__pyx_n_s_get, 0, 0, 0};
 static __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_update = {0, &__pyx_n_s_update, 0, 0, 0};
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
@@ -1336,8 +1344,6 @@ static PyObject *__pyx_tuple__19;
 static PyObject *__pyx_tuple__21;
 static PyObject *__pyx_tuple__23;
 static PyObject *__pyx_tuple__25;
-static PyObject *__pyx_tuple__27;
-static PyObject *__pyx_tuple__29;
 static PyObject *__pyx_codeobj__6;
 static PyObject *__pyx_codeobj__8;
 static PyObject *__pyx_codeobj__10;
@@ -1349,21 +1355,98 @@ static PyObject *__pyx_codeobj__20;
 static PyObject *__pyx_codeobj__22;
 static PyObject *__pyx_codeobj__24;
 static PyObject *__pyx_codeobj__26;
-static PyObject *__pyx_codeobj__28;
-static PyObject *__pyx_codeobj__30;
 /* Late includes */
 
 /* "bravado_core/schema.pyx":25
  * cdef str x_nullable_str = 'x-nullable'
  * 
- * def has_default(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
+ * cpdef has_default(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
  *     cdef dict swagger_spec_dict = swagger_spec.deref(schema_object_spec)
  *     return 'default' in swagger_spec_dict
  */
 
+static PyObject *__pyx_pw_12bravado_core_6schema_1has_default(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_f_12bravado_core_6schema_has_default(PyObject *__pyx_v_swagger_spec, PyObject *__pyx_v_schema_object_spec, CYTHON_UNUSED int __pyx_skip_dispatch) {
+  PyObject *__pyx_v_swagger_spec_dict = 0;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  int __pyx_t_4;
+  __Pyx_RefNannySetupContext("has_default", 0);
+
+  /* "bravado_core/schema.pyx":26
+ * 
+ * cpdef has_default(swagger_spec, schema_object_spec):
+ *     cdef dict swagger_spec_dict = swagger_spec.deref(schema_object_spec)             # <<<<<<<<<<<<<<
+ *     return 'default' in swagger_spec_dict
+ * 
+ */
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_swagger_spec, __pyx_n_s_deref); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+    }
+  }
+  __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_schema_object_spec) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_schema_object_spec);
+  __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (!(likely(PyDict_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_v_swagger_spec_dict = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "bravado_core/schema.pyx":27
+ * cpdef has_default(swagger_spec, schema_object_spec):
+ *     cdef dict swagger_spec_dict = swagger_spec.deref(schema_object_spec)
+ *     return 'default' in swagger_spec_dict             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __Pyx_XDECREF(__pyx_r);
+  if (unlikely(__pyx_v_swagger_spec_dict == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
+    __PYX_ERR(0, 27, __pyx_L1_error)
+  }
+  __pyx_t_4 = (__Pyx_PyDict_ContainsTF(__pyx_n_s_default, __pyx_v_swagger_spec_dict, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "bravado_core/schema.pyx":25
+ * cdef str x_nullable_str = 'x-nullable'
+ * 
+ * cpdef has_default(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
+ *     cdef dict swagger_spec_dict = swagger_spec.deref(schema_object_spec)
+ *     return 'default' in swagger_spec_dict
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_AddTraceback("bravado_core.schema.has_default", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_swagger_spec_dict);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
 /* Python wrapper */
 static PyObject *__pyx_pw_12bravado_core_6schema_1has_default(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_12bravado_core_6schema_1has_default = {"has_default", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_12bravado_core_6schema_1has_default, METH_VARARGS|METH_KEYWORDS, 0};
 static PyObject *__pyx_pw_12bravado_core_6schema_1has_default(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_swagger_spec = 0;
   PyObject *__pyx_v_schema_object_spec = 0;
@@ -1424,23 +1507,54 @@ static PyObject *__pyx_pw_12bravado_core_6schema_1has_default(PyObject *__pyx_se
 }
 
 static PyObject *__pyx_pf_12bravado_core_6schema_has_default(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_swagger_spec, PyObject *__pyx_v_schema_object_spec) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  __Pyx_RefNannySetupContext("has_default", 0);
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __pyx_f_12bravado_core_6schema_has_default(__pyx_v_swagger_spec, __pyx_v_schema_object_spec, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("bravado_core.schema.has_default", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "bravado_core/schema.pyx":30
+ * 
+ * 
+ * cpdef get_default(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
+ *     cdef dict swagger_spec_dict = swagger_spec.deref(schema_object_spec)
+ *     #return swagger_spec.deref(schema_object_spec).get('default')
+ */
+
+static PyObject *__pyx_pw_12bravado_core_6schema_3get_default(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_f_12bravado_core_6schema_get_default(PyObject *__pyx_v_swagger_spec, PyObject *__pyx_v_schema_object_spec, CYTHON_UNUSED int __pyx_skip_dispatch) {
   PyObject *__pyx_v_swagger_spec_dict = 0;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
-  int __pyx_t_4;
-  __Pyx_RefNannySetupContext("has_default", 0);
+  __Pyx_RefNannySetupContext("get_default", 0);
 
-  /* "bravado_core/schema.pyx":26
+  /* "bravado_core/schema.pyx":31
  * 
- * def has_default(swagger_spec, schema_object_spec):
+ * cpdef get_default(swagger_spec, schema_object_spec):
  *     cdef dict swagger_spec_dict = swagger_spec.deref(schema_object_spec)             # <<<<<<<<<<<<<<
- *     return 'default' in swagger_spec_dict
- * 
+ *     #return swagger_spec.deref(schema_object_spec).get('default')
+ *     return swagger_spec_dict.get('default')
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_swagger_spec, __pyx_n_s_deref); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_swagger_spec, __pyx_n_s_deref); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -1454,38 +1568,37 @@ static PyObject *__pyx_pf_12bravado_core_6schema_has_default(CYTHON_UNUSED PyObj
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_schema_object_spec) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_schema_object_spec);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 26, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(PyDict_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 26, __pyx_L1_error)
+  if (!(likely(PyDict_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "dict", Py_TYPE(__pyx_t_1)->tp_name), 0))) __PYX_ERR(0, 31, __pyx_L1_error)
   __pyx_v_swagger_spec_dict = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "bravado_core/schema.pyx":27
- * def has_default(swagger_spec, schema_object_spec):
+  /* "bravado_core/schema.pyx":33
  *     cdef dict swagger_spec_dict = swagger_spec.deref(schema_object_spec)
- *     return 'default' in swagger_spec_dict             # <<<<<<<<<<<<<<
+ *     #return swagger_spec.deref(schema_object_spec).get('default')
+ *     return swagger_spec_dict.get('default')             # <<<<<<<<<<<<<<
  * 
  * 
  */
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(__pyx_v_swagger_spec_dict == Py_None)) {
-    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not iterable");
-    __PYX_ERR(0, 27, __pyx_L1_error)
+    PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "get");
+    __PYX_ERR(0, 33, __pyx_L1_error)
   }
-  __pyx_t_4 = (__Pyx_PyDict_ContainsTF(__pyx_n_s_default, __pyx_v_swagger_spec_dict, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 27, __pyx_L1_error)
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_GetItemDefault(__pyx_v_swagger_spec_dict, __pyx_n_s_default, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "bravado_core/schema.pyx":25
- * cdef str x_nullable_str = 'x-nullable'
+  /* "bravado_core/schema.pyx":30
  * 
- * def has_default(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
+ * 
+ * cpdef get_default(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
  *     cdef dict swagger_spec_dict = swagger_spec.deref(schema_object_spec)
- *     return 'default' in swagger_spec_dict
+ *     #return swagger_spec.deref(schema_object_spec).get('default')
  */
 
   /* function exit code */
@@ -1493,8 +1606,8 @@ static PyObject *__pyx_pf_12bravado_core_6schema_has_default(CYTHON_UNUSED PyObj
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_AddTraceback("bravado_core.schema.has_default", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = NULL;
+  __Pyx_AddTraceback("bravado_core.schema.get_default", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_swagger_spec_dict);
   __Pyx_XGIVEREF(__pyx_r);
@@ -1502,17 +1615,8 @@ static PyObject *__pyx_pf_12bravado_core_6schema_has_default(CYTHON_UNUSED PyObj
   return __pyx_r;
 }
 
-/* "bravado_core/schema.pyx":30
- * 
- * 
- * def get_default(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
- *     return swagger_spec.deref(schema_object_spec).get('default')
- * 
- */
-
 /* Python wrapper */
 static PyObject *__pyx_pw_12bravado_core_6schema_3get_default(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_12bravado_core_6schema_3get_default = {"get_default", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_12bravado_core_6schema_3get_default, METH_VARARGS|METH_KEYWORDS, 0};
 static PyObject *__pyx_pw_12bravado_core_6schema_3get_default(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_swagger_spec = 0;
   PyObject *__pyx_v_schema_object_spec = 0;
@@ -1576,72 +1680,17 @@ static PyObject *__pyx_pf_12bravado_core_6schema_2get_default(CYTHON_UNUSED PyOb
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
-  PyObject *__pyx_t_2 = NULL;
-  PyObject *__pyx_t_3 = NULL;
-  PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("get_default", 0);
-
-  /* "bravado_core/schema.pyx":31
- * 
- * def get_default(swagger_spec, schema_object_spec):
- *     return swagger_spec.deref(schema_object_spec).get('default')             # <<<<<<<<<<<<<<
- * 
- * 
- */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_swagger_spec, __pyx_n_s_deref); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 31, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = NULL;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
-    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_3);
-    if (likely(__pyx_t_4)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-      __Pyx_INCREF(__pyx_t_4);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_3, function);
-    }
-  }
-  __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_v_schema_object_spec) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_schema_object_spec);
-  __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 31, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_get); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 31, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = NULL;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
-    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_3);
-    if (likely(__pyx_t_2)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-      __Pyx_INCREF(__pyx_t_2);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_3, function);
-    }
-  }
-  __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_2, __pyx_n_s_default) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_n_s_default);
-  __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_12bravado_core_6schema_get_default(__pyx_v_swagger_spec, __pyx_v_schema_object_spec, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 30, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "bravado_core/schema.pyx":30
- * 
- * 
- * def get_default(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
- *     return swagger_spec.deref(schema_object_spec).get('default')
- * 
- */
-
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_XDECREF(__pyx_t_4);
   __Pyx_AddTraceback("bravado_core.schema.get_default", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -1650,7 +1699,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_2get_default(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "bravado_core/schema.pyx":34
+/* "bravado_core/schema.pyx":36
  * 
  * 
  * def is_required(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
@@ -1690,11 +1739,11 @@ static PyObject *__pyx_pw_12bravado_core_6schema_5is_required(PyObject *__pyx_se
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_schema_object_spec)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("is_required", 1, 2, 2, 1); __PYX_ERR(0, 34, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("is_required", 1, 2, 2, 1); __PYX_ERR(0, 36, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "is_required") < 0)) __PYX_ERR(0, 34, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "is_required") < 0)) __PYX_ERR(0, 36, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -1707,7 +1756,7 @@ static PyObject *__pyx_pw_12bravado_core_6schema_5is_required(PyObject *__pyx_se
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("is_required", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 34, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("is_required", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 36, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("bravado_core.schema.is_required", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1728,7 +1777,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_4is_required(CYTHON_UNUSED PyOb
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("is_required", 0);
 
-  /* "bravado_core/schema.pyx":35
+  /* "bravado_core/schema.pyx":37
  * 
  * def is_required(swagger_spec, schema_object_spec):
  *     return swagger_spec.deref(schema_object_spec).get('required', False)             # <<<<<<<<<<<<<<
@@ -1736,7 +1785,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_4is_required(CYTHON_UNUSED PyOb
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_swagger_spec, __pyx_n_s_deref); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_swagger_spec, __pyx_n_s_deref); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -1750,20 +1799,20 @@ static PyObject *__pyx_pf_12bravado_core_6schema_4is_required(CYTHON_UNUSED PyOb
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_schema_object_spec) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_schema_object_spec);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "bravado_core/schema.pyx":34
+  /* "bravado_core/schema.pyx":36
  * 
  * 
  * def is_required(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
@@ -1784,7 +1833,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_4is_required(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "bravado_core/schema.pyx":38
+/* "bravado_core/schema.pyx":40
  * 
  * 
  * def has_format(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
@@ -1824,11 +1873,11 @@ static PyObject *__pyx_pw_12bravado_core_6schema_7has_format(PyObject *__pyx_sel
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_schema_object_spec)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("has_format", 1, 2, 2, 1); __PYX_ERR(0, 38, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("has_format", 1, 2, 2, 1); __PYX_ERR(0, 40, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "has_format") < 0)) __PYX_ERR(0, 38, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "has_format") < 0)) __PYX_ERR(0, 40, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -1841,7 +1890,7 @@ static PyObject *__pyx_pw_12bravado_core_6schema_7has_format(PyObject *__pyx_sel
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("has_format", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 38, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("has_format", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 40, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("bravado_core.schema.has_format", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1863,7 +1912,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_6has_format(CYTHON_UNUSED PyObj
   int __pyx_t_4;
   __Pyx_RefNannySetupContext("has_format", 0);
 
-  /* "bravado_core/schema.pyx":39
+  /* "bravado_core/schema.pyx":41
  * 
  * def has_format(swagger_spec, schema_object_spec):
  *     return 'format' in swagger_spec.deref(schema_object_spec)             # <<<<<<<<<<<<<<
@@ -1871,7 +1920,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_6has_format(CYTHON_UNUSED PyObj
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_swagger_spec, __pyx_n_s_deref); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_swagger_spec, __pyx_n_s_deref); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -1885,18 +1934,18 @@ static PyObject *__pyx_pf_12bravado_core_6schema_6has_format(CYTHON_UNUSED PyObj
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_schema_object_spec) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_schema_object_spec);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_format, __pyx_t_1, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_4 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_format, __pyx_t_1, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "bravado_core/schema.pyx":38
+  /* "bravado_core/schema.pyx":40
  * 
  * 
  * def has_format(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
@@ -1917,7 +1966,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_6has_format(CYTHON_UNUSED PyObj
   return __pyx_r;
 }
 
-/* "bravado_core/schema.pyx":42
+/* "bravado_core/schema.pyx":44
  * 
  * 
  * def get_format(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
@@ -1957,11 +2006,11 @@ static PyObject *__pyx_pw_12bravado_core_6schema_9get_format(PyObject *__pyx_sel
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_schema_object_spec)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("get_format", 1, 2, 2, 1); __PYX_ERR(0, 42, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("get_format", 1, 2, 2, 1); __PYX_ERR(0, 44, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_format") < 0)) __PYX_ERR(0, 42, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_format") < 0)) __PYX_ERR(0, 44, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -1974,7 +2023,7 @@ static PyObject *__pyx_pw_12bravado_core_6schema_9get_format(PyObject *__pyx_sel
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("get_format", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 42, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("get_format", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 44, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("bravado_core.schema.get_format", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1996,7 +2045,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_8get_format(CYTHON_UNUSED PyObj
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("get_format", 0);
 
-  /* "bravado_core/schema.pyx":43
+  /* "bravado_core/schema.pyx":45
  * 
  * def get_format(swagger_spec, schema_object_spec):
  *     return swagger_spec.deref(schema_object_spec).get('format')             # <<<<<<<<<<<<<<
@@ -2004,7 +2053,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_8get_format(CYTHON_UNUSED PyObj
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_swagger_spec, __pyx_n_s_deref); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_swagger_spec, __pyx_n_s_deref); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
@@ -2018,10 +2067,10 @@ static PyObject *__pyx_pf_12bravado_core_6schema_8get_format(CYTHON_UNUSED PyObj
   }
   __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_v_schema_object_spec) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_schema_object_spec);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 43, __pyx_L1_error)
+  if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_get); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_get); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -2036,14 +2085,14 @@ static PyObject *__pyx_pf_12bravado_core_6schema_8get_format(CYTHON_UNUSED PyObj
   }
   __pyx_t_1 = (__pyx_t_2) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_2, __pyx_n_s_format) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_n_s_format);
   __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "bravado_core/schema.pyx":42
+  /* "bravado_core/schema.pyx":44
  * 
  * 
  * def get_format(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
@@ -2065,7 +2114,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_8get_format(CYTHON_UNUSED PyObj
   return __pyx_r;
 }
 
-/* "bravado_core/schema.pyx":46
+/* "bravado_core/schema.pyx":48
  * 
  * 
  * def is_param_spec(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
@@ -2105,11 +2154,11 @@ static PyObject *__pyx_pw_12bravado_core_6schema_11is_param_spec(PyObject *__pyx
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_schema_object_spec)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("is_param_spec", 1, 2, 2, 1); __PYX_ERR(0, 46, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("is_param_spec", 1, 2, 2, 1); __PYX_ERR(0, 48, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "is_param_spec") < 0)) __PYX_ERR(0, 46, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "is_param_spec") < 0)) __PYX_ERR(0, 48, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2122,7 +2171,7 @@ static PyObject *__pyx_pw_12bravado_core_6schema_11is_param_spec(PyObject *__pyx
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("is_param_spec", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 46, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("is_param_spec", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 48, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("bravado_core.schema.is_param_spec", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2144,7 +2193,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_10is_param_spec(CYTHON_UNUSED P
   int __pyx_t_4;
   __Pyx_RefNannySetupContext("is_param_spec", 0);
 
-  /* "bravado_core/schema.pyx":47
+  /* "bravado_core/schema.pyx":49
  * 
  * def is_param_spec(swagger_spec, schema_object_spec):
  *     return 'in' in swagger_spec.deref(schema_object_spec)             # <<<<<<<<<<<<<<
@@ -2152,7 +2201,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_10is_param_spec(CYTHON_UNUSED P
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_swagger_spec, __pyx_n_s_deref); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_swagger_spec, __pyx_n_s_deref); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -2166,18 +2215,18 @@ static PyObject *__pyx_pf_12bravado_core_6schema_10is_param_spec(CYTHON_UNUSED P
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_schema_object_spec) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_schema_object_spec);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_4 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_in, __pyx_t_1, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_4 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_in, __pyx_t_1, Py_EQ)); if (unlikely(__pyx_t_4 < 0)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "bravado_core/schema.pyx":46
+  /* "bravado_core/schema.pyx":48
  * 
  * 
  * def is_param_spec(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
@@ -2198,7 +2247,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_10is_param_spec(CYTHON_UNUSED P
   return __pyx_r;
 }
 
-/* "bravado_core/schema.pyx":50
+/* "bravado_core/schema.pyx":52
  * 
  * 
  * def is_prop_nullable(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
@@ -2238,11 +2287,11 @@ static PyObject *__pyx_pw_12bravado_core_6schema_13is_prop_nullable(PyObject *__
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_schema_object_spec)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("is_prop_nullable", 1, 2, 2, 1); __PYX_ERR(0, 50, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("is_prop_nullable", 1, 2, 2, 1); __PYX_ERR(0, 52, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "is_prop_nullable") < 0)) __PYX_ERR(0, 50, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "is_prop_nullable") < 0)) __PYX_ERR(0, 52, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2255,7 +2304,7 @@ static PyObject *__pyx_pw_12bravado_core_6schema_13is_prop_nullable(PyObject *__
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("is_prop_nullable", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 50, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("is_prop_nullable", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 52, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("bravado_core.schema.is_prop_nullable", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2276,7 +2325,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_12is_prop_nullable(CYTHON_UNUSE
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("is_prop_nullable", 0);
 
-  /* "bravado_core/schema.pyx":51
+  /* "bravado_core/schema.pyx":53
  * 
  * def is_prop_nullable(swagger_spec, schema_object_spec):
  *     return swagger_spec.deref(schema_object_spec).get('x-nullable', False)             # <<<<<<<<<<<<<<
@@ -2284,7 +2333,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_12is_prop_nullable(CYTHON_UNUSE
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_swagger_spec, __pyx_n_s_deref); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_swagger_spec, __pyx_n_s_deref); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -2298,20 +2347,20 @@ static PyObject *__pyx_pf_12bravado_core_6schema_12is_prop_nullable(CYTHON_UNUSE
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_schema_object_spec) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_schema_object_spec);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "bravado_core/schema.pyx":50
+  /* "bravado_core/schema.pyx":52
  * 
  * 
  * def is_prop_nullable(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
@@ -2332,7 +2381,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_12is_prop_nullable(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "bravado_core/schema.pyx":54
+/* "bravado_core/schema.pyx":56
  * 
  * 
  * def is_ref(spec):             # <<<<<<<<<<<<<<
@@ -2369,7 +2418,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_14is_ref(CYTHON_UNUSED PyObject
   int __pyx_t_9;
   __Pyx_RefNannySetupContext("is_ref", 0);
 
-  /* "bravado_core/schema.pyx":64
+  /* "bravado_core/schema.pyx":66
  *     :rtype: boolean
  *     """
  *     try:             # <<<<<<<<<<<<<<
@@ -2385,7 +2434,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_14is_ref(CYTHON_UNUSED PyObject
     __Pyx_XGOTREF(__pyx_t_3);
     /*try:*/ {
 
-      /* "bravado_core/schema.pyx":65
+      /* "bravado_core/schema.pyx":67
  *     """
  *     try:
  *         return '$ref' in spec and is_dict_like(spec)             # <<<<<<<<<<<<<<
@@ -2393,16 +2442,16 @@ static PyObject *__pyx_pf_12bravado_core_6schema_14is_ref(CYTHON_UNUSED PyObject
  *         return False
  */
       __Pyx_XDECREF(__pyx_r);
-      __pyx_t_5 = (__Pyx_PySequence_ContainsTF(__pyx_kp_s_ref, __pyx_v_spec, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 65, __pyx_L3_error)
+      __pyx_t_5 = (__Pyx_PySequence_ContainsTF(__pyx_kp_s_ref, __pyx_v_spec, Py_EQ)); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 67, __pyx_L3_error)
       if (__pyx_t_5) {
       } else {
-        __pyx_t_6 = __Pyx_PyBool_FromLong(__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 65, __pyx_L3_error)
+        __pyx_t_6 = __Pyx_PyBool_FromLong(__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 67, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_6);
         __pyx_t_4 = __pyx_t_6;
         __pyx_t_6 = 0;
         goto __pyx_L9_bool_binop_done;
       }
-      __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_is_dict_like); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 65, __pyx_L3_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_is_dict_like); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 67, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_7);
       __pyx_t_8 = NULL;
       if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_7))) {
@@ -2416,7 +2465,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_14is_ref(CYTHON_UNUSED PyObject
       }
       __pyx_t_6 = (__pyx_t_8) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_8, __pyx_v_spec) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_v_spec);
       __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 65, __pyx_L3_error)
+      if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 67, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_INCREF(__pyx_t_6);
@@ -2427,7 +2476,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_14is_ref(CYTHON_UNUSED PyObject
       __pyx_t_4 = 0;
       goto __pyx_L7_try_return;
 
-      /* "bravado_core/schema.pyx":64
+      /* "bravado_core/schema.pyx":66
  *     :rtype: boolean
  *     """
  *     try:             # <<<<<<<<<<<<<<
@@ -2441,7 +2490,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_14is_ref(CYTHON_UNUSED PyObject
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "bravado_core/schema.pyx":66
+    /* "bravado_core/schema.pyx":68
  *     try:
  *         return '$ref' in spec and is_dict_like(spec)
  *     except TypeError:             # <<<<<<<<<<<<<<
@@ -2451,12 +2500,12 @@ static PyObject *__pyx_pf_12bravado_core_6schema_14is_ref(CYTHON_UNUSED PyObject
     __pyx_t_9 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_TypeError);
     if (__pyx_t_9) {
       __Pyx_AddTraceback("bravado_core.schema.is_ref", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_4, &__pyx_t_6, &__pyx_t_7) < 0) __PYX_ERR(0, 66, __pyx_L5_except_error)
+      if (__Pyx_GetException(&__pyx_t_4, &__pyx_t_6, &__pyx_t_7) < 0) __PYX_ERR(0, 68, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_GOTREF(__pyx_t_7);
 
-      /* "bravado_core/schema.pyx":67
+      /* "bravado_core/schema.pyx":69
  *         return '$ref' in spec and is_dict_like(spec)
  *     except TypeError:
  *         return False             # <<<<<<<<<<<<<<
@@ -2474,7 +2523,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_14is_ref(CYTHON_UNUSED PyObject
     goto __pyx_L5_except_error;
     __pyx_L5_except_error:;
 
-    /* "bravado_core/schema.pyx":64
+    /* "bravado_core/schema.pyx":66
  *     :rtype: boolean
  *     """
  *     try:             # <<<<<<<<<<<<<<
@@ -2500,7 +2549,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_14is_ref(CYTHON_UNUSED PyObject
     goto __pyx_L0;
   }
 
-  /* "bravado_core/schema.pyx":54
+  /* "bravado_core/schema.pyx":56
  * 
  * 
  * def is_ref(spec):             # <<<<<<<<<<<<<<
@@ -2522,7 +2571,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_14is_ref(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 
-/* "bravado_core/schema.pyx":70
+/* "bravado_core/schema.pyx":72
  * 
  * 
  * def is_dict_like(spec):             # <<<<<<<<<<<<<<
@@ -2554,7 +2603,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_16is_dict_like(CYTHON_UNUSED Py
   int __pyx_t_4;
   __Pyx_RefNannySetupContext("is_dict_like", 0);
 
-  /* "bravado_core/schema.pyx":79
+  /* "bravado_core/schema.pyx":81
  *     # by executing a much cheaper isinstance(spec, dict) check before the more
  *     # expensive isinstance(spec, Mapping) check.
  *     return isinstance(spec, (dict, Mapping))             # <<<<<<<<<<<<<<
@@ -2562,7 +2611,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_16is_dict_like(CYTHON_UNUSED Py
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Mapping); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 79, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_Mapping); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 81, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_3 = PyDict_Check(__pyx_v_spec); 
   __pyx_t_4 = (__pyx_t_3 != 0);
@@ -2576,13 +2625,13 @@ static PyObject *__pyx_pf_12bravado_core_6schema_16is_dict_like(CYTHON_UNUSED Py
   __pyx_t_2 = __pyx_t_3;
   __pyx_L3_bool_binop_done:;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 79, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 81, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "bravado_core/schema.pyx":70
+  /* "bravado_core/schema.pyx":72
  * 
  * 
  * def is_dict_like(spec):             # <<<<<<<<<<<<<<
@@ -2601,7 +2650,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_16is_dict_like(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "bravado_core/schema.pyx":82
+/* "bravado_core/schema.pyx":84
  * 
  * 
  * def is_list_like(spec):             # <<<<<<<<<<<<<<
@@ -2633,7 +2682,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_18is_list_like(CYTHON_UNUSED Py
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("is_list_like", 0);
 
-  /* "bravado_core/schema.pyx":87
+  /* "bravado_core/schema.pyx":89
  *     :rtype: boolean
  *     """
  *     return isinstance(spec, (list, tuple))             # <<<<<<<<<<<<<<
@@ -2652,13 +2701,13 @@ static PyObject *__pyx_pf_12bravado_core_6schema_18is_list_like(CYTHON_UNUSED Py
   __pyx_t_2 = (__pyx_t_3 != 0);
   __pyx_t_1 = __pyx_t_2;
   __pyx_L3_bool_binop_done:;
-  __pyx_t_4 = __Pyx_PyBool_FromLong(__pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyBool_FromLong(__pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 89, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_r = __pyx_t_4;
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "bravado_core/schema.pyx":82
+  /* "bravado_core/schema.pyx":84
  * 
  * 
  * def is_list_like(spec):             # <<<<<<<<<<<<<<
@@ -2677,7 +2726,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_18is_list_like(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "bravado_core/schema.pyx":90
+/* "bravado_core/schema.pyx":92
  * 
  * 
  * def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, properties=None):             # <<<<<<<<<<<<<<
@@ -2728,19 +2777,19 @@ static PyObject *__pyx_pw_12bravado_core_6schema_21get_spec_for_prop(PyObject *_
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_object_spec)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("get_spec_for_prop", 0, 4, 5, 1); __PYX_ERR(0, 90, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("get_spec_for_prop", 0, 4, 5, 1); __PYX_ERR(0, 92, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_object_value)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("get_spec_for_prop", 0, 4, 5, 2); __PYX_ERR(0, 90, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("get_spec_for_prop", 0, 4, 5, 2); __PYX_ERR(0, 92, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_prop_name)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("get_spec_for_prop", 0, 4, 5, 3); __PYX_ERR(0, 90, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("get_spec_for_prop", 0, 4, 5, 3); __PYX_ERR(0, 92, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
@@ -2750,7 +2799,7 @@ static PyObject *__pyx_pw_12bravado_core_6schema_21get_spec_for_prop(PyObject *_
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_spec_for_prop") < 0)) __PYX_ERR(0, 90, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_spec_for_prop") < 0)) __PYX_ERR(0, 92, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2772,7 +2821,7 @@ static PyObject *__pyx_pw_12bravado_core_6schema_21get_spec_for_prop(PyObject *_
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("get_spec_for_prop", 0, 4, 5, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 90, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("get_spec_for_prop", 0, 4, 5, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 92, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("bravado_core.schema.get_spec_for_prop", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2805,19 +2854,19 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
   __Pyx_RefNannySetupContext("get_spec_for_prop", 0);
   __Pyx_INCREF(__pyx_v_properties);
 
-  /* "bravado_core/schema.pyx":105
+  /* "bravado_core/schema.pyx":107
  *     :rtype: dict or None
  *     """
  *     deref = swagger_spec.deref             # <<<<<<<<<<<<<<
  * 
  *     if properties is None:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_swagger_spec, __pyx_n_s_deref); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 105, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_swagger_spec, __pyx_n_s_deref); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 107, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_deref = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "bravado_core/schema.pyx":107
+  /* "bravado_core/schema.pyx":109
  *     deref = swagger_spec.deref
  * 
  *     if properties is None:             # <<<<<<<<<<<<<<
@@ -2828,14 +2877,14 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "bravado_core/schema.pyx":108
+    /* "bravado_core/schema.pyx":110
  * 
  *     if properties is None:
  *         properties = collapsed_properties(deref(object_spec), swagger_spec)             # <<<<<<<<<<<<<<
  *     prop_spec = properties.get(prop_name)
  * 
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_collapsed_properties); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 108, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_collapsed_properties); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 110, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_INCREF(__pyx_v_deref);
     __pyx_t_6 = __pyx_v_deref; __pyx_t_7 = NULL;
@@ -2850,7 +2899,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
     }
     __pyx_t_5 = (__pyx_t_7) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_7, __pyx_v_object_spec) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_v_object_spec);
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 108, __pyx_L1_error)
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 110, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __pyx_t_6 = NULL;
@@ -2868,7 +2917,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_t_5, __pyx_v_swagger_spec};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 108, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 110, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -2877,14 +2926,14 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
       PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_t_5, __pyx_v_swagger_spec};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 108, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 110, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     } else
     #endif
     {
-      __pyx_t_7 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 108, __pyx_L1_error)
+      __pyx_t_7 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 110, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       if (__pyx_t_6) {
         __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -2895,7 +2944,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
       __Pyx_GIVEREF(__pyx_v_swagger_spec);
       PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_8, __pyx_v_swagger_spec);
       __pyx_t_5 = 0;
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 108, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 110, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     }
@@ -2903,7 +2952,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
     __Pyx_DECREF_SET(__pyx_v_properties, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "bravado_core/schema.pyx":107
+    /* "bravado_core/schema.pyx":109
  *     deref = swagger_spec.deref
  * 
  *     if properties is None:             # <<<<<<<<<<<<<<
@@ -2912,14 +2961,14 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
  */
   }
 
-  /* "bravado_core/schema.pyx":109
+  /* "bravado_core/schema.pyx":111
  *     if properties is None:
  *         properties = collapsed_properties(deref(object_spec), swagger_spec)
  *     prop_spec = properties.get(prop_name)             # <<<<<<<<<<<<<<
  * 
  *     if prop_spec is not None:
  */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_properties, __pyx_n_s_get); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 109, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_properties, __pyx_n_s_get); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 111, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_7 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
@@ -2933,13 +2982,13 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
   }
   __pyx_t_1 = (__pyx_t_7) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_7, __pyx_v_prop_name) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_prop_name);
   __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 109, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 111, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_prop_spec = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "bravado_core/schema.pyx":111
+  /* "bravado_core/schema.pyx":113
  *     prop_spec = properties.get(prop_name)
  * 
  *     if prop_spec is not None:             # <<<<<<<<<<<<<<
@@ -2950,7 +2999,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
   __pyx_t_2 = (__pyx_t_3 != 0);
   if (__pyx_t_2) {
 
-    /* "bravado_core/schema.pyx":112
+    /* "bravado_core/schema.pyx":114
  * 
  *     if prop_spec is not None:
  *         result_spec = deref(prop_spec)             # <<<<<<<<<<<<<<
@@ -2970,42 +3019,42 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
     }
     __pyx_t_1 = (__pyx_t_7) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_7, __pyx_v_prop_spec) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_prop_spec);
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 112, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 114, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_v_result_spec = __pyx_t_1;
     __pyx_t_1 = 0;
 
-    /* "bravado_core/schema.pyx":118
+    /* "bravado_core/schema.pyx":120
  *         # modify a referenced schema, it can be done here (or rewrite
  *         # unmarshal to pass the unreferenced property spec as another arg).
  *         if 'x-nullable' in prop_spec and 'x-nullable' not in result_spec:             # <<<<<<<<<<<<<<
  *             result_spec = copy.deepcopy(result_spec)
  *             result_spec['x-nullable'] = prop_spec['x-nullable']
  */
-    __pyx_t_3 = (__Pyx_PySequence_ContainsTF(__pyx_kp_s_x_nullable, __pyx_v_prop_spec, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 118, __pyx_L1_error)
+    __pyx_t_3 = (__Pyx_PySequence_ContainsTF(__pyx_kp_s_x_nullable, __pyx_v_prop_spec, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 120, __pyx_L1_error)
     __pyx_t_9 = (__pyx_t_3 != 0);
     if (__pyx_t_9) {
     } else {
       __pyx_t_2 = __pyx_t_9;
       goto __pyx_L6_bool_binop_done;
     }
-    __pyx_t_9 = (__Pyx_PySequence_ContainsTF(__pyx_kp_s_x_nullable, __pyx_v_result_spec, Py_NE)); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 118, __pyx_L1_error)
+    __pyx_t_9 = (__Pyx_PySequence_ContainsTF(__pyx_kp_s_x_nullable, __pyx_v_result_spec, Py_NE)); if (unlikely(__pyx_t_9 < 0)) __PYX_ERR(0, 120, __pyx_L1_error)
     __pyx_t_3 = (__pyx_t_9 != 0);
     __pyx_t_2 = __pyx_t_3;
     __pyx_L6_bool_binop_done:;
     if (__pyx_t_2) {
 
-      /* "bravado_core/schema.pyx":119
+      /* "bravado_core/schema.pyx":121
  *         # unmarshal to pass the unreferenced property spec as another arg).
  *         if 'x-nullable' in prop_spec and 'x-nullable' not in result_spec:
  *             result_spec = copy.deepcopy(result_spec)             # <<<<<<<<<<<<<<
  *             result_spec['x-nullable'] = prop_spec['x-nullable']
  *         return result_spec
  */
-      __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_copy); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 119, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_copy); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 121, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 119, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 121, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __pyx_t_4 = NULL;
@@ -3020,25 +3069,25 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
       }
       __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_4, __pyx_v_result_spec) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_v_result_spec);
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 119, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 121, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_DECREF_SET(__pyx_v_result_spec, __pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "bravado_core/schema.pyx":120
+      /* "bravado_core/schema.pyx":122
  *         if 'x-nullable' in prop_spec and 'x-nullable' not in result_spec:
  *             result_spec = copy.deepcopy(result_spec)
  *             result_spec['x-nullable'] = prop_spec['x-nullable']             # <<<<<<<<<<<<<<
  *         return result_spec
  * 
  */
-      __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_prop_spec, __pyx_kp_s_x_nullable); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 120, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_prop_spec, __pyx_kp_s_x_nullable); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 122, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      if (unlikely(PyObject_SetItem(__pyx_v_result_spec, __pyx_kp_s_x_nullable, __pyx_t_1) < 0)) __PYX_ERR(0, 120, __pyx_L1_error)
+      if (unlikely(PyObject_SetItem(__pyx_v_result_spec, __pyx_kp_s_x_nullable, __pyx_t_1) < 0)) __PYX_ERR(0, 122, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "bravado_core/schema.pyx":118
+      /* "bravado_core/schema.pyx":120
  *         # modify a referenced schema, it can be done here (or rewrite
  *         # unmarshal to pass the unreferenced property spec as another arg).
  *         if 'x-nullable' in prop_spec and 'x-nullable' not in result_spec:             # <<<<<<<<<<<<<<
@@ -3047,7 +3096,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
  */
     }
 
-    /* "bravado_core/schema.pyx":121
+    /* "bravado_core/schema.pyx":123
  *             result_spec = copy.deepcopy(result_spec)
  *             result_spec['x-nullable'] = prop_spec['x-nullable']
  *         return result_spec             # <<<<<<<<<<<<<<
@@ -3059,7 +3108,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
     __pyx_r = __pyx_v_result_spec;
     goto __pyx_L0;
 
-    /* "bravado_core/schema.pyx":111
+    /* "bravado_core/schema.pyx":113
  *     prop_spec = properties.get(prop_name)
  * 
  *     if prop_spec is not None:             # <<<<<<<<<<<<<<
@@ -3068,7 +3117,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
  */
   }
 
-  /* "bravado_core/schema.pyx":123
+  /* "bravado_core/schema.pyx":125
  *         return result_spec
  * 
  *     additional_props = deref(object_spec).get('additionalProperties', True)             # <<<<<<<<<<<<<<
@@ -3088,19 +3137,19 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
   }
   __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_4, __pyx_v_object_spec) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_v_object_spec);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 123, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_get); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 123, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_get); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 123, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_v_additional_props = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "bravado_core/schema.pyx":125
+  /* "bravado_core/schema.pyx":127
  *     additional_props = deref(object_spec).get('additionalProperties', True)
  * 
  *     if isinstance(additional_props, bool):             # <<<<<<<<<<<<<<
@@ -3109,12 +3158,12 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
  */
   __pyx_t_1 = ((PyObject*)&PyBool_Type);
   __Pyx_INCREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_IsInstance(__pyx_v_additional_props, __pyx_t_1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 125, __pyx_L1_error)
+  __pyx_t_2 = PyObject_IsInstance(__pyx_v_additional_props, __pyx_t_1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "bravado_core/schema.pyx":128
+    /* "bravado_core/schema.pyx":130
  *         # no spec for additional properties to conform to - this is basically
  *         # a way to send pretty much anything across the wire as is.
  *         return None             # <<<<<<<<<<<<<<
@@ -3125,7 +3174,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "bravado_core/schema.pyx":125
+    /* "bravado_core/schema.pyx":127
  *     additional_props = deref(object_spec).get('additionalProperties', True)
  * 
  *     if isinstance(additional_props, bool):             # <<<<<<<<<<<<<<
@@ -3134,7 +3183,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
  */
   }
 
-  /* "bravado_core/schema.pyx":130
+  /* "bravado_core/schema.pyx":132
  *         return None
  * 
  *     additional_props = deref(additional_props)             # <<<<<<<<<<<<<<
@@ -3154,20 +3203,20 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
   }
   __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_4, __pyx_v_additional_props) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_v_additional_props);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 130, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_DECREF_SET(__pyx_v_additional_props, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "bravado_core/schema.pyx":131
+  /* "bravado_core/schema.pyx":133
  * 
  *     additional_props = deref(additional_props)
  *     if is_dict_like(additional_props):             # <<<<<<<<<<<<<<
  *         # spec that all additional props MUST conform to
  *         return additional_props
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_is_dict_like); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 131, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_is_dict_like); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 133, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_t_4 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_7))) {
@@ -3181,14 +3230,14 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
   }
   __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_4, __pyx_v_additional_props) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_v_additional_props);
   __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 131, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 133, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 131, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 133, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_3) {
 
-    /* "bravado_core/schema.pyx":133
+    /* "bravado_core/schema.pyx":135
  *     if is_dict_like(additional_props):
  *         # spec that all additional props MUST conform to
  *         return additional_props             # <<<<<<<<<<<<<<
@@ -3200,7 +3249,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
     __pyx_r = __pyx_v_additional_props;
     goto __pyx_L0;
 
-    /* "bravado_core/schema.pyx":131
+    /* "bravado_core/schema.pyx":133
  * 
  *     additional_props = deref(additional_props)
  *     if is_dict_like(additional_props):             # <<<<<<<<<<<<<<
@@ -3209,24 +3258,24 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
  */
   }
 
-  /* "bravado_core/schema.pyx":135
+  /* "bravado_core/schema.pyx":137
  *         return additional_props
  * 
  *     raise SwaggerMappingError(             # <<<<<<<<<<<<<<
  *         "Don't know what to do with `additionalProperties` in spec {0} "
  *         "when inspecting value {1}".format(object_spec, object_value))
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_SwaggerMappingError); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_SwaggerMappingError); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
 
-  /* "bravado_core/schema.pyx":137
+  /* "bravado_core/schema.pyx":139
  *     raise SwaggerMappingError(
  *         "Don't know what to do with `additionalProperties` in spec {0} "
  *         "when inspecting value {1}".format(object_spec, object_value))             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_Don_t_know_what_to_do_with_addit, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_Don_t_know_what_to_do_with_addit, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 139, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_6 = NULL;
   __pyx_t_8 = 0;
@@ -3243,7 +3292,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
   #if CYTHON_FAST_PYCALL
   if (PyFunction_Check(__pyx_t_5)) {
     PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_v_object_spec, __pyx_v_object_value};
-    __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 139, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_GOTREF(__pyx_t_4);
   } else
@@ -3251,13 +3300,13 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
   #if CYTHON_FAST_PYCCALL
   if (__Pyx_PyFastCFunction_Check(__pyx_t_5)) {
     PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_v_object_spec, __pyx_v_object_value};
-    __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 139, __pyx_L1_error)
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_GOTREF(__pyx_t_4);
   } else
   #endif
   {
-    __pyx_t_10 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_10 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 139, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     if (__pyx_t_6) {
       __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -3268,7 +3317,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
     __Pyx_INCREF(__pyx_v_object_value);
     __Pyx_GIVEREF(__pyx_v_object_value);
     PyTuple_SET_ITEM(__pyx_t_10, 1+__pyx_t_8, __pyx_v_object_value);
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_10, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 137, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_10, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 139, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
   }
@@ -3286,14 +3335,14 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
   __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_7, __pyx_t_5, __pyx_t_4) : __Pyx_PyObject_CallOneArg(__pyx_t_7, __pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 135, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(0, 135, __pyx_L1_error)
+  __PYX_ERR(0, 137, __pyx_L1_error)
 
-  /* "bravado_core/schema.pyx":90
+  /* "bravado_core/schema.pyx":92
  * 
  * 
  * def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, properties=None):             # <<<<<<<<<<<<<<
@@ -3322,7 +3371,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_20get_spec_for_prop(CYTHON_UNUS
   return __pyx_r;
 }
 
-/* "bravado_core/schema.pyx":140
+/* "bravado_core/schema.pyx":142
  * 
  * 
  * def handle_null_value(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
@@ -3363,11 +3412,11 @@ static PyObject *__pyx_pw_12bravado_core_6schema_23handle_null_value(PyObject *_
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_schema_object_spec)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("handle_null_value", 1, 2, 2, 1); __PYX_ERR(0, 140, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("handle_null_value", 1, 2, 2, 1); __PYX_ERR(0, 142, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "handle_null_value") < 0)) __PYX_ERR(0, 140, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "handle_null_value") < 0)) __PYX_ERR(0, 142, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3380,7 +3429,7 @@ static PyObject *__pyx_pw_12bravado_core_6schema_23handle_null_value(PyObject *_
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("handle_null_value", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 140, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("handle_null_value", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 142, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("bravado_core.schema.handle_null_value", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3397,73 +3446,28 @@ static PyObject *__pyx_pf_12bravado_core_6schema_22handle_null_value(CYTHON_UNUS
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
-  PyObject *__pyx_t_2 = NULL;
+  int __pyx_t_2;
   PyObject *__pyx_t_3 = NULL;
-  int __pyx_t_4;
-  PyObject *__pyx_t_5 = NULL;
-  int __pyx_t_6;
+  PyObject *__pyx_t_4 = NULL;
+  int __pyx_t_5;
+  PyObject *__pyx_t_6 = NULL;
   PyObject *__pyx_t_7 = NULL;
   __Pyx_RefNannySetupContext("handle_null_value", 0);
 
-  /* "bravado_core/schema.pyx":151
+  /* "bravado_core/schema.pyx":153
  *     :raises: SwaggerMappingError if the spec is not nullable and no default exists
  *     """
  *     if has_default(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
  *         return get_default(swagger_spec, schema_object_spec)
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_has_default); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 151, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = NULL;
-  __pyx_t_4 = 0;
-  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
-    if (likely(__pyx_t_3)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_3);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_2, function);
-      __pyx_t_4 = 1;
-    }
-  }
-  #if CYTHON_FAST_PYCALL
-  if (PyFunction_Check(__pyx_t_2)) {
-    PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_v_swagger_spec, __pyx_v_schema_object_spec};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 151, __pyx_L1_error)
-    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_GOTREF(__pyx_t_1);
-  } else
-  #endif
-  #if CYTHON_FAST_PYCCALL
-  if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
-    PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_v_swagger_spec, __pyx_v_schema_object_spec};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 151, __pyx_L1_error)
-    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_GOTREF(__pyx_t_1);
-  } else
-  #endif
-  {
-    __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 151, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_5);
-    if (__pyx_t_3) {
-      __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3); __pyx_t_3 = NULL;
-    }
-    __Pyx_INCREF(__pyx_v_swagger_spec);
-    __Pyx_GIVEREF(__pyx_v_swagger_spec);
-    PyTuple_SET_ITEM(__pyx_t_5, 0+__pyx_t_4, __pyx_v_swagger_spec);
-    __Pyx_INCREF(__pyx_v_schema_object_spec);
-    __Pyx_GIVEREF(__pyx_v_schema_object_spec);
-    PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_4, __pyx_v_schema_object_spec);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 151, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  }
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 151, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_12bravado_core_6schema_has_default(__pyx_v_swagger_spec, __pyx_v_schema_object_spec, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 153, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 153, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (__pyx_t_6) {
+  if (__pyx_t_2) {
 
-    /* "bravado_core/schema.pyx":152
+    /* "bravado_core/schema.pyx":154
  *     """
  *     if has_default(swagger_spec, schema_object_spec):
  *         return get_default(swagger_spec, schema_object_spec)             # <<<<<<<<<<<<<<
@@ -3471,58 +3475,13 @@ static PyObject *__pyx_pf_12bravado_core_6schema_22handle_null_value(CYTHON_UNUS
  *     if is_prop_nullable(swagger_spec, schema_object_spec):
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_get_default); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 152, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = NULL;
-    __pyx_t_4 = 0;
-    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
-      __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_2);
-      if (likely(__pyx_t_5)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-        __Pyx_INCREF(__pyx_t_5);
-        __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_2, function);
-        __pyx_t_4 = 1;
-      }
-    }
-    #if CYTHON_FAST_PYCALL
-    if (PyFunction_Check(__pyx_t_2)) {
-      PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_v_swagger_spec, __pyx_v_schema_object_spec};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 152, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __Pyx_GOTREF(__pyx_t_1);
-    } else
-    #endif
-    #if CYTHON_FAST_PYCCALL
-    if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
-      PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_v_swagger_spec, __pyx_v_schema_object_spec};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 152, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __Pyx_GOTREF(__pyx_t_1);
-    } else
-    #endif
-    {
-      __pyx_t_3 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 152, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      if (__pyx_t_5) {
-        __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_5); __pyx_t_5 = NULL;
-      }
-      __Pyx_INCREF(__pyx_v_swagger_spec);
-      __Pyx_GIVEREF(__pyx_v_swagger_spec);
-      PyTuple_SET_ITEM(__pyx_t_3, 0+__pyx_t_4, __pyx_v_swagger_spec);
-      __Pyx_INCREF(__pyx_v_schema_object_spec);
-      __Pyx_GIVEREF(__pyx_v_schema_object_spec);
-      PyTuple_SET_ITEM(__pyx_t_3, 1+__pyx_t_4, __pyx_v_schema_object_spec);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 152, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    }
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_1 = __pyx_f_12bravado_core_6schema_get_default(__pyx_v_swagger_spec, __pyx_v_schema_object_spec, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 154, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "bravado_core/schema.pyx":151
+    /* "bravado_core/schema.pyx":153
  *     :raises: SwaggerMappingError if the spec is not nullable and no default exists
  *     """
  *     if has_default(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
@@ -3531,65 +3490,65 @@ static PyObject *__pyx_pf_12bravado_core_6schema_22handle_null_value(CYTHON_UNUS
  */
   }
 
-  /* "bravado_core/schema.pyx":154
+  /* "bravado_core/schema.pyx":156
  *         return get_default(swagger_spec, schema_object_spec)
  * 
  *     if is_prop_nullable(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
  *         return None
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_is_prop_nullable); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 154, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = NULL;
-  __pyx_t_4 = 0;
-  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
-    if (likely(__pyx_t_3)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_3);
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_is_prop_nullable); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 156, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = NULL;
+  __pyx_t_5 = 0;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_4)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_4);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_2, function);
-      __pyx_t_4 = 1;
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+      __pyx_t_5 = 1;
     }
   }
   #if CYTHON_FAST_PYCALL
-  if (PyFunction_Check(__pyx_t_2)) {
-    PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_v_swagger_spec, __pyx_v_schema_object_spec};
-    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 154, __pyx_L1_error)
-    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyFunction_Check(__pyx_t_3)) {
+    PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_v_swagger_spec, __pyx_v_schema_object_spec};
+    __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 156, __pyx_L1_error)
+    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
   #endif
   #if CYTHON_FAST_PYCCALL
-  if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
-    PyObject *__pyx_temp[3] = {__pyx_t_3, __pyx_v_swagger_spec, __pyx_v_schema_object_spec};
-    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 154, __pyx_L1_error)
-    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
+    PyObject *__pyx_temp[3] = {__pyx_t_4, __pyx_v_swagger_spec, __pyx_v_schema_object_spec};
+    __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 156, __pyx_L1_error)
+    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else
   #endif
   {
-    __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 154, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_5);
-    if (__pyx_t_3) {
-      __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3); __pyx_t_3 = NULL;
+    __pyx_t_6 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 156, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    if (__pyx_t_4) {
+      __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_4); __pyx_t_4 = NULL;
     }
     __Pyx_INCREF(__pyx_v_swagger_spec);
     __Pyx_GIVEREF(__pyx_v_swagger_spec);
-    PyTuple_SET_ITEM(__pyx_t_5, 0+__pyx_t_4, __pyx_v_swagger_spec);
+    PyTuple_SET_ITEM(__pyx_t_6, 0+__pyx_t_5, __pyx_v_swagger_spec);
     __Pyx_INCREF(__pyx_v_schema_object_spec);
     __Pyx_GIVEREF(__pyx_v_schema_object_spec);
-    PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_4, __pyx_v_schema_object_spec);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 154, __pyx_L1_error)
+    PyTuple_SET_ITEM(__pyx_t_6, 1+__pyx_t_5, __pyx_v_schema_object_spec);
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 156, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_6 < 0)) __PYX_ERR(0, 154, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 156, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (__pyx_t_6) {
+  if (__pyx_t_2) {
 
-    /* "bravado_core/schema.pyx":155
+    /* "bravado_core/schema.pyx":157
  * 
  *     if is_prop_nullable(swagger_spec, schema_object_spec):
  *         return None             # <<<<<<<<<<<<<<
@@ -3600,7 +3559,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_22handle_null_value(CYTHON_UNUS
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "bravado_core/schema.pyx":154
+    /* "bravado_core/schema.pyx":156
  *         return get_default(swagger_spec, schema_object_spec)
  * 
  *     if is_prop_nullable(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
@@ -3609,61 +3568,61 @@ static PyObject *__pyx_pf_12bravado_core_6schema_22handle_null_value(CYTHON_UNUS
  */
   }
 
-  /* "bravado_core/schema.pyx":157
+  /* "bravado_core/schema.pyx":159
  *         return None
  * 
  *     raise SwaggerMappingError(             # <<<<<<<<<<<<<<
  *         'Spec {0} is a required value'.format(schema_object_spec))
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_SwaggerMappingError); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 157, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_SwaggerMappingError); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
 
-  /* "bravado_core/schema.pyx":158
+  /* "bravado_core/schema.pyx":160
  * 
  *     raise SwaggerMappingError(
  *         'Spec {0} is a required value'.format(schema_object_spec))             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_Spec_0_is_a_required_value, __pyx_n_s_format); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 158, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_Spec_0_is_a_required_value, __pyx_n_s_format); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 160, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_7 = NULL;
-  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
-    __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_3);
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
+    __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_4);
     if (likely(__pyx_t_7)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
       __Pyx_INCREF(__pyx_t_7);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_4, function);
+    }
+  }
+  __pyx_t_6 = (__pyx_t_7) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_7, __pyx_v_schema_object_spec) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_schema_object_spec);
+  __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
+  if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 160, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_4 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_4)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_4);
       __Pyx_INCREF(function);
       __Pyx_DECREF_SET(__pyx_t_3, function);
     }
   }
-  __pyx_t_5 = (__pyx_t_7) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_7, __pyx_v_schema_object_spec) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_schema_object_spec);
-  __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-  if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 158, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = NULL;
-  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
-    if (likely(__pyx_t_3)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_3);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_2, function);
-    }
-  }
-  __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_5);
-  __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 157, __pyx_L1_error)
+  __pyx_t_1 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 159, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(0, 157, __pyx_L1_error)
+  __PYX_ERR(0, 159, __pyx_L1_error)
 
-  /* "bravado_core/schema.pyx":140
+  /* "bravado_core/schema.pyx":142
  * 
  * 
  * def handle_null_value(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
@@ -3674,9 +3633,9 @@ static PyObject *__pyx_pf_12bravado_core_6schema_22handle_null_value(CYTHON_UNUS
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
   __Pyx_AddTraceback("bravado_core.schema.handle_null_value", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
@@ -3686,7 +3645,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_22handle_null_value(CYTHON_UNUS
   return __pyx_r;
 }
 
-/* "bravado_core/schema.pyx":161
+/* "bravado_core/schema.pyx":163
  * 
  * 
  * def collapsed_properties(model_spec, swagger_spec):             # <<<<<<<<<<<<<<
@@ -3727,11 +3686,11 @@ static PyObject *__pyx_pw_12bravado_core_6schema_25collapsed_properties(PyObject
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_swagger_spec)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("collapsed_properties", 1, 2, 2, 1); __PYX_ERR(0, 161, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("collapsed_properties", 1, 2, 2, 1); __PYX_ERR(0, 163, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "collapsed_properties") < 0)) __PYX_ERR(0, 161, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "collapsed_properties") < 0)) __PYX_ERR(0, 163, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3744,7 +3703,7 @@ static PyObject *__pyx_pw_12bravado_core_6schema_25collapsed_properties(PyObject
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("collapsed_properties", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 161, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("collapsed_properties", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 163, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("bravado_core.schema.collapsed_properties", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3779,39 +3738,39 @@ static PyObject *__pyx_pf_12bravado_core_6schema_24collapsed_properties(CYTHON_U
   int __pyx_t_11;
   __Pyx_RefNannySetupContext("collapsed_properties", 0);
 
-  /* "bravado_core/schema.pyx":174
+  /* "bravado_core/schema.pyx":176
  *     """
  * 
  *     properties = {}             # <<<<<<<<<<<<<<
  * 
  *     # properties may or may not be present
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 174, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 176, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_properties = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "bravado_core/schema.pyx":177
+  /* "bravado_core/schema.pyx":179
  * 
  *     # properties may or may not be present
  *     if 'properties' in model_spec:             # <<<<<<<<<<<<<<
  *         for attr, attr_spec in iteritems(model_spec['properties']):
  *             properties[attr] = attr_spec
  */
-  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_properties, __pyx_v_model_spec, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 177, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_properties, __pyx_v_model_spec, Py_EQ)); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(0, 179, __pyx_L1_error)
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
-    /* "bravado_core/schema.pyx":178
+    /* "bravado_core/schema.pyx":180
  *     # properties may or may not be present
  *     if 'properties' in model_spec:
  *         for attr, attr_spec in iteritems(model_spec['properties']):             # <<<<<<<<<<<<<<
  *             properties[attr] = attr_spec
  * 
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_iteritems); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 178, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_iteritems); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 180, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_PyObject_Dict_GetItem(__pyx_v_model_spec, __pyx_n_s_properties); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 178, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Dict_GetItem(__pyx_v_model_spec, __pyx_n_s_properties); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 180, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_6 = NULL;
     if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_4))) {
@@ -3826,16 +3785,16 @@ static PyObject *__pyx_pf_12bravado_core_6schema_24collapsed_properties(CYTHON_U
     __pyx_t_1 = (__pyx_t_6) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_6, __pyx_t_5) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_5);
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 178, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 180, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
       __pyx_t_4 = __pyx_t_1; __Pyx_INCREF(__pyx_t_4); __pyx_t_7 = 0;
       __pyx_t_8 = NULL;
     } else {
-      __pyx_t_7 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 178, __pyx_L1_error)
+      __pyx_t_7 = -1; __pyx_t_4 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 180, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_8 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 178, __pyx_L1_error)
+      __pyx_t_8 = Py_TYPE(__pyx_t_4)->tp_iternext; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 180, __pyx_L1_error)
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     for (;;) {
@@ -3843,17 +3802,17 @@ static PyObject *__pyx_pf_12bravado_core_6schema_24collapsed_properties(CYTHON_U
         if (likely(PyList_CheckExact(__pyx_t_4))) {
           if (__pyx_t_7 >= PyList_GET_SIZE(__pyx_t_4)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_7); __Pyx_INCREF(__pyx_t_1); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 178, __pyx_L1_error)
+          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_4, __pyx_t_7); __Pyx_INCREF(__pyx_t_1); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 180, __pyx_L1_error)
           #else
-          __pyx_t_1 = PySequence_ITEM(__pyx_t_4, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 178, __pyx_L1_error)
+          __pyx_t_1 = PySequence_ITEM(__pyx_t_4, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 180, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_1);
           #endif
         } else {
           if (__pyx_t_7 >= PyTuple_GET_SIZE(__pyx_t_4)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_7); __Pyx_INCREF(__pyx_t_1); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 178, __pyx_L1_error)
+          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_4, __pyx_t_7); __Pyx_INCREF(__pyx_t_1); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 180, __pyx_L1_error)
           #else
-          __pyx_t_1 = PySequence_ITEM(__pyx_t_4, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 178, __pyx_L1_error)
+          __pyx_t_1 = PySequence_ITEM(__pyx_t_4, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 180, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_1);
           #endif
         }
@@ -3863,7 +3822,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_24collapsed_properties(CYTHON_U
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 178, __pyx_L1_error)
+            else __PYX_ERR(0, 180, __pyx_L1_error)
           }
           break;
         }
@@ -3875,7 +3834,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_24collapsed_properties(CYTHON_U
         if (unlikely(size != 2)) {
           if (size > 2) __Pyx_RaiseTooManyValuesError(2);
           else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-          __PYX_ERR(0, 178, __pyx_L1_error)
+          __PYX_ERR(0, 180, __pyx_L1_error)
         }
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
         if (likely(PyTuple_CheckExact(sequence))) {
@@ -3888,15 +3847,15 @@ static PyObject *__pyx_pf_12bravado_core_6schema_24collapsed_properties(CYTHON_U
         __Pyx_INCREF(__pyx_t_5);
         __Pyx_INCREF(__pyx_t_6);
         #else
-        __pyx_t_5 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 178, __pyx_L1_error)
+        __pyx_t_5 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 180, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 178, __pyx_L1_error)
+        __pyx_t_6 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 180, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
         #endif
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       } else {
         Py_ssize_t index = -1;
-        __pyx_t_9 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 178, __pyx_L1_error)
+        __pyx_t_9 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 180, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __pyx_t_10 = Py_TYPE(__pyx_t_9)->tp_iternext;
@@ -3904,7 +3863,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_24collapsed_properties(CYTHON_U
         __Pyx_GOTREF(__pyx_t_5);
         index = 1; __pyx_t_6 = __pyx_t_10(__pyx_t_9); if (unlikely(!__pyx_t_6)) goto __pyx_L6_unpacking_failed;
         __Pyx_GOTREF(__pyx_t_6);
-        if (__Pyx_IternextUnpackEndCheck(__pyx_t_10(__pyx_t_9), 2) < 0) __PYX_ERR(0, 178, __pyx_L1_error)
+        if (__Pyx_IternextUnpackEndCheck(__pyx_t_10(__pyx_t_9), 2) < 0) __PYX_ERR(0, 180, __pyx_L1_error)
         __pyx_t_10 = NULL;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         goto __pyx_L7_unpacking_done;
@@ -3912,7 +3871,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_24collapsed_properties(CYTHON_U
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         __pyx_t_10 = NULL;
         if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-        __PYX_ERR(0, 178, __pyx_L1_error)
+        __PYX_ERR(0, 180, __pyx_L1_error)
         __pyx_L7_unpacking_done:;
       }
       __Pyx_XDECREF_SET(__pyx_v_attr, __pyx_t_5);
@@ -3920,16 +3879,16 @@ static PyObject *__pyx_pf_12bravado_core_6schema_24collapsed_properties(CYTHON_U
       __Pyx_XDECREF_SET(__pyx_v_attr_spec, __pyx_t_6);
       __pyx_t_6 = 0;
 
-      /* "bravado_core/schema.pyx":179
+      /* "bravado_core/schema.pyx":181
  *     if 'properties' in model_spec:
  *         for attr, attr_spec in iteritems(model_spec['properties']):
  *             properties[attr] = attr_spec             # <<<<<<<<<<<<<<
  * 
  *     # allOf may or may not be present
  */
-      if (unlikely(PyDict_SetItem(__pyx_v_properties, __pyx_v_attr, __pyx_v_attr_spec) < 0)) __PYX_ERR(0, 179, __pyx_L1_error)
+      if (unlikely(PyDict_SetItem(__pyx_v_properties, __pyx_v_attr, __pyx_v_attr_spec) < 0)) __PYX_ERR(0, 181, __pyx_L1_error)
 
-      /* "bravado_core/schema.pyx":178
+      /* "bravado_core/schema.pyx":180
  *     # properties may or may not be present
  *     if 'properties' in model_spec:
  *         for attr, attr_spec in iteritems(model_spec['properties']):             # <<<<<<<<<<<<<<
@@ -3939,7 +3898,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_24collapsed_properties(CYTHON_U
     }
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "bravado_core/schema.pyx":177
+    /* "bravado_core/schema.pyx":179
  * 
  *     # properties may or may not be present
  *     if 'properties' in model_spec:             # <<<<<<<<<<<<<<
@@ -3948,45 +3907,45 @@ static PyObject *__pyx_pf_12bravado_core_6schema_24collapsed_properties(CYTHON_U
  */
   }
 
-  /* "bravado_core/schema.pyx":182
+  /* "bravado_core/schema.pyx":184
  * 
  *     # allOf may or may not be present
  *     if 'allOf' in model_spec:             # <<<<<<<<<<<<<<
  *         deref = swagger_spec.deref
  *         for item_spec in model_spec['allOf']:
  */
-  __pyx_t_3 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_allOf, __pyx_v_model_spec, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 182, __pyx_L1_error)
+  __pyx_t_3 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_allOf, __pyx_v_model_spec, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 184, __pyx_L1_error)
   __pyx_t_2 = (__pyx_t_3 != 0);
   if (__pyx_t_2) {
 
-    /* "bravado_core/schema.pyx":183
+    /* "bravado_core/schema.pyx":185
  *     # allOf may or may not be present
  *     if 'allOf' in model_spec:
  *         deref = swagger_spec.deref             # <<<<<<<<<<<<<<
  *         for item_spec in model_spec['allOf']:
  *             item_spec = deref(item_spec)
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_swagger_spec, __pyx_n_s_deref); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 183, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_swagger_spec, __pyx_n_s_deref); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 185, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_v_deref = __pyx_t_4;
     __pyx_t_4 = 0;
 
-    /* "bravado_core/schema.pyx":184
+    /* "bravado_core/schema.pyx":186
  *     if 'allOf' in model_spec:
  *         deref = swagger_spec.deref
  *         for item_spec in model_spec['allOf']:             # <<<<<<<<<<<<<<
  *             item_spec = deref(item_spec)
  *             more_properties = collapsed_properties(item_spec, swagger_spec)
  */
-    __pyx_t_4 = __Pyx_PyObject_Dict_GetItem(__pyx_v_model_spec, __pyx_n_s_allOf); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 184, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_Dict_GetItem(__pyx_v_model_spec, __pyx_n_s_allOf); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 186, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     if (likely(PyList_CheckExact(__pyx_t_4)) || PyTuple_CheckExact(__pyx_t_4)) {
       __pyx_t_1 = __pyx_t_4; __Pyx_INCREF(__pyx_t_1); __pyx_t_7 = 0;
       __pyx_t_8 = NULL;
     } else {
-      __pyx_t_7 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 184, __pyx_L1_error)
+      __pyx_t_7 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 186, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_8 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 184, __pyx_L1_error)
+      __pyx_t_8 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 186, __pyx_L1_error)
     }
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     for (;;) {
@@ -3994,17 +3953,17 @@ static PyObject *__pyx_pf_12bravado_core_6schema_24collapsed_properties(CYTHON_U
         if (likely(PyList_CheckExact(__pyx_t_1))) {
           if (__pyx_t_7 >= PyList_GET_SIZE(__pyx_t_1)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_7); __Pyx_INCREF(__pyx_t_4); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 184, __pyx_L1_error)
+          __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_7); __Pyx_INCREF(__pyx_t_4); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 186, __pyx_L1_error)
           #else
-          __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 184, __pyx_L1_error)
+          __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 186, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_4);
           #endif
         } else {
           if (__pyx_t_7 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_7); __Pyx_INCREF(__pyx_t_4); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 184, __pyx_L1_error)
+          __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_7); __Pyx_INCREF(__pyx_t_4); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 186, __pyx_L1_error)
           #else
-          __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 184, __pyx_L1_error)
+          __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 186, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_4);
           #endif
         }
@@ -4014,7 +3973,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_24collapsed_properties(CYTHON_U
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 184, __pyx_L1_error)
+            else __PYX_ERR(0, 186, __pyx_L1_error)
           }
           break;
         }
@@ -4023,7 +3982,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_24collapsed_properties(CYTHON_U
       __Pyx_XDECREF_SET(__pyx_v_item_spec, __pyx_t_4);
       __pyx_t_4 = 0;
 
-      /* "bravado_core/schema.pyx":185
+      /* "bravado_core/schema.pyx":187
  *         deref = swagger_spec.deref
  *         for item_spec in model_spec['allOf']:
  *             item_spec = deref(item_spec)             # <<<<<<<<<<<<<<
@@ -4043,20 +4002,20 @@ static PyObject *__pyx_pf_12bravado_core_6schema_24collapsed_properties(CYTHON_U
       }
       __pyx_t_4 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_6, __pyx_t_5, __pyx_v_item_spec) : __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_v_item_spec);
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 185, __pyx_L1_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 187, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_DECREF_SET(__pyx_v_item_spec, __pyx_t_4);
       __pyx_t_4 = 0;
 
-      /* "bravado_core/schema.pyx":186
+      /* "bravado_core/schema.pyx":188
  *         for item_spec in model_spec['allOf']:
  *             item_spec = deref(item_spec)
  *             more_properties = collapsed_properties(item_spec, swagger_spec)             # <<<<<<<<<<<<<<
  *             properties.update(more_properties)
  * 
  */
-      __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_collapsed_properties); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 186, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_collapsed_properties); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 188, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __pyx_t_5 = NULL;
       __pyx_t_11 = 0;
@@ -4073,7 +4032,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_24collapsed_properties(CYTHON_U
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_6)) {
         PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_v_item_spec, __pyx_v_swagger_spec};
-        __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 186, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PyFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 188, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_GOTREF(__pyx_t_4);
       } else
@@ -4081,13 +4040,13 @@ static PyObject *__pyx_pf_12bravado_core_6schema_24collapsed_properties(CYTHON_U
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_6)) {
         PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_v_item_spec, __pyx_v_swagger_spec};
-        __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 186, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PyCFunction_FastCall(__pyx_t_6, __pyx_temp+1-__pyx_t_11, 2+__pyx_t_11); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 188, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_GOTREF(__pyx_t_4);
       } else
       #endif
       {
-        __pyx_t_9 = PyTuple_New(2+__pyx_t_11); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 186, __pyx_L1_error)
+        __pyx_t_9 = PyTuple_New(2+__pyx_t_11); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 188, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_9);
         if (__pyx_t_5) {
           __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -4098,7 +4057,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_24collapsed_properties(CYTHON_U
         __Pyx_INCREF(__pyx_v_swagger_spec);
         __Pyx_GIVEREF(__pyx_v_swagger_spec);
         PyTuple_SET_ITEM(__pyx_t_9, 1+__pyx_t_11, __pyx_v_swagger_spec);
-        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_9, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 186, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_9, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 188, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       }
@@ -4106,18 +4065,18 @@ static PyObject *__pyx_pf_12bravado_core_6schema_24collapsed_properties(CYTHON_U
       __Pyx_XDECREF_SET(__pyx_v_more_properties, __pyx_t_4);
       __pyx_t_4 = 0;
 
-      /* "bravado_core/schema.pyx":187
+      /* "bravado_core/schema.pyx":189
  *             item_spec = deref(item_spec)
  *             more_properties = collapsed_properties(item_spec, swagger_spec)
  *             properties.update(more_properties)             # <<<<<<<<<<<<<<
  * 
  *     return properties
  */
-      __pyx_t_4 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyDict_Type_update, __pyx_v_properties, __pyx_v_more_properties); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 187, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyDict_Type_update, __pyx_v_properties, __pyx_v_more_properties); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 189, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-      /* "bravado_core/schema.pyx":184
+      /* "bravado_core/schema.pyx":186
  *     if 'allOf' in model_spec:
  *         deref = swagger_spec.deref
  *         for item_spec in model_spec['allOf']:             # <<<<<<<<<<<<<<
@@ -4127,7 +4086,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_24collapsed_properties(CYTHON_U
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "bravado_core/schema.pyx":182
+    /* "bravado_core/schema.pyx":184
  * 
  *     # allOf may or may not be present
  *     if 'allOf' in model_spec:             # <<<<<<<<<<<<<<
@@ -4136,7 +4095,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_24collapsed_properties(CYTHON_U
  */
   }
 
-  /* "bravado_core/schema.pyx":189
+  /* "bravado_core/schema.pyx":191
  *             properties.update(more_properties)
  * 
  *     return properties             # <<<<<<<<<<<<<<
@@ -4146,7 +4105,7 @@ static PyObject *__pyx_pf_12bravado_core_6schema_24collapsed_properties(CYTHON_U
   __pyx_r = __pyx_v_properties;
   goto __pyx_L0;
 
-  /* "bravado_core/schema.pyx":161
+  /* "bravado_core/schema.pyx":163
  * 
  * 
  * def collapsed_properties(model_spec, swagger_spec):             # <<<<<<<<<<<<<<
@@ -4176,6 +4135,8 @@ static PyObject *__pyx_pf_12bravado_core_6schema_24collapsed_properties(CYTHON_U
 }
 
 static PyMethodDef __pyx_methods[] = {
+  {"has_default", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_12bravado_core_6schema_1has_default, METH_VARARGS|METH_KEYWORDS, 0},
+  {"get_default", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_12bravado_core_6schema_3get_default, METH_VARARGS|METH_KEYWORDS, 0},
   {0, 0, 0, 0}
 };
 
@@ -4244,11 +4205,9 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_deref, __pyx_k_deref, sizeof(__pyx_k_deref), 0, 0, 1, 1},
   {&__pyx_n_s_format, __pyx_k_format, sizeof(__pyx_k_format), 0, 0, 1, 1},
   {&__pyx_n_s_get, __pyx_k_get, sizeof(__pyx_k_get), 0, 0, 1, 1},
-  {&__pyx_n_s_get_default, __pyx_k_get_default, sizeof(__pyx_k_get_default), 0, 0, 1, 1},
   {&__pyx_n_s_get_format, __pyx_k_get_format, sizeof(__pyx_k_get_format), 0, 0, 1, 1},
   {&__pyx_n_s_get_spec_for_prop, __pyx_k_get_spec_for_prop, sizeof(__pyx_k_get_spec_for_prop), 0, 0, 1, 1},
   {&__pyx_n_s_handle_null_value, __pyx_k_handle_null_value, sizeof(__pyx_k_handle_null_value), 0, 0, 1, 1},
-  {&__pyx_n_s_has_default, __pyx_k_has_default, sizeof(__pyx_k_has_default), 0, 0, 1, 1},
   {&__pyx_n_s_has_format, __pyx_k_has_format, sizeof(__pyx_k_has_format), 0, 0, 1, 1},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
   {&__pyx_n_s_in, __pyx_k_in, sizeof(__pyx_k_in), 0, 0, 1, 1},
@@ -4281,14 +4240,13 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_spec, __pyx_k_spec, sizeof(__pyx_k_spec), 0, 0, 1, 1},
   {&__pyx_n_s_string, __pyx_k_string, sizeof(__pyx_k_string), 0, 0, 1, 1},
   {&__pyx_n_s_swagger_spec, __pyx_k_swagger_spec, sizeof(__pyx_k_swagger_spec), 0, 0, 1, 1},
-  {&__pyx_n_s_swagger_spec_dict, __pyx_k_swagger_spec_dict, sizeof(__pyx_k_swagger_spec_dict), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {&__pyx_n_s_update, __pyx_k_update, sizeof(__pyx_k_update), 0, 0, 1, 1},
   {&__pyx_kp_s_x_nullable, __pyx_k_x_nullable, sizeof(__pyx_k_x_nullable), 0, 0, 1, 0},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 68, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -4298,36 +4256,36 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "bravado_core/schema.pyx":35
+  /* "bravado_core/schema.pyx":37
  * 
  * def is_required(swagger_spec, schema_object_spec):
  *     return swagger_spec.deref(schema_object_spec).get('required', False)             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_tuple_ = PyTuple_Pack(2, __pyx_n_s_required, Py_False); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(2, __pyx_n_s_required, Py_False); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "bravado_core/schema.pyx":51
+  /* "bravado_core/schema.pyx":53
  * 
  * def is_prop_nullable(swagger_spec, schema_object_spec):
  *     return swagger_spec.deref(schema_object_spec).get('x-nullable', False)             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_tuple__2 = PyTuple_Pack(2, __pyx_kp_s_x_nullable, Py_False); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(2, __pyx_kp_s_x_nullable, Py_False); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "bravado_core/schema.pyx":123
+  /* "bravado_core/schema.pyx":125
  *         return result_spec
  * 
  *     additional_props = deref(object_spec).get('additionalProperties', True)             # <<<<<<<<<<<<<<
  * 
  *     if isinstance(additional_props, bool):
  */
-  __pyx_tuple__3 = PyTuple_Pack(2, __pyx_n_s_additionalProperties, Py_True); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 123, __pyx_L1_error)
+  __pyx_tuple__3 = PyTuple_Pack(2, __pyx_n_s_additionalProperties, Py_True); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
@@ -4342,161 +4300,137 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "bravado_core/schema.pyx":25
- * cdef str x_nullable_str = 'x-nullable'
- * 
- * def has_default(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
- *     cdef dict swagger_spec_dict = swagger_spec.deref(schema_object_spec)
- *     return 'default' in swagger_spec_dict
- */
-  __pyx_tuple__5 = PyTuple_Pack(3, __pyx_n_s_swagger_spec, __pyx_n_s_schema_object_spec, __pyx_n_s_swagger_spec_dict); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 25, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__5);
-  __Pyx_GIVEREF(__pyx_tuple__5);
-  __pyx_codeobj__6 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__5, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_schema_pyx, __pyx_n_s_has_default, 25, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__6)) __PYX_ERR(0, 25, __pyx_L1_error)
-
-  /* "bravado_core/schema.pyx":30
- * 
- * 
- * def get_default(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
- *     return swagger_spec.deref(schema_object_spec).get('default')
- * 
- */
-  __pyx_tuple__7 = PyTuple_Pack(2, __pyx_n_s_swagger_spec, __pyx_n_s_schema_object_spec); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 30, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__7);
-  __Pyx_GIVEREF(__pyx_tuple__7);
-  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_schema_pyx, __pyx_n_s_get_default, 30, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 30, __pyx_L1_error)
-
-  /* "bravado_core/schema.pyx":34
+  /* "bravado_core/schema.pyx":36
  * 
  * 
  * def is_required(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
  *     return swagger_spec.deref(schema_object_spec).get('required', False)
  * 
  */
-  __pyx_tuple__9 = PyTuple_Pack(2, __pyx_n_s_swagger_spec, __pyx_n_s_schema_object_spec); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 34, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__9);
-  __Pyx_GIVEREF(__pyx_tuple__9);
-  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_schema_pyx, __pyx_n_s_is_required, 34, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_tuple__5 = PyTuple_Pack(2, __pyx_n_s_swagger_spec, __pyx_n_s_schema_object_spec); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__5);
+  __Pyx_GIVEREF(__pyx_tuple__5);
+  __pyx_codeobj__6 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__5, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_schema_pyx, __pyx_n_s_is_required, 36, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__6)) __PYX_ERR(0, 36, __pyx_L1_error)
 
-  /* "bravado_core/schema.pyx":38
+  /* "bravado_core/schema.pyx":40
  * 
  * 
  * def has_format(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
  *     return 'format' in swagger_spec.deref(schema_object_spec)
  * 
  */
-  __pyx_tuple__11 = PyTuple_Pack(2, __pyx_n_s_swagger_spec, __pyx_n_s_schema_object_spec); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 38, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__11);
-  __Pyx_GIVEREF(__pyx_tuple__11);
-  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_schema_pyx, __pyx_n_s_has_format, 38, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_tuple__7 = PyTuple_Pack(2, __pyx_n_s_swagger_spec, __pyx_n_s_schema_object_spec); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__7);
+  __Pyx_GIVEREF(__pyx_tuple__7);
+  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__7, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_schema_pyx, __pyx_n_s_has_format, 40, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 40, __pyx_L1_error)
 
-  /* "bravado_core/schema.pyx":42
+  /* "bravado_core/schema.pyx":44
  * 
  * 
  * def get_format(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
  *     return swagger_spec.deref(schema_object_spec).get('format')
  * 
  */
-  __pyx_tuple__13 = PyTuple_Pack(2, __pyx_n_s_swagger_spec, __pyx_n_s_schema_object_spec); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 42, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__13);
-  __Pyx_GIVEREF(__pyx_tuple__13);
-  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_schema_pyx, __pyx_n_s_get_format, 42, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_tuple__9 = PyTuple_Pack(2, __pyx_n_s_swagger_spec, __pyx_n_s_schema_object_spec); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__9);
+  __Pyx_GIVEREF(__pyx_tuple__9);
+  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_schema_pyx, __pyx_n_s_get_format, 44, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 44, __pyx_L1_error)
 
-  /* "bravado_core/schema.pyx":46
+  /* "bravado_core/schema.pyx":48
  * 
  * 
  * def is_param_spec(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
  *     return 'in' in swagger_spec.deref(schema_object_spec)
  * 
  */
-  __pyx_tuple__15 = PyTuple_Pack(2, __pyx_n_s_swagger_spec, __pyx_n_s_schema_object_spec); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 46, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__15);
-  __Pyx_GIVEREF(__pyx_tuple__15);
-  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_schema_pyx, __pyx_n_s_is_param_spec, 46, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_tuple__11 = PyTuple_Pack(2, __pyx_n_s_swagger_spec, __pyx_n_s_schema_object_spec); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__11);
+  __Pyx_GIVEREF(__pyx_tuple__11);
+  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_schema_pyx, __pyx_n_s_is_param_spec, 48, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 48, __pyx_L1_error)
 
-  /* "bravado_core/schema.pyx":50
+  /* "bravado_core/schema.pyx":52
  * 
  * 
  * def is_prop_nullable(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
  *     return swagger_spec.deref(schema_object_spec).get('x-nullable', False)
  * 
  */
-  __pyx_tuple__17 = PyTuple_Pack(2, __pyx_n_s_swagger_spec, __pyx_n_s_schema_object_spec); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 50, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__17);
-  __Pyx_GIVEREF(__pyx_tuple__17);
-  __pyx_codeobj__18 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__17, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_schema_pyx, __pyx_n_s_is_prop_nullable, 50, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__18)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_tuple__13 = PyTuple_Pack(2, __pyx_n_s_swagger_spec, __pyx_n_s_schema_object_spec); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__13);
+  __Pyx_GIVEREF(__pyx_tuple__13);
+  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_schema_pyx, __pyx_n_s_is_prop_nullable, 52, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 52, __pyx_L1_error)
 
-  /* "bravado_core/schema.pyx":54
+  /* "bravado_core/schema.pyx":56
  * 
  * 
  * def is_ref(spec):             # <<<<<<<<<<<<<<
  *     """ Check if the given spec is a Mapping and contains a $ref.
  * 
  */
-  __pyx_tuple__19 = PyTuple_Pack(1, __pyx_n_s_spec); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 54, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__19);
-  __Pyx_GIVEREF(__pyx_tuple__19);
-  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_schema_pyx, __pyx_n_s_is_ref, 54, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __pyx_tuple__15 = PyTuple_Pack(1, __pyx_n_s_spec); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__15);
+  __Pyx_GIVEREF(__pyx_tuple__15);
+  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_schema_pyx, __pyx_n_s_is_ref, 56, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 56, __pyx_L1_error)
 
-  /* "bravado_core/schema.pyx":70
+  /* "bravado_core/schema.pyx":72
  * 
  * 
  * def is_dict_like(spec):             # <<<<<<<<<<<<<<
  *     """
  *     :param spec: swagger object specification in dict form
  */
-  __pyx_tuple__21 = PyTuple_Pack(1, __pyx_n_s_spec); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 70, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__21);
-  __Pyx_GIVEREF(__pyx_tuple__21);
-  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_schema_pyx, __pyx_n_s_is_dict_like, 70, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 70, __pyx_L1_error)
+  __pyx_tuple__17 = PyTuple_Pack(1, __pyx_n_s_spec); if (unlikely(!__pyx_tuple__17)) __PYX_ERR(0, 72, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__17);
+  __Pyx_GIVEREF(__pyx_tuple__17);
+  __pyx_codeobj__18 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__17, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_schema_pyx, __pyx_n_s_is_dict_like, 72, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__18)) __PYX_ERR(0, 72, __pyx_L1_error)
 
-  /* "bravado_core/schema.pyx":82
+  /* "bravado_core/schema.pyx":84
  * 
  * 
  * def is_list_like(spec):             # <<<<<<<<<<<<<<
  *     """
  *     :param spec: swagger object specification in dict form
  */
-  __pyx_tuple__23 = PyTuple_Pack(1, __pyx_n_s_spec); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 82, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__23);
-  __Pyx_GIVEREF(__pyx_tuple__23);
-  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_schema_pyx, __pyx_n_s_is_list_like, 82, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_tuple__19 = PyTuple_Pack(1, __pyx_n_s_spec); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(0, 84, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__19);
+  __Pyx_GIVEREF(__pyx_tuple__19);
+  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_schema_pyx, __pyx_n_s_is_list_like, 84, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(0, 84, __pyx_L1_error)
 
-  /* "bravado_core/schema.pyx":90
+  /* "bravado_core/schema.pyx":92
  * 
  * 
  * def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, properties=None):             # <<<<<<<<<<<<<<
  *     """Given a jsonschema object spec and value, retrieve the spec for the
  *      given property taking 'additionalProperties' into consideration.
  */
-  __pyx_tuple__25 = PyTuple_Pack(9, __pyx_n_s_swagger_spec, __pyx_n_s_object_spec, __pyx_n_s_object_value, __pyx_n_s_prop_name, __pyx_n_s_properties, __pyx_n_s_deref, __pyx_n_s_prop_spec, __pyx_n_s_result_spec, __pyx_n_s_additional_props); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 90, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__25);
-  __Pyx_GIVEREF(__pyx_tuple__25);
-  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(5, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_schema_pyx, __pyx_n_s_get_spec_for_prop, 90, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_tuple__21 = PyTuple_Pack(9, __pyx_n_s_swagger_spec, __pyx_n_s_object_spec, __pyx_n_s_object_value, __pyx_n_s_prop_name, __pyx_n_s_properties, __pyx_n_s_deref, __pyx_n_s_prop_spec, __pyx_n_s_result_spec, __pyx_n_s_additional_props); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__21);
+  __Pyx_GIVEREF(__pyx_tuple__21);
+  __pyx_codeobj__22 = (PyObject*)__Pyx_PyCode_New(5, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__21, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_schema_pyx, __pyx_n_s_get_spec_for_prop, 92, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__22)) __PYX_ERR(0, 92, __pyx_L1_error)
 
-  /* "bravado_core/schema.pyx":140
+  /* "bravado_core/schema.pyx":142
  * 
  * 
  * def handle_null_value(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
  *     """Handle a null value for the associated schema object spec. Checks the
  *      x-nullable attribute in the spec to see if it is allowed and returns None
  */
-  __pyx_tuple__27 = PyTuple_Pack(2, __pyx_n_s_swagger_spec, __pyx_n_s_schema_object_spec); if (unlikely(!__pyx_tuple__27)) __PYX_ERR(0, 140, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__27);
-  __Pyx_GIVEREF(__pyx_tuple__27);
-  __pyx_codeobj__28 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__27, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_schema_pyx, __pyx_n_s_handle_null_value, 140, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__28)) __PYX_ERR(0, 140, __pyx_L1_error)
+  __pyx_tuple__23 = PyTuple_Pack(2, __pyx_n_s_swagger_spec, __pyx_n_s_schema_object_spec); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(0, 142, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__23);
+  __Pyx_GIVEREF(__pyx_tuple__23);
+  __pyx_codeobj__24 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__23, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_schema_pyx, __pyx_n_s_handle_null_value, 142, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__24)) __PYX_ERR(0, 142, __pyx_L1_error)
 
-  /* "bravado_core/schema.pyx":161
+  /* "bravado_core/schema.pyx":163
  * 
  * 
  * def collapsed_properties(model_spec, swagger_spec):             # <<<<<<<<<<<<<<
  *     """Processes model spec and outputs dictionary with attributes
  *     as the keys and attribute spec as the value for the model.
  */
-  __pyx_tuple__29 = PyTuple_Pack(8, __pyx_n_s_model_spec, __pyx_n_s_swagger_spec, __pyx_n_s_properties, __pyx_n_s_attr, __pyx_n_s_attr_spec, __pyx_n_s_deref, __pyx_n_s_item_spec, __pyx_n_s_more_properties); if (unlikely(!__pyx_tuple__29)) __PYX_ERR(0, 161, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__29);
-  __Pyx_GIVEREF(__pyx_tuple__29);
-  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(2, 0, 8, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_schema_pyx, __pyx_n_s_collapsed_properties, 161, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) __PYX_ERR(0, 161, __pyx_L1_error)
+  __pyx_tuple__25 = PyTuple_Pack(8, __pyx_n_s_model_spec, __pyx_n_s_swagger_spec, __pyx_n_s_properties, __pyx_n_s_attr, __pyx_n_s_attr_spec, __pyx_n_s_deref, __pyx_n_s_item_spec, __pyx_n_s_more_properties); if (unlikely(!__pyx_tuple__25)) __PYX_ERR(0, 163, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__25);
+  __Pyx_GIVEREF(__pyx_tuple__25);
+  __pyx_codeobj__26 = (PyObject*)__Pyx_PyCode_New(2, 0, 8, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__25, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_schema_pyx, __pyx_n_s_collapsed_properties, 163, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__26)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -4505,6 +4439,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
 }
 
 static CYTHON_SMALL_CODE int __Pyx_InitGlobals(void) {
+  __pyx_umethod_PyDict_Type_get.type = (PyObject*)&PyDict_Type;
   __pyx_umethod_PyDict_Type_update.type = (PyObject*)&PyDict_Type;
   if (__Pyx_InitStrings(__pyx_string_tab) < 0) __PYX_ERR(0, 1, __pyx_L1_error);
   return 0;
@@ -4897,167 +4832,143 @@ if (!__Pyx_RefNanny) {
  * cdef bint false_cython = False
  * cdef str x_nullable_str = 'x-nullable'             # <<<<<<<<<<<<<<
  * 
- * def has_default(swagger_spec, schema_object_spec):
+ * cpdef has_default(swagger_spec, schema_object_spec):
  */
   __Pyx_INCREF(__pyx_kp_s_x_nullable);
   __Pyx_XGOTREF(__pyx_v_12bravado_core_6schema_x_nullable_str);
   __Pyx_DECREF_SET(__pyx_v_12bravado_core_6schema_x_nullable_str, __pyx_kp_s_x_nullable);
   __Pyx_GIVEREF(__pyx_kp_s_x_nullable);
 
-  /* "bravado_core/schema.pyx":25
- * cdef str x_nullable_str = 'x-nullable'
- * 
- * def has_default(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
- *     cdef dict swagger_spec_dict = swagger_spec.deref(schema_object_spec)
- *     return 'default' in swagger_spec_dict
- */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_12bravado_core_6schema_1has_default, NULL, __pyx_n_s_bravado_core_schema); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 25, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_has_default, __pyx_t_2) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-  /* "bravado_core/schema.pyx":30
- * 
- * 
- * def get_default(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
- *     return swagger_spec.deref(schema_object_spec).get('default')
- * 
- */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_12bravado_core_6schema_3get_default, NULL, __pyx_n_s_bravado_core_schema); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 30, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_default, __pyx_t_2) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-  /* "bravado_core/schema.pyx":34
+  /* "bravado_core/schema.pyx":36
  * 
  * 
  * def is_required(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
  *     return swagger_spec.deref(schema_object_spec).get('required', False)
  * 
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_12bravado_core_6schema_5is_required, NULL, __pyx_n_s_bravado_core_schema); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_12bravado_core_6schema_5is_required, NULL, __pyx_n_s_bravado_core_schema); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_required, __pyx_t_2) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_required, __pyx_t_2) < 0) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "bravado_core/schema.pyx":38
+  /* "bravado_core/schema.pyx":40
  * 
  * 
  * def has_format(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
  *     return 'format' in swagger_spec.deref(schema_object_spec)
  * 
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_12bravado_core_6schema_7has_format, NULL, __pyx_n_s_bravado_core_schema); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_12bravado_core_6schema_7has_format, NULL, __pyx_n_s_bravado_core_schema); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_has_format, __pyx_t_2) < 0) __PYX_ERR(0, 38, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_has_format, __pyx_t_2) < 0) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "bravado_core/schema.pyx":42
+  /* "bravado_core/schema.pyx":44
  * 
  * 
  * def get_format(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
  *     return swagger_spec.deref(schema_object_spec).get('format')
  * 
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_12bravado_core_6schema_9get_format, NULL, __pyx_n_s_bravado_core_schema); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_12bravado_core_6schema_9get_format, NULL, __pyx_n_s_bravado_core_schema); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_format, __pyx_t_2) < 0) __PYX_ERR(0, 42, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_format, __pyx_t_2) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "bravado_core/schema.pyx":46
+  /* "bravado_core/schema.pyx":48
  * 
  * 
  * def is_param_spec(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
  *     return 'in' in swagger_spec.deref(schema_object_spec)
  * 
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_12bravado_core_6schema_11is_param_spec, NULL, __pyx_n_s_bravado_core_schema); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_12bravado_core_6schema_11is_param_spec, NULL, __pyx_n_s_bravado_core_schema); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_param_spec, __pyx_t_2) < 0) __PYX_ERR(0, 46, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_param_spec, __pyx_t_2) < 0) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "bravado_core/schema.pyx":50
+  /* "bravado_core/schema.pyx":52
  * 
  * 
  * def is_prop_nullable(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
  *     return swagger_spec.deref(schema_object_spec).get('x-nullable', False)
  * 
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_12bravado_core_6schema_13is_prop_nullable, NULL, __pyx_n_s_bravado_core_schema); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_12bravado_core_6schema_13is_prop_nullable, NULL, __pyx_n_s_bravado_core_schema); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_prop_nullable, __pyx_t_2) < 0) __PYX_ERR(0, 50, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_prop_nullable, __pyx_t_2) < 0) __PYX_ERR(0, 52, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "bravado_core/schema.pyx":54
+  /* "bravado_core/schema.pyx":56
  * 
  * 
  * def is_ref(spec):             # <<<<<<<<<<<<<<
  *     """ Check if the given spec is a Mapping and contains a $ref.
  * 
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_12bravado_core_6schema_15is_ref, NULL, __pyx_n_s_bravado_core_schema); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_12bravado_core_6schema_15is_ref, NULL, __pyx_n_s_bravado_core_schema); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_ref, __pyx_t_2) < 0) __PYX_ERR(0, 54, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_ref, __pyx_t_2) < 0) __PYX_ERR(0, 56, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "bravado_core/schema.pyx":70
+  /* "bravado_core/schema.pyx":72
  * 
  * 
  * def is_dict_like(spec):             # <<<<<<<<<<<<<<
  *     """
  *     :param spec: swagger object specification in dict form
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_12bravado_core_6schema_17is_dict_like, NULL, __pyx_n_s_bravado_core_schema); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 70, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_12bravado_core_6schema_17is_dict_like, NULL, __pyx_n_s_bravado_core_schema); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_dict_like, __pyx_t_2) < 0) __PYX_ERR(0, 70, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_dict_like, __pyx_t_2) < 0) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "bravado_core/schema.pyx":82
+  /* "bravado_core/schema.pyx":84
  * 
  * 
  * def is_list_like(spec):             # <<<<<<<<<<<<<<
  *     """
  *     :param spec: swagger object specification in dict form
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_12bravado_core_6schema_19is_list_like, NULL, __pyx_n_s_bravado_core_schema); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 82, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_12bravado_core_6schema_19is_list_like, NULL, __pyx_n_s_bravado_core_schema); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 84, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_list_like, __pyx_t_2) < 0) __PYX_ERR(0, 82, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_is_list_like, __pyx_t_2) < 0) __PYX_ERR(0, 84, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "bravado_core/schema.pyx":90
+  /* "bravado_core/schema.pyx":92
  * 
  * 
  * def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, properties=None):             # <<<<<<<<<<<<<<
  *     """Given a jsonschema object spec and value, retrieve the spec for the
  *      given property taking 'additionalProperties' into consideration.
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_12bravado_core_6schema_21get_spec_for_prop, NULL, __pyx_n_s_bravado_core_schema); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_12bravado_core_6schema_21get_spec_for_prop, NULL, __pyx_n_s_bravado_core_schema); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_spec_for_prop, __pyx_t_2) < 0) __PYX_ERR(0, 90, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_spec_for_prop, __pyx_t_2) < 0) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "bravado_core/schema.pyx":140
+  /* "bravado_core/schema.pyx":142
  * 
  * 
  * def handle_null_value(swagger_spec, schema_object_spec):             # <<<<<<<<<<<<<<
  *     """Handle a null value for the associated schema object spec. Checks the
  *      x-nullable attribute in the spec to see if it is allowed and returns None
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_12bravado_core_6schema_23handle_null_value, NULL, __pyx_n_s_bravado_core_schema); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 140, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_12bravado_core_6schema_23handle_null_value, NULL, __pyx_n_s_bravado_core_schema); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 142, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_handle_null_value, __pyx_t_2) < 0) __PYX_ERR(0, 140, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_handle_null_value, __pyx_t_2) < 0) __PYX_ERR(0, 142, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "bravado_core/schema.pyx":161
+  /* "bravado_core/schema.pyx":163
  * 
  * 
  * def collapsed_properties(model_spec, swagger_spec):             # <<<<<<<<<<<<<<
  *     """Processes model spec and outputs dictionary with attributes
  *     as the keys and attribute spec as the value for the model.
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_12bravado_core_6schema_25collapsed_properties, NULL, __pyx_n_s_bravado_core_schema); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 161, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_12bravado_core_6schema_25collapsed_properties, NULL, __pyx_n_s_bravado_core_schema); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_collapsed_properties, __pyx_t_2) < 0) __PYX_ERR(0, 161, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_collapsed_properties, __pyx_t_2) < 0) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "bravado_core/schema.pyx":1
@@ -5139,148 +5050,6 @@ static PyObject *__Pyx_GetBuiltinName(PyObject *name) {
 #endif
     }
     return result;
-}
-
-/* RaiseArgTupleInvalid */
-static void __Pyx_RaiseArgtupleInvalid(
-    const char* func_name,
-    int exact,
-    Py_ssize_t num_min,
-    Py_ssize_t num_max,
-    Py_ssize_t num_found)
-{
-    Py_ssize_t num_expected;
-    const char *more_or_less;
-    if (num_found < num_min) {
-        num_expected = num_min;
-        more_or_less = "at least";
-    } else {
-        num_expected = num_max;
-        more_or_less = "at most";
-    }
-    if (exact) {
-        more_or_less = "exactly";
-    }
-    PyErr_Format(PyExc_TypeError,
-                 "%.200s() takes %.8s %" CYTHON_FORMAT_SSIZE_T "d positional argument%.1s (%" CYTHON_FORMAT_SSIZE_T "d given)",
-                 func_name, more_or_less, num_expected,
-                 (num_expected == 1) ? "" : "s", num_found);
-}
-
-/* RaiseDoubleKeywords */
-static void __Pyx_RaiseDoubleKeywordsError(
-    const char* func_name,
-    PyObject* kw_name)
-{
-    PyErr_Format(PyExc_TypeError,
-        #if PY_MAJOR_VERSION >= 3
-        "%s() got multiple values for keyword argument '%U'", func_name, kw_name);
-        #else
-        "%s() got multiple values for keyword argument '%s'", func_name,
-        PyString_AsString(kw_name));
-        #endif
-}
-
-/* ParseKeywords */
-static int __Pyx_ParseOptionalKeywords(
-    PyObject *kwds,
-    PyObject **argnames[],
-    PyObject *kwds2,
-    PyObject *values[],
-    Py_ssize_t num_pos_args,
-    const char* function_name)
-{
-    PyObject *key = 0, *value = 0;
-    Py_ssize_t pos = 0;
-    PyObject*** name;
-    PyObject*** first_kw_arg = argnames + num_pos_args;
-    while (PyDict_Next(kwds, &pos, &key, &value)) {
-        name = first_kw_arg;
-        while (*name && (**name != key)) name++;
-        if (*name) {
-            values[name-argnames] = value;
-            continue;
-        }
-        name = first_kw_arg;
-        #if PY_MAJOR_VERSION < 3
-        if (likely(PyString_CheckExact(key)) || likely(PyString_Check(key))) {
-            while (*name) {
-                if ((CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**name) == PyString_GET_SIZE(key))
-                        && _PyString_Eq(**name, key)) {
-                    values[name-argnames] = value;
-                    break;
-                }
-                name++;
-            }
-            if (*name) continue;
-            else {
-                PyObject*** argname = argnames;
-                while (argname != first_kw_arg) {
-                    if ((**argname == key) || (
-                            (CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**argname) == PyString_GET_SIZE(key))
-                             && _PyString_Eq(**argname, key))) {
-                        goto arg_passed_twice;
-                    }
-                    argname++;
-                }
-            }
-        } else
-        #endif
-        if (likely(PyUnicode_Check(key))) {
-            while (*name) {
-                int cmp = (**name == key) ? 0 :
-                #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
-                    (PyUnicode_GET_SIZE(**name) != PyUnicode_GET_SIZE(key)) ? 1 :
-                #endif
-                    PyUnicode_Compare(**name, key);
-                if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
-                if (cmp == 0) {
-                    values[name-argnames] = value;
-                    break;
-                }
-                name++;
-            }
-            if (*name) continue;
-            else {
-                PyObject*** argname = argnames;
-                while (argname != first_kw_arg) {
-                    int cmp = (**argname == key) ? 0 :
-                    #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
-                        (PyUnicode_GET_SIZE(**argname) != PyUnicode_GET_SIZE(key)) ? 1 :
-                    #endif
-                        PyUnicode_Compare(**argname, key);
-                    if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
-                    if (cmp == 0) goto arg_passed_twice;
-                    argname++;
-                }
-            }
-        } else
-            goto invalid_keyword_type;
-        if (kwds2) {
-            if (unlikely(PyDict_SetItem(kwds2, key, value))) goto bad;
-        } else {
-            goto invalid_keyword;
-        }
-    }
-    return 0;
-arg_passed_twice:
-    __Pyx_RaiseDoubleKeywordsError(function_name, key);
-    goto bad;
-invalid_keyword_type:
-    PyErr_Format(PyExc_TypeError,
-        "%.200s() keywords must be strings", function_name);
-    goto bad;
-invalid_keyword:
-    PyErr_Format(PyExc_TypeError,
-    #if PY_MAJOR_VERSION < 3
-        "%.200s() got an unexpected keyword argument '%.200s'",
-        function_name, PyString_AsString(key));
-    #else
-        "%s() got an unexpected keyword argument '%U'",
-        function_name, key);
-    #endif
-bad:
-    return -1;
 }
 
 /* PyCFunctionFastCall */
@@ -5533,6 +5302,306 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObjec
     return result;
 }
 #endif
+
+/* RaiseArgTupleInvalid */
+static void __Pyx_RaiseArgtupleInvalid(
+    const char* func_name,
+    int exact,
+    Py_ssize_t num_min,
+    Py_ssize_t num_max,
+    Py_ssize_t num_found)
+{
+    Py_ssize_t num_expected;
+    const char *more_or_less;
+    if (num_found < num_min) {
+        num_expected = num_min;
+        more_or_less = "at least";
+    } else {
+        num_expected = num_max;
+        more_or_less = "at most";
+    }
+    if (exact) {
+        more_or_less = "exactly";
+    }
+    PyErr_Format(PyExc_TypeError,
+                 "%.200s() takes %.8s %" CYTHON_FORMAT_SSIZE_T "d positional argument%.1s (%" CYTHON_FORMAT_SSIZE_T "d given)",
+                 func_name, more_or_less, num_expected,
+                 (num_expected == 1) ? "" : "s", num_found);
+}
+
+/* RaiseDoubleKeywords */
+static void __Pyx_RaiseDoubleKeywordsError(
+    const char* func_name,
+    PyObject* kw_name)
+{
+    PyErr_Format(PyExc_TypeError,
+        #if PY_MAJOR_VERSION >= 3
+        "%s() got multiple values for keyword argument '%U'", func_name, kw_name);
+        #else
+        "%s() got multiple values for keyword argument '%s'", func_name,
+        PyString_AsString(kw_name));
+        #endif
+}
+
+/* ParseKeywords */
+static int __Pyx_ParseOptionalKeywords(
+    PyObject *kwds,
+    PyObject **argnames[],
+    PyObject *kwds2,
+    PyObject *values[],
+    Py_ssize_t num_pos_args,
+    const char* function_name)
+{
+    PyObject *key = 0, *value = 0;
+    Py_ssize_t pos = 0;
+    PyObject*** name;
+    PyObject*** first_kw_arg = argnames + num_pos_args;
+    while (PyDict_Next(kwds, &pos, &key, &value)) {
+        name = first_kw_arg;
+        while (*name && (**name != key)) name++;
+        if (*name) {
+            values[name-argnames] = value;
+            continue;
+        }
+        name = first_kw_arg;
+        #if PY_MAJOR_VERSION < 3
+        if (likely(PyString_CheckExact(key)) || likely(PyString_Check(key))) {
+            while (*name) {
+                if ((CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**name) == PyString_GET_SIZE(key))
+                        && _PyString_Eq(**name, key)) {
+                    values[name-argnames] = value;
+                    break;
+                }
+                name++;
+            }
+            if (*name) continue;
+            else {
+                PyObject*** argname = argnames;
+                while (argname != first_kw_arg) {
+                    if ((**argname == key) || (
+                            (CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**argname) == PyString_GET_SIZE(key))
+                             && _PyString_Eq(**argname, key))) {
+                        goto arg_passed_twice;
+                    }
+                    argname++;
+                }
+            }
+        } else
+        #endif
+        if (likely(PyUnicode_Check(key))) {
+            while (*name) {
+                int cmp = (**name == key) ? 0 :
+                #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
+                    (PyUnicode_GET_SIZE(**name) != PyUnicode_GET_SIZE(key)) ? 1 :
+                #endif
+                    PyUnicode_Compare(**name, key);
+                if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
+                if (cmp == 0) {
+                    values[name-argnames] = value;
+                    break;
+                }
+                name++;
+            }
+            if (*name) continue;
+            else {
+                PyObject*** argname = argnames;
+                while (argname != first_kw_arg) {
+                    int cmp = (**argname == key) ? 0 :
+                    #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
+                        (PyUnicode_GET_SIZE(**argname) != PyUnicode_GET_SIZE(key)) ? 1 :
+                    #endif
+                        PyUnicode_Compare(**argname, key);
+                    if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
+                    if (cmp == 0) goto arg_passed_twice;
+                    argname++;
+                }
+            }
+        } else
+            goto invalid_keyword_type;
+        if (kwds2) {
+            if (unlikely(PyDict_SetItem(kwds2, key, value))) goto bad;
+        } else {
+            goto invalid_keyword;
+        }
+    }
+    return 0;
+arg_passed_twice:
+    __Pyx_RaiseDoubleKeywordsError(function_name, key);
+    goto bad;
+invalid_keyword_type:
+    PyErr_Format(PyExc_TypeError,
+        "%.200s() keywords must be strings", function_name);
+    goto bad;
+invalid_keyword:
+    PyErr_Format(PyExc_TypeError,
+    #if PY_MAJOR_VERSION < 3
+        "%.200s() got an unexpected keyword argument '%.200s'",
+        function_name, PyString_AsString(key));
+    #else
+        "%s() got an unexpected keyword argument '%U'",
+        function_name, key);
+    #endif
+bad:
+    return -1;
+}
+
+/* UnpackUnboundCMethod */
+static int __Pyx_TryUnpackUnboundCMethod(__Pyx_CachedCFunction* target) {
+    PyObject *method;
+    method = __Pyx_PyObject_GetAttrStr(target->type, *target->method_name);
+    if (unlikely(!method))
+        return -1;
+    target->method = method;
+#if CYTHON_COMPILING_IN_CPYTHON
+    #if PY_MAJOR_VERSION >= 3
+    if (likely(__Pyx_TypeCheck(method, &PyMethodDescr_Type)))
+    #endif
+    {
+        PyMethodDescrObject *descr = (PyMethodDescrObject*) method;
+        target->func = descr->d_method->ml_meth;
+        target->flag = descr->d_method->ml_flags & ~(METH_CLASS | METH_STATIC | METH_COEXIST | METH_STACKLESS);
+    }
+#endif
+    return 0;
+}
+
+/* CallUnboundCMethod1 */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_CallUnboundCMethod1(__Pyx_CachedCFunction* cfunc, PyObject* self, PyObject* arg) {
+    if (likely(cfunc->func)) {
+        int flag = cfunc->flag;
+        if (flag == METH_O) {
+            return (*(cfunc->func))(self, arg);
+        } else if (PY_VERSION_HEX >= 0x030600B1 && flag == METH_FASTCALL) {
+            if (PY_VERSION_HEX >= 0x030700A0) {
+                return (*(__Pyx_PyCFunctionFast)(void*)(PyCFunction)cfunc->func)(self, &arg, 1);
+            } else {
+                return (*(__Pyx_PyCFunctionFastWithKeywords)(void*)(PyCFunction)cfunc->func)(self, &arg, 1, NULL);
+            }
+        } else if (PY_VERSION_HEX >= 0x030700A0 && flag == (METH_FASTCALL | METH_KEYWORDS)) {
+            return (*(__Pyx_PyCFunctionFastWithKeywords)(void*)(PyCFunction)cfunc->func)(self, &arg, 1, NULL);
+        }
+    }
+    return __Pyx__CallUnboundCMethod1(cfunc, self, arg);
+}
+#endif
+static PyObject* __Pyx__CallUnboundCMethod1(__Pyx_CachedCFunction* cfunc, PyObject* self, PyObject* arg){
+    PyObject *args, *result = NULL;
+    if (unlikely(!cfunc->func && !cfunc->method) && unlikely(__Pyx_TryUnpackUnboundCMethod(cfunc) < 0)) return NULL;
+#if CYTHON_COMPILING_IN_CPYTHON
+    if (cfunc->func && (cfunc->flag & METH_VARARGS)) {
+        args = PyTuple_New(1);
+        if (unlikely(!args)) goto bad;
+        Py_INCREF(arg);
+        PyTuple_SET_ITEM(args, 0, arg);
+        if (cfunc->flag & METH_KEYWORDS)
+            result = (*(PyCFunctionWithKeywords)(void*)(PyCFunction)cfunc->func)(self, args, NULL);
+        else
+            result = (*cfunc->func)(self, args);
+    } else {
+        args = PyTuple_New(2);
+        if (unlikely(!args)) goto bad;
+        Py_INCREF(self);
+        PyTuple_SET_ITEM(args, 0, self);
+        Py_INCREF(arg);
+        PyTuple_SET_ITEM(args, 1, arg);
+        result = __Pyx_PyObject_Call(cfunc->method, args, NULL);
+    }
+#else
+    args = PyTuple_Pack(2, self, arg);
+    if (unlikely(!args)) goto bad;
+    result = __Pyx_PyObject_Call(cfunc->method, args, NULL);
+#endif
+bad:
+    Py_XDECREF(args);
+    return result;
+}
+
+/* CallUnboundCMethod2 */
+#if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030600B1
+static CYTHON_INLINE PyObject *__Pyx_CallUnboundCMethod2(__Pyx_CachedCFunction *cfunc, PyObject *self, PyObject *arg1, PyObject *arg2) {
+    if (likely(cfunc->func)) {
+        PyObject *args[2] = {arg1, arg2};
+        if (cfunc->flag == METH_FASTCALL) {
+            #if PY_VERSION_HEX >= 0x030700A0
+            return (*(__Pyx_PyCFunctionFast)(void*)(PyCFunction)cfunc->func)(self, args, 2);
+            #else
+            return (*(__Pyx_PyCFunctionFastWithKeywords)(void*)(PyCFunction)cfunc->func)(self, args, 2, NULL);
+            #endif
+        }
+        #if PY_VERSION_HEX >= 0x030700A0
+        if (cfunc->flag == (METH_FASTCALL | METH_KEYWORDS))
+            return (*(__Pyx_PyCFunctionFastWithKeywords)(void*)(PyCFunction)cfunc->func)(self, args, 2, NULL);
+        #endif
+    }
+    return __Pyx__CallUnboundCMethod2(cfunc, self, arg1, arg2);
+}
+#endif
+static PyObject* __Pyx__CallUnboundCMethod2(__Pyx_CachedCFunction* cfunc, PyObject* self, PyObject* arg1, PyObject* arg2){
+    PyObject *args, *result = NULL;
+    if (unlikely(!cfunc->func && !cfunc->method) && unlikely(__Pyx_TryUnpackUnboundCMethod(cfunc) < 0)) return NULL;
+#if CYTHON_COMPILING_IN_CPYTHON
+    if (cfunc->func && (cfunc->flag & METH_VARARGS)) {
+        args = PyTuple_New(2);
+        if (unlikely(!args)) goto bad;
+        Py_INCREF(arg1);
+        PyTuple_SET_ITEM(args, 0, arg1);
+        Py_INCREF(arg2);
+        PyTuple_SET_ITEM(args, 1, arg2);
+        if (cfunc->flag & METH_KEYWORDS)
+            result = (*(PyCFunctionWithKeywords)(void*)(PyCFunction)cfunc->func)(self, args, NULL);
+        else
+            result = (*cfunc->func)(self, args);
+    } else {
+        args = PyTuple_New(3);
+        if (unlikely(!args)) goto bad;
+        Py_INCREF(self);
+        PyTuple_SET_ITEM(args, 0, self);
+        Py_INCREF(arg1);
+        PyTuple_SET_ITEM(args, 1, arg1);
+        Py_INCREF(arg2);
+        PyTuple_SET_ITEM(args, 2, arg2);
+        result = __Pyx_PyObject_Call(cfunc->method, args, NULL);
+    }
+#else
+    args = PyTuple_Pack(3, self, arg1, arg2);
+    if (unlikely(!args)) goto bad;
+    result = __Pyx_PyObject_Call(cfunc->method, args, NULL);
+#endif
+bad:
+    Py_XDECREF(args);
+    return result;
+}
+
+/* dict_getitem_default */
+static PyObject* __Pyx_PyDict_GetItemDefault(PyObject* d, PyObject* key, PyObject* default_value) {
+    PyObject* value;
+#if PY_MAJOR_VERSION >= 3 && !CYTHON_COMPILING_IN_PYPY
+    value = PyDict_GetItemWithError(d, key);
+    if (unlikely(!value)) {
+        if (unlikely(PyErr_Occurred()))
+            return NULL;
+        value = default_value;
+    }
+    Py_INCREF(value);
+    if ((1));
+#else
+    if (PyString_CheckExact(key) || PyUnicode_CheckExact(key) || PyInt_CheckExact(key)) {
+        value = PyDict_GetItem(d, key);
+        if (unlikely(!value)) {
+            value = default_value;
+        }
+        Py_INCREF(value);
+    }
+#endif
+    else {
+        if (default_value == Py_None)
+            value = __Pyx_CallUnboundCMethod1(&__pyx_umethod_PyDict_Type_get, d, key);
+        else
+            value = __Pyx_CallUnboundCMethod2(&__pyx_umethod_PyDict_Type_get, d, key, default_value);
+    }
+    return value;
+}
 
 /* GetModuleGlobalName */
 #if CYTHON_USE_DICT_VERSIONS
@@ -5989,78 +6058,6 @@ static int __Pyx_IternextUnpackEndCheck(PyObject *retval, Py_ssize_t expected) {
         return __Pyx_IterFinish();
     }
     return 0;
-}
-
-/* UnpackUnboundCMethod */
-static int __Pyx_TryUnpackUnboundCMethod(__Pyx_CachedCFunction* target) {
-    PyObject *method;
-    method = __Pyx_PyObject_GetAttrStr(target->type, *target->method_name);
-    if (unlikely(!method))
-        return -1;
-    target->method = method;
-#if CYTHON_COMPILING_IN_CPYTHON
-    #if PY_MAJOR_VERSION >= 3
-    if (likely(__Pyx_TypeCheck(method, &PyMethodDescr_Type)))
-    #endif
-    {
-        PyMethodDescrObject *descr = (PyMethodDescrObject*) method;
-        target->func = descr->d_method->ml_meth;
-        target->flag = descr->d_method->ml_flags & ~(METH_CLASS | METH_STATIC | METH_COEXIST | METH_STACKLESS);
-    }
-#endif
-    return 0;
-}
-
-/* CallUnboundCMethod1 */
-#if CYTHON_COMPILING_IN_CPYTHON
-static CYTHON_INLINE PyObject* __Pyx_CallUnboundCMethod1(__Pyx_CachedCFunction* cfunc, PyObject* self, PyObject* arg) {
-    if (likely(cfunc->func)) {
-        int flag = cfunc->flag;
-        if (flag == METH_O) {
-            return (*(cfunc->func))(self, arg);
-        } else if (PY_VERSION_HEX >= 0x030600B1 && flag == METH_FASTCALL) {
-            if (PY_VERSION_HEX >= 0x030700A0) {
-                return (*(__Pyx_PyCFunctionFast)(void*)(PyCFunction)cfunc->func)(self, &arg, 1);
-            } else {
-                return (*(__Pyx_PyCFunctionFastWithKeywords)(void*)(PyCFunction)cfunc->func)(self, &arg, 1, NULL);
-            }
-        } else if (PY_VERSION_HEX >= 0x030700A0 && flag == (METH_FASTCALL | METH_KEYWORDS)) {
-            return (*(__Pyx_PyCFunctionFastWithKeywords)(void*)(PyCFunction)cfunc->func)(self, &arg, 1, NULL);
-        }
-    }
-    return __Pyx__CallUnboundCMethod1(cfunc, self, arg);
-}
-#endif
-static PyObject* __Pyx__CallUnboundCMethod1(__Pyx_CachedCFunction* cfunc, PyObject* self, PyObject* arg){
-    PyObject *args, *result = NULL;
-    if (unlikely(!cfunc->func && !cfunc->method) && unlikely(__Pyx_TryUnpackUnboundCMethod(cfunc) < 0)) return NULL;
-#if CYTHON_COMPILING_IN_CPYTHON
-    if (cfunc->func && (cfunc->flag & METH_VARARGS)) {
-        args = PyTuple_New(1);
-        if (unlikely(!args)) goto bad;
-        Py_INCREF(arg);
-        PyTuple_SET_ITEM(args, 0, arg);
-        if (cfunc->flag & METH_KEYWORDS)
-            result = (*(PyCFunctionWithKeywords)(void*)(PyCFunction)cfunc->func)(self, args, NULL);
-        else
-            result = (*cfunc->func)(self, args);
-    } else {
-        args = PyTuple_New(2);
-        if (unlikely(!args)) goto bad;
-        Py_INCREF(self);
-        PyTuple_SET_ITEM(args, 0, self);
-        Py_INCREF(arg);
-        PyTuple_SET_ITEM(args, 1, arg);
-        result = __Pyx_PyObject_Call(cfunc->method, args, NULL);
-    }
-#else
-    args = PyTuple_Pack(2, self, arg);
-    if (unlikely(!args)) goto bad;
-    result = __Pyx_PyObject_Call(cfunc->method, args, NULL);
-#endif
-bad:
-    Py_XDECREF(args);
-    return result;
 }
 
 /* Import */
