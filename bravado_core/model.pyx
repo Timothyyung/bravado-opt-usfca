@@ -109,6 +109,7 @@ cpdef _tag_models(container, json_reference, dict visited_models, swagger_spec):
     if deref(model_spec.get(MODEL_MARKER)) is not None:
         return
 
+    cdef str model_name
     model_name = _get_model_name(model_spec) or key
     _register_visited_model(
         json_reference=json_reference,
@@ -120,7 +121,7 @@ cpdef _tag_models(container, json_reference, dict visited_models, swagger_spec):
     )
 
 
-def _bless_models(container, json_reference, visited_models, swagger_spec):
+cpdef _bless_models(container, json_reference, dict visited_models, swagger_spec):
     """
     Callback used during the swagger spec ingestion process to add
     ``x-model`` attribute to models which does not define it.
@@ -144,6 +145,7 @@ def _bless_models(container, json_reference, visited_models, swagger_spec):
     if not is_dict_like(container):
         return
 
+    cdef str key
     key = json_reference.split('/')[-1]
     deref = swagger_spec.deref
     model_spec = deref(container.get(key))
@@ -159,6 +161,7 @@ def _bless_models(container, json_reference, visited_models, swagger_spec):
     ):
         return
 
+    cdef str model_name
     model_name = _get_model_name(model_spec)
     if not model_name:
         return
@@ -173,7 +176,7 @@ def _bless_models(container, json_reference, visited_models, swagger_spec):
     )
 
 
-def _collect_models(container, json_reference, models, swagger_spec):
+cpdef _collect_models(container, json_reference, models, swagger_spec):
     """
     Callback used during the swagger spec ingestion to collect all the
     tagged models and create appropriate python types for them.
@@ -189,6 +192,10 @@ def _collect_models(container, json_reference, models, swagger_spec):
     :param models: created model types are placed here
     :type swagger_spec: :class:`bravado_core.spec.Spec`
     """
+    cdef str key
+    cdef str model_name
+    cdef str model_type
+    cdef str message
     key = json_reference.split('/')[-1]
     if key == MODEL_MARKER and is_object(swagger_spec, container):
         model_spec = swagger_spec.deref(container)
