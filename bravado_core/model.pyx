@@ -24,7 +24,7 @@ log = logging.getLogger(__name__)
 # differentiated from 'object' types.
 #MODEL_MARKER = 'x-model'
 
-cdef str MODEL_MARKER = 'x-model'
+cpdef str MODEL_MARKER = 'x-model'
 cdef str title_str = 'title'
 
 cpdef _get_model_name(model_dict):

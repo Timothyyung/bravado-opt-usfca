@@ -17395,7 +17395,7 @@ if (!__Pyx_RefNanny) {
   /* "bravado_core/model.pyx":27
  * #MODEL_MARKER = 'x-model'
  * 
- * cdef str MODEL_MARKER = 'x-model'             # <<<<<<<<<<<<<<
+ * cpdef str MODEL_MARKER = 'x-model'             # <<<<<<<<<<<<<<
  * cdef str title_str = 'title'
  * 
  */
@@ -17406,7 +17406,7 @@ if (!__Pyx_RefNanny) {
 
   /* "bravado_core/model.pyx":28
  * 
- * cdef str MODEL_MARKER = 'x-model'
+ * cpdef str MODEL_MARKER = 'x-model'
  * cdef str title_str = 'title'             # <<<<<<<<<<<<<<
  * 
  * cpdef _get_model_name(model_dict):
