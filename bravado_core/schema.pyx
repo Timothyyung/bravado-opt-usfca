@@ -46,16 +46,19 @@ cpdef bint has_format(swagger_spec, schema_object_spec):
     return 'format' in swagger_spec_dict
 
 
-def get_format(swagger_spec, schema_object_spec):
-    return swagger_spec.deref(schema_object_spec).get('format')
+cpdef get_format(swagger_spec, schema_object_spec):
+    cdef dict swagger_spec_dict = swagger_spec.deref(schema_object_spec)
+    return swagger_spec_dict.get('format')
 
 
-def is_param_spec(swagger_spec, schema_object_spec):
-    return 'in' in swagger_spec.deref(schema_object_spec)
+cpdef bint is_param_spec(swagger_spec, schema_object_spec):
+    cdef dict swagger_spec_dict = swagger_spec.deref(schema_object_spec)
+    return 'in' in swagger_spec_dict
 
 
-def is_prop_nullable(swagger_spec, schema_object_spec):
-    return swagger_spec.deref(schema_object_spec).get('x-nullable', False)
+cpdef is_prop_nullable(swagger_spec, schema_object_spec):
+    cdef dict swagger_spec_dict = swagger_spec.deref(schema_object_spec)
+    return swagger_spec_dict.get('x-nullable', False)
 
 
 def is_ref(spec):
