@@ -23,6 +23,7 @@ log = logging.getLogger(__name__)
 # Models in #/definitions are tagged with this key so that they can be
 # differentiated from 'object' types.
 MODEL_MARKER = 'x-model'
+
 cdef str title_str = 'title'
 
 def _get_model_name(model_dict):
@@ -33,7 +34,7 @@ def _get_model_name(model_dict):
     return model_name
 
 
-def _raise_or_warn_duplicated_model(swagger_spec, message):
+cpdef _raise_or_warn_duplicated_model(swagger_spec,str message):
     if swagger_spec.config['use_models']:
         raise ValueError(message)
     else:
