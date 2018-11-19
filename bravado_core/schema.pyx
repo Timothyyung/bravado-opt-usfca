@@ -33,14 +33,17 @@ cpdef get_default(swagger_spec, schema_object_spec):
     return swagger_spec_dict.get('default')
 
 
-cpdef bint is_required(swagger_spec, schema_object_spec):
+cpdef is_required(swagger_spec, schema_object_spec):
     cdef dict swagger_spec_dict = swagger_spec.deref(schema_object_spec)
+    cdef str required_str = 'required'
     #return swagger_spec.deref(schema_object_spec).get('required', False)
-    return swagger_spec_dict.get('required', False)
+    return swagger_spec_dict.get(required_str, False)
 
 
-def has_format(swagger_spec, schema_object_spec):
-    return 'format' in swagger_spec.deref(schema_object_spec)
+cpdef bint has_format(swagger_spec, schema_object_spec):
+    cdef dict swagger_spec_dict = swagger_spec.deref(schema_object_spec)
+    #return 'format' in swagger_spec.deref(schema_object_spec)
+    return 'format' in swagger_spec_dict
 
 
 def get_format(swagger_spec, schema_object_spec):
