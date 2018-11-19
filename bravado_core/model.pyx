@@ -71,7 +71,7 @@ cpdef _register_visited_model(str json_reference, model_spec, str model_name, di
     visited_models[model_name] = json_reference
 
 
-def _tag_models(container, json_reference, visited_models, swagger_spec):
+cpdef _tag_models(container, json_reference, dict visited_models, swagger_spec):
     """
     Callback used during the swagger spec ingestion process to tag models
     with a 'x-model'. This is only done in the root document.
@@ -98,6 +98,7 @@ def _tag_models(container, json_reference, visited_models, swagger_spec):
     if not re.match('^[^#]*#/definitions/[^/]+$', json_reference):
         return
 
+    cdef str key
     key = json_reference.split('/')[-1]
     deref = swagger_spec.deref
     model_spec = deref(container.get(key))
