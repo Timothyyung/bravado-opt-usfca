@@ -168,7 +168,7 @@ def handle_null_value(swagger_spec, schema_object_spec):
         'Spec {0} is a required value'.format(schema_object_spec))
 
 
-def collapsed_properties(model_spec, swagger_spec):
+cpdef collapsed_properties(dict model_spec, swagger_spec):
     """Processes model spec and outputs dictionary with attributes
     as the keys and attribute spec as the value for the model.
 
