@@ -14,7 +14,7 @@ from bravado_core.schema import is_list_like
 from bravado_core.schema import SWAGGER_PRIMITIVES
 
 
-def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
+cpdef unmarshal_schema_object(swagger_spec, dict schema_object_spec, value):
     """Unmarshal the value using the given schema object specification.
 
     Unmarshalling includes:
@@ -68,7 +68,7 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
         .format(value, obj_type))
 
 
-def unmarshal_primitive(swagger_spec, primitive_spec, value):
+cpdef unmarshal_primitive(swagger_spec, dict primitive_spec, value):
     """Unmarshal a jsonschema primitive type into a python primitive.
 
     :type swagger_spec: :class:`bravado_core.spec.Spec`
@@ -86,7 +86,7 @@ def unmarshal_primitive(swagger_spec, primitive_spec, value):
     return value
 
 
-def unmarshal_array(swagger_spec, array_spec, array_value):
+cpdef list unmarshal_array(swagger_spec, dict array_spec, list array_value):
     """Unmarshal a jsonschema type of 'array' into a python list.
 
     :type swagger_spec: :class:`bravado_core.spec.Spec`
@@ -109,7 +109,7 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
     ]
 
 
-def unmarshal_object(swagger_spec, object_spec, object_value):
+cpdef dict unmarshal_object(swagger_spec, dict object_spec, dict object_value):
     """Unmarshal a jsonschema type of 'object' into a python dict.
 
     :type swagger_spec: :class:`bravado_core.spec.Spec`
@@ -155,7 +155,7 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
     return result
 
 
-def unmarshal_model(swagger_spec, model_spec, model_value):
+cpdef unmarshal_model(swagger_spec, dict model_spec, dict model_value):
     """Unmarshal a dict into a Model instance.
 
     :type swagger_spec: :class:`bravado_core.spec.Spec`
