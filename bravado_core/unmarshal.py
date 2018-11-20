@@ -32,7 +32,37 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
     """
     deref = swagger_spec.deref
     schema_object_spec = deref(schema_object_spec)
-    unmarshal_schema_object_sub(swagger_spec, schema_object_spec, value)
+    
+    obj_type = schema_object_spec.get('type')
+
+    if 'allOf' in schema_object_spec:
+        obj_type = 'object'
+
+    if not obj_type:
+        if swagger_spec.config['default_type_to_object']:
+            obj_type = 'object'
+        else:
+            return value
+
+    if obj_type in SWAGGER_PRIMITIVES:
+        return unmarshal_primitive(swagger_spec, schema_object_spec, value)
+
+    if obj_type == 'array':
+        return unmarshal_array(swagger_spec, schema_object_spec, value)
+
+    if swagger_spec.config['use_models'] and \
+            is_model(swagger_spec, schema_object_spec):
+        return unmarshal_model(swagger_spec, schema_object_spec, value)
+
+    if obj_type == 'object':
+        return unmarshal_object(swagger_spec, schema_object_spec, value)
+
+    if obj_type == 'file':
+        return value
+
+    raise SwaggerMappingError(
+        "Don't know how to unmarshal value {0} with a type of {1}"
+        .format(value, obj_type))
 
 def unmarshal_schema_object_sub(swagger_spec, schema_object_spec, value):
     obj_type = schema_object_spec.get('type')
