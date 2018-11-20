@@ -8,6 +8,8 @@ from setuptools import setup
 
 import bravado_core
 
+from distutils.core import setup
+from distutils.extension import Extension
 
 install_requires = [
     "jsonref",
