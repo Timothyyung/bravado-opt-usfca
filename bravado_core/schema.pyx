@@ -72,16 +72,12 @@ cpdef bint is_ref(spec):
     :rtype: boolean
     """
     try:
-        #return '$ref' in spec and is_dict_like(spec)
-        return is_ref_helper(spec)
+        return '$ref' in spec and is_dict_like(spec)
     except TypeError:
         return False
 
-cdef bint is_ref_helper(dict spec):
-    cdef str r = '$ref' 
-    return r in spec
 
-def is_dict_like(spec):
+cpdef bint is_dict_like(spec):
     """
     :param spec: swagger object specification in dict form
     :rtype: boolean
@@ -93,7 +89,7 @@ def is_dict_like(spec):
     return isinstance(spec, (dict, Mapping))
 
 
-def is_list_like(spec):
+cpdef bint is_list_like(spec):
     """
     :param spec: swagger object specification in dict form
     :rtype: boolean
