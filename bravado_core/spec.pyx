@@ -77,7 +77,7 @@ CONFIG_DEFAULTS = {
 }
 
 
-cdef class Spec(object):
+class Spec(object):
     """Represents a Swagger Specification for a service.
 
     :param spec_dict: Swagger API specification in json-like dict form
@@ -86,7 +86,6 @@ cdef class Spec(object):
     :type http_client: :class:`bravado.http_client.HTTPClient`
     :param config: Configuration dict. See CONFIG_DEFAULTS.
     """
-    cdef dict definitions
 
     def __init__(self, spec_dict, origin_url=None, http_client=None,
                  config=None):
