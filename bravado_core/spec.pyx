@@ -327,7 +327,7 @@ class Spec(object):
             descend.cache.clear()
 
 
-def is_yaml(url, content_type=None):
+cpdef bint is_yaml(str url, str content_type=None):
     yaml_content_types = {'application/yaml', 'application/x-yaml', 'text/yaml'}
 
     yaml_file_extensions = {'.yaml', '.yml'}
