@@ -55,6 +55,7 @@ setup(
         Extension("bravado_core.model", ["bravado_core/model.c"]),
         Extension("bravado_core.schema", ["bravado_core/schema.c"]),
         Extension("bravado_core.spec", ["bravado_core/spec.c"]),
+        Extension("bravado_core.unmarshal", ["bravado_core/unmarshal.c"]),
     ],
     
 )
