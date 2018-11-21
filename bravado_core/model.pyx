@@ -24,17 +24,16 @@ log = logging.getLogger(__name__)
 # differentiated from 'object' types.
 MODEL_MARKER = 'x-model'
 
-cdef str title_str = 'title'
 
 def _get_model_name(model_dict):
     """Determine model name from model dictionary representation and Swagger Path"""
     model_name = model_dict.get(MODEL_MARKER)
     if not model_name:
-        model_name = model_dict.get(title_str)
+        model_name = model_dict.get('title')
     return model_name
 
 
-cpdef _raise_or_warn_duplicated_model(swagger_spec,str message):
+def _raise_or_warn_duplicated_model(swagger_spec, message):
     if swagger_spec.config['use_models']:
         raise ValueError(message)
     else:
@@ -42,7 +41,7 @@ cpdef _raise_or_warn_duplicated_model(swagger_spec,str message):
     return
 
 
-cpdef _register_visited_model(str json_reference, model_spec, str model_name, dict visited_models, bint is_blessed, swagger_spec):
+def _register_visited_model(json_reference, model_spec, model_name, visited_models, is_blessed, swagger_spec):
     """
     Registers a model that has been tagged by a callback method.
 
@@ -71,7 +70,7 @@ cpdef _register_visited_model(str json_reference, model_spec, str model_name, di
     visited_models[model_name] = json_reference
 
 
-cpdef _tag_models(container, json_reference, dict visited_models, swagger_spec):
+def _tag_models(container, json_reference, visited_models, swagger_spec):
     """
     Callback used during the swagger spec ingestion process to tag models
     with a 'x-model'. This is only done in the root document.
@@ -98,7 +97,6 @@ cpdef _tag_models(container, json_reference, dict visited_models, swagger_spec):
     if not re.match('^[^#]*#/definitions/[^/]+$', json_reference):
         return
 
-    cdef str key
     key = json_reference.split('/')[-1]
     deref = swagger_spec.deref
     model_spec = deref(container.get(key))
@@ -109,7 +107,6 @@ cpdef _tag_models(container, json_reference, dict visited_models, swagger_spec):
     if deref(model_spec.get(MODEL_MARKER)) is not None:
         return
 
-    cdef str model_name
     model_name = _get_model_name(model_spec) or key
     _register_visited_model(
         json_reference=json_reference,
@@ -121,7 +118,7 @@ cpdef _tag_models(container, json_reference, dict visited_models, swagger_spec):
     )
 
 
-cpdef _bless_models(container, json_reference, dict visited_models, swagger_spec):
+def _bless_models(container, json_reference, visited_models, swagger_spec):
     """
     Callback used during the swagger spec ingestion process to add
     ``x-model`` attribute to models which does not define it.
@@ -145,7 +142,6 @@ cpdef _bless_models(container, json_reference, dict visited_models, swagger_spec
     if not is_dict_like(container):
         return
 
-    cdef str key
     key = json_reference.split('/')[-1]
     deref = swagger_spec.deref
     model_spec = deref(container.get(key))
@@ -161,7 +157,6 @@ cpdef _bless_models(container, json_reference, dict visited_models, swagger_spec
     ):
         return
 
-    cdef str model_name
     model_name = _get_model_name(model_spec)
     if not model_name:
         return
@@ -176,7 +171,7 @@ cpdef _bless_models(container, json_reference, dict visited_models, swagger_spec
     )
 
 
-cpdef _collect_models(container, json_reference, models, swagger_spec):
+def _collect_models(container, json_reference, models, swagger_spec):
     """
     Callback used during the swagger spec ingestion to collect all the
     tagged models and create appropriate python types for them.
@@ -192,10 +187,6 @@ cpdef _collect_models(container, json_reference, models, swagger_spec):
     :param models: created model types are placed here
     :type swagger_spec: :class:`bravado_core.spec.Spec`
     """
-    cdef str key
-    cdef str model_name
-    cdef str model_type
-    cdef str message
     key = json_reference.split('/')[-1]
     if key == MODEL_MARKER and is_object(swagger_spec, container):
         model_spec = swagger_spec.deref(container)
