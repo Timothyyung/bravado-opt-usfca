@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# cython: profile=True
 from six import iteritems
 
 from bravado_core import formatter

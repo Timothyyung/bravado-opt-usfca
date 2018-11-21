@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# cython: profile=True
 import copy
 from collections import Mapping
 
@@ -147,7 +148,7 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
         "when inspecting value {1}".format(object_spec, object_value))
 
 
-def handle_null_value(swagger_spec, schema_object_spec):
+cpdef handle_null_value(swagger_spec, dict schema_object_spec):
     """Handle a null value for the associated schema object spec. Checks the
      x-nullable attribute in the spec to see if it is allowed and returns None
      if so and raises an exception otherwise.
