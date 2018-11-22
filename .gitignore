@@ -13,3 +13,5 @@ build
 *.iml
 .benchmarks/
 .pytest_cache/
+bravado_core/.DS_Store
+.DS_Store

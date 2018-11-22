@@ -3890,7 +3890,7 @@ static PyObject *__pyx_pf_12bravado_core_4spec_4Spec_12fast_deref(CYTHON_UNUSED 
  *             return self.cache_spec[i]
  *         except KeyError:             # <<<<<<<<<<<<<<
  *             result = self._force_deref(ref_dict)
- *             self.cache_spec[i] = result;
+ *             self.cache_spec[i] = result
  */
     __pyx_t_6 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_KeyError);
     if (__pyx_t_6) {
@@ -3904,7 +3904,7 @@ static PyObject *__pyx_pf_12bravado_core_4spec_4Spec_12fast_deref(CYTHON_UNUSED 
  *             return self.cache_spec[i]
  *         except KeyError:
  *             result = self._force_deref(ref_dict)             # <<<<<<<<<<<<<<
- *             self.cache_spec[i] = result;
+ *             self.cache_spec[i] = result
  *             return result
  */
       __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_force_deref); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 235, __pyx_L5_except_error)
@@ -3930,7 +3930,7 @@ static PyObject *__pyx_pf_12bravado_core_4spec_4Spec_12fast_deref(CYTHON_UNUSED 
       /* "bravado_core/spec.pyx":236
  *         except KeyError:
  *             result = self._force_deref(ref_dict)
- *             self.cache_spec[i] = result;             # <<<<<<<<<<<<<<
+ *             self.cache_spec[i] = result             # <<<<<<<<<<<<<<
  *             return result
  * 
  */
@@ -3941,7 +3941,7 @@ static PyObject *__pyx_pf_12bravado_core_4spec_4Spec_12fast_deref(CYTHON_UNUSED 
 
       /* "bravado_core/spec.pyx":237
  *             result = self._force_deref(ref_dict)
- *             self.cache_spec[i] = result;
+ *             self.cache_spec[i] = result
  *             return result             # <<<<<<<<<<<<<<
  * 
  * 

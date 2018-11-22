@@ -1246,9 +1246,9 @@ static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_schema_object_spec[] = "schema_object_spec";
 static const char __pyx_k_SwaggerMappingError[] = "SwaggerMappingError";
 static const char __pyx_k_bravado_core_schema[] = "bravado_core.schema";
-static const char __pyx_k_collapsed_properties[] = "collapsed_properties";
 static const char __pyx_k_bravado_core_exception[] = "bravado_core.exception";
 static const char __pyx_k_default_type_to_object[] = "default_type_to_object";
+static const char __pyx_k_fast_collapsed_properties[] = "fast_collapsed_properties";
 static const char __pyx_k_include_missing_properties[] = "include_missing_properties";
 static const char __pyx_k_Expected_dict_like_type_for_0_1[] = "Expected dict like type for {0}:{1}";
 static const char __pyx_k_Expected_list_like_type_for_0_1[] = "Expected list like type for {0}:{1}";
@@ -1274,12 +1274,12 @@ static PyObject *__pyx_n_s_bravado_core_exception;
 static PyObject *__pyx_n_s_bravado_core_model;
 static PyObject *__pyx_n_s_bravado_core_schema;
 static PyObject *__pyx_n_s_cline_in_traceback;
-static PyObject *__pyx_n_s_collapsed_properties;
 static PyObject *__pyx_n_s_config;
 static PyObject *__pyx_n_s_default_type_to_object;
 static PyObject *__pyx_n_s_definitions;
 static PyObject *__pyx_n_s_deref;
 static PyObject *__pyx_n_s_discriminator;
+static PyObject *__pyx_n_s_fast_collapsed_properties;
 static PyObject *__pyx_n_s_file;
 static PyObject *__pyx_n_s_format;
 static PyObject *__pyx_n_s_formatter;
@@ -2985,7 +2985,7 @@ static PyObject *__pyx_f_12bravado_core_9unmarshal_unmarshal_object(PyObject *__
  * 
  *     object_spec = deref(object_spec)             # <<<<<<<<<<<<<<
  *     required_fields = object_spec.get('required', [])
- *     properties = collapsed_properties(object_spec, swagger_spec)
+ *     properties = fast_collapsed_properties(object_spec, swagger_spec)
  */
   __Pyx_INCREF(__pyx_v_deref);
   __pyx_t_4 = __pyx_v_deref; __pyx_t_7 = NULL;
@@ -3011,7 +3011,7 @@ static PyObject *__pyx_f_12bravado_core_9unmarshal_unmarshal_object(PyObject *__
  * 
  *     object_spec = deref(object_spec)
  *     required_fields = object_spec.get('required', [])             # <<<<<<<<<<<<<<
- *     properties = collapsed_properties(object_spec, swagger_spec)
+ *     properties = fast_collapsed_properties(object_spec, swagger_spec)
  * 
  */
   if (unlikely(__pyx_v_object_spec == Py_None)) {
@@ -3029,11 +3029,11 @@ static PyObject *__pyx_f_12bravado_core_9unmarshal_unmarshal_object(PyObject *__
   /* "bravado_core/unmarshal.pyx":132
  *     object_spec = deref(object_spec)
  *     required_fields = object_spec.get('required', [])
- *     properties = collapsed_properties(object_spec, swagger_spec)             # <<<<<<<<<<<<<<
+ *     properties = fast_collapsed_properties(object_spec, swagger_spec)             # <<<<<<<<<<<<<<
  * 
  *     result = {}
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_collapsed_properties); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_fast_collapsed_properties); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_7 = NULL;
   __pyx_t_6 = 0;
@@ -3084,7 +3084,7 @@ static PyObject *__pyx_f_12bravado_core_9unmarshal_unmarshal_object(PyObject *__
   __pyx_t_4 = 0;
 
   /* "bravado_core/unmarshal.pyx":134
- *     properties = collapsed_properties(object_spec, swagger_spec)
+ *     properties = fast_collapsed_properties(object_spec, swagger_spec)
  * 
  *     result = {}             # <<<<<<<<<<<<<<
  *     for k, v in iteritems(object_value):
@@ -4880,12 +4880,12 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_bravado_core_model, __pyx_k_bravado_core_model, sizeof(__pyx_k_bravado_core_model), 0, 0, 1, 1},
   {&__pyx_n_s_bravado_core_schema, __pyx_k_bravado_core_schema, sizeof(__pyx_k_bravado_core_schema), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
-  {&__pyx_n_s_collapsed_properties, __pyx_k_collapsed_properties, sizeof(__pyx_k_collapsed_properties), 0, 0, 1, 1},
   {&__pyx_n_s_config, __pyx_k_config, sizeof(__pyx_k_config), 0, 0, 1, 1},
   {&__pyx_n_s_default_type_to_object, __pyx_k_default_type_to_object, sizeof(__pyx_k_default_type_to_object), 0, 0, 1, 1},
   {&__pyx_n_s_definitions, __pyx_k_definitions, sizeof(__pyx_k_definitions), 0, 0, 1, 1},
   {&__pyx_n_s_deref, __pyx_k_deref, sizeof(__pyx_k_deref), 0, 0, 1, 1},
   {&__pyx_n_s_discriminator, __pyx_k_discriminator, sizeof(__pyx_k_discriminator), 0, 0, 1, 1},
+  {&__pyx_n_s_fast_collapsed_properties, __pyx_k_fast_collapsed_properties, sizeof(__pyx_k_fast_collapsed_properties), 0, 0, 1, 1},
   {&__pyx_n_s_file, __pyx_k_file, sizeof(__pyx_k_file), 0, 0, 1, 1},
   {&__pyx_n_s_format, __pyx_k_format, sizeof(__pyx_k_format), 0, 0, 1, 1},
   {&__pyx_n_s_formatter, __pyx_k_formatter, sizeof(__pyx_k_formatter), 0, 0, 1, 1},
@@ -5291,7 +5291,7 @@ if (!__Pyx_RefNanny) {
  * from bravado_core.exception import SwaggerMappingError
  * from bravado_core.model import is_model             # <<<<<<<<<<<<<<
  * from bravado_core.model import MODEL_MARKER
- * from bravado_core.schema import collapsed_properties
+ * from bravado_core.schema import fast_collapsed_properties
  */
   __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 7, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -5311,7 +5311,7 @@ if (!__Pyx_RefNanny) {
  * from bravado_core.exception import SwaggerMappingError
  * from bravado_core.model import is_model
  * from bravado_core.model import MODEL_MARKER             # <<<<<<<<<<<<<<
- * from bravado_core.schema import collapsed_properties
+ * from bravado_core.schema import fast_collapsed_properties
  * from bravado_core.schema import get_spec_for_prop
  */
   __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 8, __pyx_L1_error)
@@ -5331,27 +5331,27 @@ if (!__Pyx_RefNanny) {
   /* "bravado_core/unmarshal.pyx":9
  * from bravado_core.model import is_model
  * from bravado_core.model import MODEL_MARKER
- * from bravado_core.schema import collapsed_properties             # <<<<<<<<<<<<<<
+ * from bravado_core.schema import fast_collapsed_properties             # <<<<<<<<<<<<<<
  * from bravado_core.schema import get_spec_for_prop
  * from bravado_core.schema import handle_null_value
  */
   __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_INCREF(__pyx_n_s_collapsed_properties);
-  __Pyx_GIVEREF(__pyx_n_s_collapsed_properties);
-  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_collapsed_properties);
+  __Pyx_INCREF(__pyx_n_s_fast_collapsed_properties);
+  __Pyx_GIVEREF(__pyx_n_s_fast_collapsed_properties);
+  PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_fast_collapsed_properties);
   __pyx_t_2 = __Pyx_Import(__pyx_n_s_bravado_core_schema, __pyx_t_1, -1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_collapsed_properties); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_fast_collapsed_properties); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_collapsed_properties, __pyx_t_1) < 0) __PYX_ERR(0, 9, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_fast_collapsed_properties, __pyx_t_1) < 0) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "bravado_core/unmarshal.pyx":10
  * from bravado_core.model import MODEL_MARKER
- * from bravado_core.schema import collapsed_properties
+ * from bravado_core.schema import fast_collapsed_properties
  * from bravado_core.schema import get_spec_for_prop             # <<<<<<<<<<<<<<
  * from bravado_core.schema import handle_null_value
  * from bravado_core.schema import is_dict_like
@@ -5371,7 +5371,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "bravado_core/unmarshal.pyx":11
- * from bravado_core.schema import collapsed_properties
+ * from bravado_core.schema import fast_collapsed_properties
  * from bravado_core.schema import get_spec_for_prop
  * from bravado_core.schema import handle_null_value             # <<<<<<<<<<<<<<
  * from bravado_core.schema import is_dict_like
