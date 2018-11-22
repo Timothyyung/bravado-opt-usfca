@@ -130,7 +130,6 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
             result_spec = copy.deepcopy(result_spec)
             result_spec['x-nullable'] = prop_spec['x-nullable']
 
-        swagger_spec.cache_schema[i] = result_spec
         return result_spec
 
     additional_props = deref(object_spec).get('additionalProperties', True)
@@ -138,13 +137,11 @@ def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, proper
     if isinstance(additional_props, bool):
     # no spec for additional properties to conform to - this is basically
     # a way to send pretty much anything across the wire as is.
-        swagger_spec.cache_schema[i] = None
         return None
 
     additional_props = deref(additional_props)
     if is_dict_like(additional_props):
     # spec that all additional props MUST conform to
-        swagger_spec.cache_schema[i] = additional_props
         return additional_props
 
     raise SwaggerMappingError(
