@@ -217,6 +217,6 @@ cpdef fast_collapsed_properties(model_spec, swagger_spec):
                 item_spec = deref(item_spec)
                 more_properties = collapsed_properties(item_spec, swagger_spec)
                 properties.update(more_properties)
-            swagger_spec.cache_schema[i] = properties
+        swagger_spec.cache_schema[i] = properties
             
         return properties
