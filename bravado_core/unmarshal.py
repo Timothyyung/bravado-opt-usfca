@@ -6,30 +6,27 @@ from bravado_core import schema
 from bravado_core.exception import SwaggerMappingError
 from bravado_core.model import is_model
 from bravado_core.model import MODEL_MARKER
-from bravado_core.schema import collapsed_properties
+from bravado_core.schema import fast_collapsed_properties
 from bravado_core.schema import get_spec_for_prop
 from bravado_core.schema import handle_null_value
 from bravado_core.schema import is_dict_like
 from bravado_core.schema import is_list_like
 from bravado_core.schema import SWAGGER_PRIMITIVES
 
+
 def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
     """Unmarshal the value using the given schema object specification.
-
     Unmarshalling includes:
     - transform the value according to 'format' if available
     - return the value in a form suitable for use. e.g. conversion to a Model
       type.
-
     :type swagger_spec: :class:`bravado_core.spec.Spec`
     :type schema_object_spec: dict
     :type value: int, float, long, string, unicode, boolean, list, dict, etc
-
     :return: unmarshalled value
     :rtype: int, float, long, string, unicode, boolean, list, dict, object (in
         the case of a 'format' conversion', or Model type
     """
-
     deref = swagger_spec.fast_deref
     schema_object_spec = deref(schema_object_spec)
 
@@ -70,11 +67,9 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
 
 def unmarshal_primitive(swagger_spec, primitive_spec, value):
     """Unmarshal a jsonschema primitive type into a python primitive.
-
     :type swagger_spec: :class:`bravado_core.spec.Spec`
     :type primitive_spec: dict
     :type value: int, long, float, boolean, string, unicode, etc
-
     :rtype: int, long, float, boolean, string, unicode, or an object
         based on 'format'
     :raises: SwaggerMappingError
@@ -88,7 +83,6 @@ def unmarshal_primitive(swagger_spec, primitive_spec, value):
 
 def unmarshal_array(swagger_spec, array_spec, array_value):
     """Unmarshal a jsonschema type of 'array' into a python list.
-
     :type swagger_spec: :class:`bravado_core.spec.Spec`
     :type array_spec: dict
     :type array_value: list
@@ -111,7 +105,6 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
 
 def unmarshal_object(swagger_spec, object_spec, object_value):
     """Unmarshal a jsonschema type of 'object' into a python dict.
-
     :type swagger_spec: :class:`bravado_core.spec.Spec`
     :type object_spec: dict
     :type object_value: dict
@@ -129,8 +122,7 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
 
     object_spec = deref(object_spec)
     required_fields = object_spec.get('required', [])
-    properties = collapsed_properties(object_spec, swagger_spec)
-    #print(collapsed_properties.cache_info())
+    properties = fast_collapsed_properties(object_spec, swagger_spec)
 
     result = {}
     for k, v in iteritems(object_value):
@@ -158,17 +150,14 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
 
 def unmarshal_model(swagger_spec, model_spec, model_value):
     """Unmarshal a dict into a Model instance.
-
     :type swagger_spec: :class:`bravado_core.spec.Spec`
     :type model_spec: dict
     :type model_value: dict
     :rtype: Model instance
     :raises: SwaggerMappingError
     """
-
     deref = swagger_spec.fast_deref
     model_name = deref(model_spec).get(MODEL_MARKER)
-
     model_type = swagger_spec.definitions.get(model_name, None)
 
     if model_type is None:
