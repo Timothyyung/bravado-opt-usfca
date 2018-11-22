@@ -233,7 +233,7 @@ class Spec(object):
             return self.cache_spec[i]
         except KeyError:
             result = self._force_deref(ref_dict)
-            self.cache_spec[i] = result;
+            self.cache_spec[i] = result
             return result
 
 
