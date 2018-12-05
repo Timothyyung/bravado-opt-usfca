@@ -58,6 +58,7 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
         return unmarshal_model(swagger_spec, schema_object_spec, value)
 
     if obj_type == 'object':
+        print('ooooooooooooo')
         return unmarshal_object(swagger_spec, schema_object_spec, value)
 
     if obj_type == 'file':
