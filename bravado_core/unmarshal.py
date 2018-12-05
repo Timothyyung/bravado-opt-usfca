@@ -41,9 +41,6 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
 
     obj_type = schema_object_spec.get('type')
 
-    if 'allOf' in schema_object_spec:
-        obj_type = 'object'
-
     if not obj_type:
         if swagger_spec.config['default_type_to_object']:
             obj_type = 'object'
@@ -53,9 +50,6 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
     if obj_type in SWAGGER_PRIMITIVES:
         return unmarshal_primitive(swagger_spec, schema_object_spec, value)
 
-    if obj_type == 'array':
-        return unmarshal_array(swagger_spec, schema_object_spec, value)
-
     if swagger_spec.config['use_models'] and \
             is_model(swagger_spec, schema_object_spec):
         # It is important that the 'model' check comes before 'object' check.
@@ -63,8 +57,14 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
         # MODEL_MARKER key for identification.
         return unmarshal_model(swagger_spec, schema_object_spec, value)
 
+    if 'allOf' in schema_object_spec:
+        obj_type = 'object'
+
     if obj_type == 'object':
         return unmarshal_object(swagger_spec, schema_object_spec, value)
+
+    if obj_type == 'array':
+        return unmarshal_array(swagger_spec, schema_object_spec, value)
 
     if obj_type == 'file':
         return value
