@@ -213,9 +213,12 @@ class Spec(object):
         # Restore attached resolution scope before resolving since the
         # resolver doesn't have a traversal history (accumulated scope_stack)
         # when asked to resolve.
-        with in_scope(self.resolver, ref_dict):
-            _, target = self.resolver.resolve(ref_dict['$ref'])
-            return target
+        try:
+            with in_scope(self.resolver, ref_dict):
+                _, target = self.resolver.resolve(ref_dict['$ref'])
+                return target
+        except:
+            return ref_dict
 
     # NOTE: deref gets overridden, if internally_dereference_refs is enabled, after calling build
     deref = _force_deref
