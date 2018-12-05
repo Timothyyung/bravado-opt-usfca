@@ -207,8 +207,8 @@ class Spec(object):
         :return: dereferenced value of ref_dict
         :rtype: scalar, list, dict
         """
-        if ref_dict is None or not is_ref(ref_dict):
-            return ref_dict
+        #if ref_dict is None or not is_ref(ref_dict):
+        #    return ref_dict
 
         # Restore attached resolution scope before resolving since the
         # resolver doesn't have a traversal history (accumulated scope_stack)
