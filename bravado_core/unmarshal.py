@@ -85,6 +85,7 @@ def unmarshal_primitive(swagger_spec, primitive_spec, value):
         based on 'format'
     :raises: SwaggerMappingError
     """
+    global primitive_count
     primitive_count += 1
     if value is None:
         return handle_null_value(swagger_spec, primitive_spec)
@@ -102,6 +103,7 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
     :rtype: list
     :raises: SwaggerMappingError
     """
+    global array_count
     array_count += 1
     if array_value is None:
         return handle_null_value(swagger_spec, array_spec)
@@ -126,6 +128,7 @@ def unmarshal_object(swagger_spec, object_spec, object_value):
     :rtype: dict
     :raises: SwaggerMappingError
     """
+    global obj_count
     obj_count += 1
     deref = swagger_spec.deref
 
@@ -173,6 +176,7 @@ def unmarshal_model(swagger_spec, model_spec, model_value):
     :rtype: Model instance
     :raises: SwaggerMappingError
     """
+    global model_count
     model_count += 1
     deref = swagger_spec.deref
     model_name = deref(model_spec).get(MODEL_MARKER)
