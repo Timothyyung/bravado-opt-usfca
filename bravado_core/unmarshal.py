@@ -15,7 +15,7 @@ from bravado_core.schema import SWAGGER_PRIMITIVES
 
 from numba import jit
 
-@jit(nopython=True)
+@jit
 def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
     """Unmarshal the value using the given schema object specification.
 
