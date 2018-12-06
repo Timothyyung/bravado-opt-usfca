@@ -62,7 +62,7 @@ def is_ref(spec):
         return False
 
 
-def is_dict_like(spec: Dict):
+def is_dict_like(spec: Dict) -> bool:
     """
     :param spec: swagger object specification in dict form
     :rtype: boolean
