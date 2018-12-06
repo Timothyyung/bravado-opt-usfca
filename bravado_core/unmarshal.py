@@ -12,7 +12,6 @@ from bravado_core.schema import handle_null_value
 from bravado_core.schema import is_dict_like
 from bravado_core.schema import is_list_like
 from bravado_core.schema import SWAGGER_PRIMITIVES
-from numba import jit
 
 primitive_count = 0
 array_count = 0
@@ -94,7 +93,6 @@ def unmarshal_primitive(swagger_spec, primitive_spec, value):
     value = formatter.to_python(swagger_spec, primitive_spec, value)
     return value
 
-@jit(parallel=True)
 def unmarshal_array(swagger_spec, array_spec, array_value):
     """Unmarshal a jsonschema type of 'array' into a python list.
 
