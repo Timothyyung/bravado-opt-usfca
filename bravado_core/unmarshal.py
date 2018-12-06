@@ -15,7 +15,7 @@ from bravado_core.schema import SWAGGER_PRIMITIVES
 
 from numba import jit
 
-@jit
+#@jit
 def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
     """Unmarshal the value using the given schema object specification.
 
@@ -69,7 +69,7 @@ def unmarshal_schema_object(swagger_spec, schema_object_spec, value):
         "Don't know how to unmarshal value {0} with a type of {1}"
         .format(value, obj_type))
 
-
+@jit
 def unmarshal_primitive(swagger_spec, primitive_spec, value):
     """Unmarshal a jsonschema primitive type into a python primitive.
 
