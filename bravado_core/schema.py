@@ -46,7 +46,7 @@ def is_param_spec(swagger_spec, schema_object_spec):
 def is_prop_nullable(swagger_spec, schema_object_spec):
     return swagger_spec.deref(schema_object_spec).get('x-nullable', False)
 
-@jit
+#@jit
 def is_ref(spec):
     """ Check if the given spec is a Mapping and contains a $ref.
 
@@ -62,7 +62,7 @@ def is_ref(spec):
     except TypeError:
         return False
 
-
+@jit
 def is_dict_like(spec):
     """
     :param spec: swagger object specification in dict form
