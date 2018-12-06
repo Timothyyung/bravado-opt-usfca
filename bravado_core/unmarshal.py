@@ -119,7 +119,7 @@ def unmarshal_array(swagger_spec, array_spec, array_value):
         for item in array_value
     ]
 
-@jit(nopython=True)
+@jit
 def unmarshal_object(swagger_spec, object_spec, object_value):
     """Unmarshal a jsonschema type of 'object' into a python dict.
 
