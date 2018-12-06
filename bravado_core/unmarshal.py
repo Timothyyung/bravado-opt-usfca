@@ -87,7 +87,7 @@ def unmarshal_primitive(swagger_spec, primitive_spec, value):
     value = formatter.to_python(swagger_spec, primitive_spec, value)
     return value
 
-@jit
+#@jit
 def unmarshal_array(swagger_spec, array_spec, array_value):
     """Unmarshal a jsonschema type of 'array' into a python list.
 

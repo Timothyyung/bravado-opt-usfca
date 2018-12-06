@@ -5,6 +5,7 @@ from collections import Mapping
 from six import iteritems
 
 from bravado_core.exception import SwaggerMappingError
+from numba import jit
 
 
 # 'object' and 'array' are omitted since this should really be read as
@@ -45,7 +46,7 @@ def is_param_spec(swagger_spec, schema_object_spec):
 def is_prop_nullable(swagger_spec, schema_object_spec):
     return swagger_spec.deref(schema_object_spec).get('x-nullable', False)
 
-
+@jit
 def is_ref(spec):
     """ Check if the given spec is a Mapping and contains a $ref.
 
