@@ -5,7 +5,7 @@ from collections import Mapping
 from six import iteritems
 
 from bravado_core.exception import SwaggerMappingError
-
+from typing import Dict
 
 # 'object' and 'array' are omitted since this should really be read as
 # "Swagger types that map to python primitives"
@@ -62,7 +62,7 @@ def is_ref(spec):
         return False
 
 
-def is_dict_like(spec):
+def is_dict_like(spec: Dict):
     """
     :param spec: swagger object specification in dict form
     :rtype: boolean
