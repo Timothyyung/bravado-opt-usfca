@@ -46,7 +46,7 @@ def is_prop_nullable(swagger_spec, schema_object_spec):
     return swagger_spec.deref(schema_object_spec).get('x-nullable', False)
 
 
-def is_ref(spec):
+def is_ref(spec) -> bool:
     """ Check if the given spec is a Mapping and contains a $ref.
 
     FYI: This function gets called A LOT during unmarshalling and is_dict_like
@@ -71,7 +71,9 @@ def is_dict_like(spec: Dict) -> bool:
     # gets usually called with a dict type argument we optimize for that case
     # by executing a much cheaper isinstance(spec, dict) check before the more
     # expensive isinstance(spec, Mapping) check.
-    return isinstance(spec, (dict, Mapping))
+    #return isinstance(spec, (dict, Mapping))
+    spec_type = type(spec)
+    return spec_type is dict or spec_type is Mapping
 
 
 def is_list_like(spec):
