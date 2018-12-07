@@ -71,9 +71,11 @@ def is_dict_like(spec: Dict) -> bool:
     # gets usually called with a dict type argument we optimize for that case
     # by executing a much cheaper isinstance(spec, dict) check before the more
     # expensive isinstance(spec, Mapping) check.
+
     #return isinstance(spec, (dict, Mapping))
+    
     spec_type = type(spec)
-    return spec_type is dict or spec_type is Mapping
+    return spec_type is dict or isinstance(spec, Mapping)
 
 
 def is_list_like(spec):
@@ -81,7 +83,9 @@ def is_list_like(spec):
     :param spec: swagger object specification in dict form
     :rtype: boolean
     """
-    return isinstance(spec, (list, tuple))
+    #return isinstance(spec, (list, tuple))
+    spec_type = type(spec)
+    return spec_type is list or spec_type is tuple
 
 
 def get_spec_for_prop(swagger_spec, object_spec, object_value, prop_name, properties=None):
