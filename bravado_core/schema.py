@@ -62,7 +62,7 @@ def is_ref(spec):
     except TypeError:
         return False
 
-#@jit
+@jit
 def is_dict_like(spec):
     """
     :param spec: swagger object specification in dict form
